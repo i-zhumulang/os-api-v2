@@ -1,0 +1,21 @@
+
+/**/target/
+/**/**/target/
+
+*.iml
+/**/*.iml
+/**/**/*.iml
+
+### IntelliJ IDEA ###
+.idea
+
+component/nacos-server-1.4.2/data
+component/nacos-server-1.4.2/logs
+component/nacos-server-1.4.2/bin/logs
+component/nacos-server-1.4.2/bin/work
+
+component/seata-server-1.4.2/logs
+component/seata-server-1.4.2/bin/sessionStore
+
+dubbo-registry
+log
