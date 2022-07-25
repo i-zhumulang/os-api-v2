@@ -44,7 +44,7 @@ public class ShiroRealm extends AuthorizingRealm {
      * redis过期时间设置
      */
     @Value("${custom.jwt.expire_time}")
-    private long expireTime;
+    protected long expireTime;
 
     /**
      * 设置对应的token类型
@@ -60,51 +60,28 @@ public class ShiroRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        return null;
+        //获取用户名
+        String token = (String) SecurityUtils.getSubject().getPrincipal();
+        String username = JwtUtils.getUsername(token);
+        //模拟数据库校验,写死用户名xsy，其他用户无法登陆成功
+        if (!"xsy".equals(username)) {
+            return null;
+        }
+        //创建授权信息
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        //创建set集合，存储权限
+        HashSet<String> rootSet = new HashSet<>();
+        //添加权限
+        rootSet.add("user:show");
+        rootSet.add("user:admin");
+        //设置权限
+        info.setStringPermissions(rootSet);
+        //返回权限实例
+        return info;
     }
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        System.out.println("开始身份认证.....................");
-        //获取token
-        String token = (String) authenticationToken.getCredentials();
-        //创建字符串，存储用户信息
-        String username = null;
-        try {
-            //获取用户名
-            username = JwtUtils.getUsername(token);
-        } catch (AuthenticationException e) {
-            throw new AuthenticationException("heard的token拼写错误或者值为空");
-        }
-        if (username == null) {
-            throw new AuthenticationException("token无效");
-        }
-        // 校验token是否超时失效 & 或者账号密码是否错误
-        if (!jwtTokenRefresh(token, username, JwtUtils.SECRET)) {
-            throw new AuthenticationException("Token失效，请重新登录!");
-        }
-        //返回身份认证信息
-        return new SimpleAuthenticationInfo(token, token, "my_realm");
-    }
-
-    /**
-     * jwt刷新令牌
-     *
-     * @param token    令牌
-     * @param userName 用户名
-     * @param passWord 通过单词
-     * @return boolean
-     */
-    public boolean jwtTokenRefresh(String token, String userName, String passWord) {
-        String redisToken = redisTemplate.opsForValue().get(token);
-        if (redisToken != null) {
-            if (!JwtUtils.verify(redisToken, userName)) {
-                String newToken = JwtUtils.sign(userName);
-                //设置redis缓存
-                redisTemplate.opsForValue().set(token, newToken, expireTime * 2 / 1000, TimeUnit.SECONDS);
-            }
-            return true;
-        }
-        return false;
+        return null;
     }
 }
