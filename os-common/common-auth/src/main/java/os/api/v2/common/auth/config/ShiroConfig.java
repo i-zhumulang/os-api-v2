@@ -37,8 +37,10 @@ import java.util.Map;
  */
 @Configuration
 public class ShiroConfig {
-    @Autowired
-    private ShiroRealm shiroRealm;
+    @Bean
+    public ShiroRealm shiroRealm() {
+        return new ShiroRealm();
+    }
 
     /**
      * shiro过滤器工厂
@@ -53,13 +55,15 @@ public class ShiroConfig {
         //设置安全管理器
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         //设置组登录请求，其他路径一律自动跳转到这里
-        shiroFilterFactoryBean.setLoginUrl("/login");
+        shiroFilterFactoryBean.setLoginUrl("/auth/authenticated?code=1");
         //未授权跳转路径
-        shiroFilterFactoryBean.setUnauthorizedUrl("/notRole");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/auth/authenticated?code=2");
         //设置拦截链map
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         //放行请求
         filterChainDefinitionMap.put("/auth/login", "anon");
+        filterChainDefinitionMap.put("/user/register", "anon");
+        filterChainDefinitionMap.put("/auth/authenticated", "anon");
         //拦截剩下的其他请求
         filterChainDefinitionMap.put("/**", "authc");
         //设置拦截规则给shiro的拦截链工厂
@@ -81,7 +85,7 @@ public class ShiroConfig {
      * @return {@link DefaultWebSecurityManager}
      */
     @Bean
-    public DefaultWebSecurityManager securityManager() {
+    public DefaultWebSecurityManager securityManager(ShiroRealm shiroRealm) {
         //创建默认的web安全管理器
         DefaultWebSecurityManager defaultSecurityManager = new DefaultWebSecurityManager();
         //配置shiro的自定义认证逻辑
