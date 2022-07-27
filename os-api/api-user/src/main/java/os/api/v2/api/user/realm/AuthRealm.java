@@ -7,7 +7,7 @@
 // +----------------------------------------------------------------------
 // | Date  : 2022-07-24 21:00
 // +----------------------------------------------------------------------
-package os.api.v2.api.auth.realm;
+package os.api.v2.api.user.realm;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;

@@ -13,11 +13,6 @@ import org.springframework.context.annotation.ComponentScan;
  * @date 2022-07-24 16:30
  */
 @SpringBootApplication(scanBasePackages = "os.api.v2.api.user")
-@EnableAutoConfiguration
-@ComponentScan({
-        "os.api.v2.api.user",
-        "os.api.v2.common.auth"
-})
 public class Main {
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);

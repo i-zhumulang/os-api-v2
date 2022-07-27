@@ -36,7 +36,7 @@ public class UserController {
     @Value("${custom.jwt.expire_time}")
     private long expireTime;
 
-    @RequestMapping(value = "/getToken", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Result<String> index() {
         String token = JwtUtils.sign("xsy");
         if (token == null) {
