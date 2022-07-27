@@ -20,7 +20,11 @@ import os.api.v2.common.base.utils.jwt.JwtUtils;
 import java.util.concurrent.TimeUnit;
 
 /**
+<<<<<<< HEAD
  * os.api.v2.api.auth.realm
+=======
+ * os.api.v2.api.user.realm
+>>>>>>> 820c11b723601d5f9988218df24f69961847af03
  *
  * @author 吴荣超
  * @version 2.0.0
