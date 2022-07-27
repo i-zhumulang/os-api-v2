@@ -16,7 +16,6 @@ import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSource
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -61,13 +60,10 @@ public class ShiroConfig {
         //设置拦截链map
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         //放行请求
-<<<<<<< HEAD
         filterChainDefinitionMap.put("/user/login", "anon");
-=======
-        filterChainDefinitionMap.put("/auth/login", "anon");
         filterChainDefinitionMap.put("/user/register", "anon");
+        filterChainDefinitionMap.put("/auth/login", "anon");
         filterChainDefinitionMap.put("/auth/authenticated", "anon");
->>>>>>> 820c11b723601d5f9988218df24f69961847af03
         //拦截剩下的其他请求
         filterChainDefinitionMap.put("/**", "authc");
         //设置拦截规则给shiro的拦截链工厂

@@ -7,7 +7,7 @@
 // +----------------------------------------------------------------------
 // | Date  : 2022-07-27 20:40
 // +----------------------------------------------------------------------
-package os.api.v2.api.auth.controller;
+package os.api.v2.api.user.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,7 +22,7 @@ import os.api.v2.common.base.common.Result;
  * @date 2022-07-27 20:40
  */
 @RestController
-@RequestMapping(value = "/auth")
+@RequestMapping("/auth")
 public class AuthController {
     @RequestMapping(value = "/index", method = RequestMethod.POST)
     public Result<String> index() {
