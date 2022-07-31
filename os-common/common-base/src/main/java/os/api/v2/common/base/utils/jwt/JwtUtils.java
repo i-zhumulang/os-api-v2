@@ -39,14 +39,14 @@ public class JwtUtils {
     /**
      * 生成token签名EXPIRE_TIME 分钟后过期
      *
-     * @param username 用户名(电话号码)
+     * @param userId 用户名(电话号码)
      * @return 加密的token
      */
-    public static String sign(String username) {
+    public static String sign(Long userId) {
         Date date = new Date(System.currentTimeMillis() + EXPIRE_TIME);
         Algorithm algorithm = Algorithm.HMAC256(SECRET);
         // 附带username信息
-        String token = JWT.create().withClaim("username", username).withExpiresAt(date).sign(algorithm);
+        String token = JWT.create().withClaim("userId", userId).withExpiresAt(date).sign(algorithm);
         String encodeToken = "";
         encodeToken = Base64.getEncoder().encodeToString(token.getBytes(StandardCharsets.UTF_8));
         return encodeToken;
@@ -58,12 +58,12 @@ public class JwtUtils {
      * @param token 密钥
      * @return 是否正确
      */
-    public static boolean verify(String token, String username) {
+    public static boolean verify(String token, Long userId) {
         try {
             String decoderToken = new String(Base64.getDecoder().decode(token), StandardCharsets.UTF_8);
             //根据密码生成JWT效验器
             Algorithm algorithm = Algorithm.HMAC256(SECRET);
-            JWTVerifier verifier = JWT.require(algorithm).withClaim("username", username).build();
+            JWTVerifier verifier = JWT.require(algorithm).withClaim("userId", userId).build();
             //效验TOKEN
             DecodedJWT jwt = verifier.verify(decoderToken);
             log.info("登录验证成功!");
@@ -79,11 +79,20 @@ public class JwtUtils {
      *
      * @return token中包含的用户名
      */
-    public static String getUsername(String token) {
+    public static Long getUsername(String token) {
         try {
             String decoderToken = new String(Base64.getDecoder().decode(token), StandardCharsets.UTF_8);
             DecodedJWT jwt = JWT.decode(decoderToken);
-            return jwt.getClaim("username").asString();
+            return jwt.getClaim("userId").asLong();
+        } catch (JWTDecodeException e) {
+            return null;
+        }
+    }
+    public static Long getUserId(String token) {
+        try {
+            String decoderToken = new String(Base64.getDecoder().decode(token), StandardCharsets.UTF_8);
+            DecodedJWT jwt = JWT.decode(decoderToken);
+            return jwt.getClaim("userId").asLong();
         } catch (JWTDecodeException e) {
             return null;
         }

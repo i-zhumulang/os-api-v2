@@ -9,10 +9,18 @@
 // +----------------------------------------------------------------------
 package os.api.v2.api.user.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import os.api.v2.api.user.dto.auth.LoginDto;
+import os.api.v2.api.user.service.auth.ILoginService;
 import os.api.v2.common.base.common.Result;
+import os.api.v2.common.base.exception.UserException;
+
+import javax.validation.Valid;
+import java.util.Map;
 
 /**
  * os.api.v2.api.auth.controller.AuthController
@@ -24,8 +32,11 @@ import os.api.v2.common.base.common.Result;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-    @RequestMapping(value = "/index", method = RequestMethod.POST)
-    public Result<String> index() {
-        return new Result<>(Result.SUCCESS, "成功");
+    @Autowired
+    protected ILoginService iLoginService;
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public Result<Map<String, Object>> login(@RequestBody @Valid LoginDto loginDto) throws UserException {
+        return iLoginService.login(loginDto);
     }
 }

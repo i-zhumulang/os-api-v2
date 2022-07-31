@@ -1,0 +1,24 @@
+# 个人中心模块-模型-接口层
+model-interface-user.server.port: 8101
+model-interface-user.dubbo.protocol.port: 20101
+# 个人中心模块-模型-实现层
+model-impl-user.server.port: 8201
+model-impl-user.application.qos.port: 33231
+model-impl-user.dubbo.protocol.port: 20201
+model-impl-user.spring.datasource.url: 127.0.0.1:3306
+model-impl-user.spring.datasource.username: v2_user
+model-impl-user.spring.datasource.password: AbCd@2022!
+# 个人中心模块-API
+api-user.server.port: 8301
+api-user.dubbo.protocol.port: 20301
+# redis
+spring.redis.host: 127.0.0.1
+spring.redis.port: 6379
+# nacos
+spring.cloud.nacos.server.addr: 127.0.0.1:8848
+# dubbo
+spring.dubbo.registry.address: nacos://127.0.0.1:8848
+jwt:
+  config:
+    key: AbCd@2022!
+    expire: 3600000

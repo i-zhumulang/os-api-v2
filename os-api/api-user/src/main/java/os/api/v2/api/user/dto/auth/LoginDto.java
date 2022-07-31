@@ -10,7 +10,11 @@
 package os.api.v2.api.user.dto.auth;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.io.Serializable;
 
 /**
@@ -22,7 +26,11 @@ import java.io.Serializable;
  */
 @Data
 public class LoginDto implements Serializable {
+    @NotBlank(message = "手机号码不能为空")
+    @Length(min = 11, max = 11, message = "手机号码长度错误")
     private String mobile;
 
+    @NotBlank(message = "密码不能为空")
     private String password;
+
 }

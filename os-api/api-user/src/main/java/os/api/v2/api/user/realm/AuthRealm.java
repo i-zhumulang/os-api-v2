@@ -38,9 +38,9 @@ public class AuthRealm extends ShiroRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         //获取用户名
         String token = (String) SecurityUtils.getSubject().getPrincipal();
-        String username = JwtUtils.getUsername(token);
+        Long userId = JwtUtils.getUserId(token);
         //模拟数据库校验,写死用户名xsy，其他用户无法登陆成功
-        if (!"xsy".equals(username)) {
+        if (userId == null) {
             return null;
         }
         //创建授权信息

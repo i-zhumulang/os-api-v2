@@ -11,6 +11,7 @@ package os.api.v2.api.user.service.auth;
 
 import os.api.v2.api.user.dto.auth.LoginDto;
 import os.api.v2.common.base.common.Result;
+import os.api.v2.common.base.exception.UserException;
 
 import java.util.Map;
 
@@ -22,5 +23,5 @@ import java.util.Map;
  * @date 2022-07-26 20:05
  */
 public interface ILoginService {
-    Result<Map<String, Object>> login(LoginDto loginDto);
+    Result<Map<String, Object>> login(LoginDto loginDto) throws UserException;
 }

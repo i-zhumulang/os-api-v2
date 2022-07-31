@@ -62,9 +62,9 @@ public class ShiroRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         //获取用户名
         String token = (String) SecurityUtils.getSubject().getPrincipal();
-        String username = JwtUtils.getUsername(token);
+        Long userId = JwtUtils.getUserId(token);
         //模拟数据库校验,写死用户名xsy，其他用户无法登陆成功
-        if (!"xsy".equals(username)) {
+        if (userId == null) {
             return null;
         }
         //创建授权信息
@@ -86,18 +86,18 @@ public class ShiroRealm extends AuthorizingRealm {
         //获取token
         String token = (String) authenticationToken.getCredentials();
         //创建字符串，存储用户信息
-        String username = null;
+        Long userId = null;
         try {
             //获取用户名
-            username = JwtUtils.getUsername(token);
+            userId = JwtUtils.getUserId(token);
         } catch (AuthenticationException e) {
             throw new AuthenticationException("heard的token拼写错误或者值为空");
         }
-        if (username == null) {
+        if (userId == null) {
             throw new AuthenticationException("token无效");
         }
         // 校验token是否超时失效 & 或者账号密码是否错误
-        if (!jwtTokenRefresh(token, username, JwtUtils.SECRET)) {
+        if (!jwtTokenRefresh(token, userId, JwtUtils.SECRET)) {
             throw new AuthenticationException("Token失效，请重新登录!");
         }
         //返回身份认证信息
@@ -108,15 +108,15 @@ public class ShiroRealm extends AuthorizingRealm {
      * jwt刷新令牌
      *
      * @param token    令牌
-     * @param userName 用户名
+     * @param userId   用户名ID
      * @param passWord 通过单词
      * @return boolean
      */
-    public boolean jwtTokenRefresh(String token, String userName, String passWord) {
+    public boolean jwtTokenRefresh(String token, Long userId, String passWord) {
         String redisToken = redisTemplate.opsForValue().get(token);
         if (redisToken != null) {
-            if (!JwtUtils.verify(redisToken, userName)) {
-                String newToken = JwtUtils.sign(userName);
+            if (!JwtUtils.verify(redisToken, userId)) {
+                String newToken = JwtUtils.sign(userId);
                 //设置redis缓存
                 redisTemplate.opsForValue().set(token, newToken, expireTime * 2 / 1000, TimeUnit.SECONDS);
             }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import os.api.v2.common.base.common.Result;
+import os.api.v2.common.base.exception.UserException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,6 +31,10 @@ public class GlobalExceptionHandle {
                                 HttpServletResponse response,
                                 Exception exception
     ) {
+        if (exception.getClass() == UserException.class) {
+            UserException ce = (UserException) exception;
+            return new Result<>(Result.FAILURE, ce.getMessage());
+        }
         exception.printStackTrace();
         return new Result<>(Result.FAILURE, "抱歉，系统繁忙，请稍后重试！");
     }

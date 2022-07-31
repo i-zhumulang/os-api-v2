@@ -1,17 +1,36 @@
 
 server:
-  port: 8000
+  port: ${api-user.server.port}
 spring:
+  application:
+    name: api-user
   redis:
-    host: 127.0.0.1
-    port: 6379
+    host: ${spring.redis.host}
+    port: ${spring.redis.port}
     lettuce:
       shutdown-timeout: 0
     timeout: 2000ms
   cache:
     type: redis
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${spring.cloud.nacos.server.addr}
+dubbo:
+  application:
+    name: api-user
+  protocol:
+    port: ${api-user.dubbo.protocol.port}
+    name: dubbo
+  registry:
+    address: ${spring.dubbo.registry.address}
+    file: logs/dubbo-registry/api-user.properties
+  scan:
+    base-packages: os.api.v2.api.user
+  consumer:
+    check: false
 #自定义属性
 custom:
   jwt:
-    tokenHeader: Authorization
+    token_header: Authorization
     expire_time: 1800000
