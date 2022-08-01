@@ -17,5 +17,4 @@ component/nacos-server-1.4.2/bin/work
 component/seata-server-1.4.2/logs
 component/seata-server-1.4.2/bin/sessionStore
 
-dubbo-registry
-log
+logs
