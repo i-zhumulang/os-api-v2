@@ -9,6 +9,7 @@
         <module>os-common</module>
         <module>os-model-interface</module>
         <module>os-model-impl</module>
+        <module>os-gateway</module>
     </modules>
 
     <parent>

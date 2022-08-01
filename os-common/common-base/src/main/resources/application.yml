@@ -14,10 +14,18 @@ api-user.dubbo.protocol.port: 20301
 # redis
 spring.redis.host: 127.0.0.1
 spring.redis.port: 6379
+# 404 配置
+spring:
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
 # nacos
 spring.cloud.nacos.server.addr: 127.0.0.1:8848
 # dubbo
 spring.dubbo.registry.address: nacos://127.0.0.1:8848
+# JWT
 jwt:
   config:
     key: AbCd@2022!

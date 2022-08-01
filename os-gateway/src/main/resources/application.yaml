@@ -1,0 +1,31 @@
+
+server:
+  port: 8081
+spring:
+  application:
+    name: os-gateway
+  redis:
+    host: 127.0.0.1
+    port: 6379
+  main:
+    web-application-type: reactive
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        username: nacos
+        password: nacos
+    gateway:
+      routes:
+        - id: os-api-user
+          uri: lb://api-user
+          predicates:
+            - Path=/api-user/**
+          filters:
+            - StripPrefix=1
+        - id: os-api-system
+          uri: lb://api-system
+          predicates:
+            - Path=/api-system/**
+          filters:
+            - StripPrefix=1
