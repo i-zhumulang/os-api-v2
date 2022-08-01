@@ -15,7 +15,6 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication(scanBasePackages = "os.api.v2.api.user")
 @EnableDiscoveryClient
-@EnableAutoConfiguration
 @ComponentScan({
         "os.api.v2.api.user",
         "os.api.v2.common.auth.config",

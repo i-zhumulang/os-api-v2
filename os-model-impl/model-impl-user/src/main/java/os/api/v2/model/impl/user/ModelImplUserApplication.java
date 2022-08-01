@@ -25,7 +25,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @SpringBootApplication(scanBasePackages = "os.api.v2.model.impl.user")
 @MapperScan(value = "os.api.v2.model.impl.user.mapper")
 @EnableDiscoveryClient
-@EnableAutoConfiguration
 public class ModelImplUserApplication {
 
     public static void main(String[] args) {
