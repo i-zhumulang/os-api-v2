@@ -1,0 +1,101 @@
+server:
+  port: ${model-impl-system.server.port}
+spring:
+  application:
+    name: model-impl-system
+    qos:
+      enable: true
+      port: ${model-impl-system.application.qos.port}
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${model-impl-system.spring.datasource.url}/v2_system?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: ${model-impl-system.spring.datasource.username}
+    password: ${model-impl-system.spring.datasource.password}
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      # 初始化时建立物理链接的个数
+      initial-size: 5
+      # 获取连接等待的最大时间
+      max-wait: 60000
+      # 连接池包含链接的最大数量
+      max-active: 20
+      # 连接池包含链接最小数量
+      min-idle: 1
+      # 关闭，影响性能
+      test-on-borrow: false
+      # 关闭，影响性能
+      test-on-return: false
+      min-evictable-idle-time-millis: 1800000
+      max-evictable-idle-time-millis: 2500000
+      time-between-eviction-runs-millis: 60000
+      test-while-idle: true
+      validation-query: select 1
+      # 启用监控
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        login-username: druid
+        login-password: druid
+      # 监控配置
+      filter:
+        stat:
+          enabled: true
+          merge-sql: true
+          slow-sql-millis: 3000
+        wall:
+          enabled: false
+          db-type: mysql
+          config:
+            delete-allow: false
+        slf4j:
+          enabled: true
+          statement-executable-sql-log-enable: true
+      # web 模块
+      web-stat-filter:
+        enabled: true
+        session-state-enable: true
+        exclusions: "*.js,*.gif,*.png,*.css,*ico,/druid/*"
+        url-pattern: /*
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${spring.cloud.nacos.server.addr}
+    alibaba:
+      seata:
+        tx-service-group: localhost_tx_group
+dubbo:
+  application:
+    name: model-impl-system
+  protocol:
+    port: ${model-impl-system.dubbo.protocol.port}
+    name: dubbo
+  registry:
+    address: ${spring.dubbo.registry.address}
+    file: logs/dubbo-registry/model-impl-system.properties
+  scan:
+    base-packages: os.api.v2.model.impl.system.service
+  consumer:
+    check: false
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+seata:
+  enabled: true
+  registry:
+    type: nacos
+    nacos:
+      server-addr: ${spring.cloud.nacos.server.addr}
+      application: seata-server
+      username: nacos
+      password: nacos
+      group: SEATA_GROUP
+  config:
+    type: nacos
+    nacos:
+      server-addr: ${spring.cloud.nacos.server.addr}
+      application: seata-server
+      dataId: seata-server.properties
+      username: nacos
+      password: nacos
+      group: SEATA_GROUP

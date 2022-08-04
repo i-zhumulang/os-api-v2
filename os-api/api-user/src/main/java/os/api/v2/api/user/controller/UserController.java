@@ -12,9 +12,11 @@ package os.api.v2.api.user.controller;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import os.api.v2.api.user.service.user.IModuleService;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.common.base.utils.jwt.JwtUtils;
 
@@ -32,6 +34,9 @@ import java.util.Map;
 @RequestMapping("/user")
 public class UserController {
 
+    @Autowired
+    protected IModuleService iModuleService;
+
     @RequestMapping(value = "/aaa", method = RequestMethod.GET)
     public Result<String> aaa() {
         return new Result<>(Result.SUCCESS, "666");
@@ -39,11 +44,6 @@ public class UserController {
 
     @RequestMapping(value = "/module", method = RequestMethod.POST)
     public Result<List<Map<String, Object>>> module() {
-        Subject subject = SecurityUtils.getSubject();
-        PrincipalCollection principal = subject.getPrincipals();
-        System.out.println(principal);
-        Long userId = JwtUtils.getUserId((String) principal.getPrimaryPrincipal());
-        System.out.println(userId);
-        return null;
+        return iModuleService.module();
     }
 }

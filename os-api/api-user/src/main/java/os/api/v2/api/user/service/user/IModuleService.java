@@ -5,21 +5,22 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-07-31 08:58
+// | Date  : 2022-08-02 23:33
 // +----------------------------------------------------------------------
-package os.api.v2.model.service.user.service.userrole;
+package os.api.v2.api.user.service.user;
 
 import os.api.v2.common.base.common.Result;
 
 import java.util.List;
+import java.util.Map;
 
 /**
- * os.api.v2.model.service.user.service.userrole.IUserRoleService
+ * os.api.v2.api.user.service.user.IModuleService
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-07-31 08:58
+ * @date 2022-08-02 23:33
  */
-public interface IUserRoleService {
-    Result<List<Integer>> getMultiModuleIdByUserId(Long userId);
+public interface IModuleService {
+    Result<List<Map<String, Object>>> module();
 }

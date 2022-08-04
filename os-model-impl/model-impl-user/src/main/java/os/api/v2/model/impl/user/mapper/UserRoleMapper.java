@@ -3,6 +3,8 @@ package os.api.v2.model.impl.user.mapper;
 import os.api.v2.model.impl.user.pojo.UserRole;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import java.util.List;
+
 /**
  * <p>
  * 用户-角色表 Mapper 接口
@@ -12,5 +14,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2022-07-30
  */
 public interface UserRoleMapper extends BaseMapper<UserRole> {
-
+    List<Integer> getMultiModuleIdByUserId(Long userId);
 }

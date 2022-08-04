@@ -10,6 +10,8 @@
         <module>os-model-interface</module>
         <module>os-model-impl</module>
         <module>os-gateway</module>
+        <module>os-service-interface</module>
+        <module>os-service-impl</module>
     </modules>
 
     <parent>

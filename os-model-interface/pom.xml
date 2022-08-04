@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>model-interface-user</module>
+        <module>model-interface-system</module>
     </modules>
 
     <properties>
