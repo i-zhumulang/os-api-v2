@@ -5,22 +5,32 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-07-31 08:38
+// | Date  : 2022-08-06 01:11
 // +----------------------------------------------------------------------
-package os.api.v2.model.service.user.service.modulemenu;
+package os.api.v2.service.service.system.vo.modulemenu;
 
-import os.api.v2.common.base.common.Result;
-import os.api.v2.model.service.user.vo.modulemenu.ModuleMenuModelVo;
+import lombok.Data;
 
-import java.util.List;
+import java.io.Serializable;
 
 /**
- * os.api.v2.model.service.user.service.modulemenu.IModuleMenuService
+ * os.api.v2.service.service.system.vo.modulemenu.ModuleMenuServiceVo
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-07-31 08:38
+ * @date 2022-08-06 01:11
  */
-public interface IModuleMenuService {
-    Result<List<Integer>> permission(ModuleMenuModelVo moduleMenuModelVo);
+@Data
+public class ModuleMenuServiceVo implements Serializable {
+    private Integer id;
+
+    /**
+     * 上级菜单ID
+     */
+    private Integer parentId;
+
+    /**
+     * 所属模块
+     */
+    private Integer moduleId;
 }

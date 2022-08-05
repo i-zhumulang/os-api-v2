@@ -9,17 +9,21 @@
 // +----------------------------------------------------------------------
 package os.api.v2.api.user.controller;
 
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import os.api.v2.api.user.service.user.IModuleService;
+import os.api.v2.api.user.service.user.IPermissionService;
+import os.api.v2.api.user.vo.user.PermissionVo;
 import os.api.v2.common.base.common.Result;
-import os.api.v2.common.base.utils.jwt.JwtUtils;
+import os.api.v2.common.base.exception.UserException;
+import os.api.v2.service.service.system.dto.modulemenu.PermissionServiceDto;
 
+import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,13 +41,16 @@ public class UserController {
     @Autowired
     protected IModuleService iModuleService;
 
-    @RequestMapping(value = "/aaa", method = RequestMethod.GET)
-    public Result<String> aaa() {
-        return new Result<>(Result.SUCCESS, "666");
-    }
+    @Autowired
+    protected IPermissionService iPermissionService;
 
     @RequestMapping(value = "/module", method = RequestMethod.POST)
     public Result<List<Map<String, Object>>> module() {
         return iModuleService.module();
+    }
+
+    @RequestMapping(value = "/permission", method = RequestMethod.POST)
+    public Result<List<PermissionServiceDto>> permission(@RequestBody @Valid PermissionVo permissionVo) throws UserException {
+        return iPermissionService.permission(permissionVo);
     }
 }

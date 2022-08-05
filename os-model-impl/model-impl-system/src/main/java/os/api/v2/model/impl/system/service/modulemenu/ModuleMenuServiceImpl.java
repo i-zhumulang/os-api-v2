@@ -5,43 +5,57 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-07-31 08:41
+// | Date  : 2022-08-06 00:54
 // +----------------------------------------------------------------------
-package os.api.v2.model.impl.user.service.modulemenu;
+package os.api.v2.model.impl.system.service.modulemenu;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.springframework.beans.BeanUtils;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.model.impl.common.utils.FieldValuesUtils;
-import os.api.v2.model.impl.user.mapper.ModuleMenuMapper;
-import os.api.v2.model.impl.user.pojo.ModuleMenu;
-import os.api.v2.model.service.user.service.modulemenu.IModuleMenuService;
-import os.api.v2.model.service.user.vo.modulemenu.ModuleMenuModelVo;
+import os.api.v2.model.impl.system.mapper.ModuleMenuMapper;
+import os.api.v2.model.impl.system.pojo.ModuleMenu;
+import os.api.v2.model.service.system.dto.modulemenu.ModuleMenuModelDto;
+import os.api.v2.model.service.system.service.modulemenu.IModuleMenuService;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
- * os.api.v2.model.impl.user.service.modulemenu.ModuleMenuServiceImpl
+ * os.api.v2.model.impl.system.service.modulemenu.ModuleMenuServiceImpl
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-07-31 08:41
+ * @date 2022-08-06 00:54
  */
 @DubboService(version = "2.0.0")
 public class ModuleMenuServiceImpl extends ServiceImpl<ModuleMenuMapper, ModuleMenu> implements IModuleMenuService {
+    /**
+     * permission
+     *
+     * @param idList
+     * @param fieldArray
+     * @return Result<List<ModuleMenuModelDto>>
+     * @author 吴荣超
+     * @date 1:05 2022/8/6
+     */
     @Override
-    public Result<List<Integer>> permission(ModuleMenuModelVo moduleMenuModelVo) {
-        String[] fieldArray = {"module_menu_id"};
+    public Result<List<ModuleMenuModelDto>> permission(List<Integer> idList, String[] fieldArray) {
         LambdaQueryWrapper<ModuleMenu> queryWrapper = new FieldValuesUtils<>(ModuleMenu.class, fieldArray).queryWrapper();
-        queryWrapper.eq(ModuleMenu::getRoleId, moduleMenuModelVo.getRoleId());
-        queryWrapper.eq(ModuleMenu::getModuleId, moduleMenuModelVo.getModuleId());
+        queryWrapper.in(ModuleMenu::getId, idList);
         List<ModuleMenu> moduleMenus = getBaseMapper().selectList(queryWrapper);
         if (moduleMenus.isEmpty()) {
             return new Result<>(Result.FAILURE, null);
         }
-        List<Integer> collect = moduleMenus.stream().map(ModuleMenu::getModuleMenuId).collect(Collectors.toList());
-        return new Result<>(Result.SUCCESS, collect);
+        List<ModuleMenuModelDto> moduleMenuModelDtoList = new ArrayList<>();
+
+        for (ModuleMenu moduleMenu : moduleMenus) {
+            ModuleMenuModelDto moduleMenuModelDto = new ModuleMenuModelDto();
+            BeanUtils.copyProperties(moduleMenu, moduleMenuModelDto);
+            moduleMenuModelDtoList.add(moduleMenuModelDto);
+        }
+        return new Result<>(Result.SUCCESS, moduleMenuModelDtoList);
     }
 }

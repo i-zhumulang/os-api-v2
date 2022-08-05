@@ -38,10 +38,4 @@ public class ModuleMenu implements Serializable {
      */
     private Integer moduleMenuId;
 
-    /**
-     * 上级菜单ID
-     */
-    private Integer moduleMenuParentId;
-
-
 }

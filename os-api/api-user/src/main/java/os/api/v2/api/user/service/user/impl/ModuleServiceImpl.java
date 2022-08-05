@@ -47,7 +47,7 @@ public class ModuleServiceImpl implements IModuleService {
         }
         // 通过ID获取数据
         Result<List<ModuleServiceDto>> moduleByIdList = getModuleByIdList(result.getData());
-        if (Objects.equals(moduleByIdList.getFlag(), Result.SUCCESS)) {
+        if (Objects.equals(moduleByIdList.getFlag(), Result.FAILURE)) {
             return new Result<>(result.getFlag(), "暂无权限:1001");
         }
         // 返回处理结果
@@ -58,6 +58,7 @@ public class ModuleServiceImpl implements IModuleService {
         List<Map<String, Object>> list = new ArrayList<>();
         for (ModuleServiceDto moduleServiceDto : moduleModelDtoList) {
             Map<String, Object> map = new HashMap<>();
+            map.put("id", moduleServiceDto.getId());
             map.put("nameEn", moduleServiceDto.getNameEn());
             map.put("nameZh", moduleServiceDto.getNameZh());
             map.put("domain", moduleServiceDto.getDomain());

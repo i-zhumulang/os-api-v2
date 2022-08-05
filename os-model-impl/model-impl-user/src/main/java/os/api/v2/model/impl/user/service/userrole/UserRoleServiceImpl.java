@@ -9,14 +9,21 @@
 // +----------------------------------------------------------------------
 package os.api.v2.model.impl.user.service.userrole;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.springframework.beans.BeanUtils;
 import os.api.v2.common.base.common.Result;
+import os.api.v2.model.impl.common.utils.FieldValuesUtils;
 import os.api.v2.model.impl.user.mapper.UserRoleMapper;
 import os.api.v2.model.impl.user.pojo.UserRole;
+import os.api.v2.model.service.user.dto.userrole.UserRoleModelDto;
 import os.api.v2.model.service.user.service.userrole.IUserRoleService;
+import os.api.v2.model.service.user.vo.userrole.UserRoleModelVo;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * os.api.v2.model.impl.user.service.userrole.UserRoleServiceImpl
@@ -34,5 +41,18 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> i
             return new Result<>(Result.FAILURE, null);
         }
         return new Result<>(Result.SUCCESS, list);
+    }
+
+    @Override
+    public Result<UserRoleModelDto> getRoleId(UserRoleModelVo userRoleModelVo) {
+        String[] fieldArray = {"role_id"};
+        LambdaQueryWrapper<UserRole> queryWrapper = new FieldValuesUtils<>(UserRole.class, fieldArray).queryWrapper();
+        UserRole userRole = getBaseMapper().selectOne(queryWrapper);
+        if (userRole == null) {
+            return new Result<>(Result.FAILURE, null);
+        }
+        UserRoleModelDto userRoleModelDto = new UserRoleModelDto();
+        BeanUtils.copyProperties(userRole, userRoleModelDto);
+        return new Result<>(Result.SUCCESS, userRoleModelDto);
     }
 }

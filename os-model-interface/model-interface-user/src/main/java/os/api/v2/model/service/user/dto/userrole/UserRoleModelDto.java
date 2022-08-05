@@ -5,22 +5,37 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-07-31 08:38
+// | Date  : 2022-08-05 23:45
 // +----------------------------------------------------------------------
-package os.api.v2.model.service.user.service.modulemenu;
+package os.api.v2.model.service.user.dto.userrole;
 
-import os.api.v2.common.base.common.Result;
-import os.api.v2.model.service.user.vo.modulemenu.ModuleMenuModelVo;
+import lombok.Data;
 
-import java.util.List;
+import java.io.Serializable;
 
 /**
- * os.api.v2.model.service.user.service.modulemenu.IModuleMenuService
+ * os.api.v2.model.service.user.dto.userrole.UserRoleModelDto
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-07-31 08:38
+ * @date 2022-08-05 23:45
  */
-public interface IModuleMenuService {
-    Result<List<Integer>> permission(ModuleMenuModelVo moduleMenuModelVo);
+@Data
+public class UserRoleModelDto implements Serializable {
+    private Long id;
+
+    /**
+     * 角色ID
+     */
+    private Integer roleId;
+
+    /**
+     * 用户ID
+     */
+    private Long userId;
+
+    /**
+     * 创建时间
+     */
+    private Long createdAt;
 }

@@ -10,6 +10,8 @@
 package os.api.v2.model.service.user.service.userrole;
 
 import os.api.v2.common.base.common.Result;
+import os.api.v2.model.service.user.dto.userrole.UserRoleModelDto;
+import os.api.v2.model.service.user.vo.userrole.UserRoleModelVo;
 
 import java.util.List;
 
@@ -22,4 +24,6 @@ import java.util.List;
  */
 public interface IUserRoleService {
     Result<List<Integer>> getMultiModuleIdByUserId(Long userId);
+
+    Result<UserRoleModelDto> getRoleId(UserRoleModelVo userRoleModelVo);
 }

@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
-import os.api.v2.api.user.dto.auth.LoginDto;
+import os.api.v2.api.user.vo.auth.LoginVo;
 import os.api.v2.api.user.service.auth.ILoginService;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.common.base.exception.UserException;
@@ -52,17 +52,17 @@ public class LoginServiceImpl implements ILoginService {
     /**
      * login
      *
-     * @param loginDto 登录表单
+     * @param loginVo 登录表单
      * @return Result<Map < String, Object>>
      * @author 吴荣超
      * @date 20:52 2022/7/26
      */
     @Override
-    public Result<Map<String, Object>> login(LoginDto loginDto) throws UserException {
+    public Result<Map<String, Object>> login(LoginVo loginVo) throws UserException {
 
-        UserAccountDto userAccountDto = this.getUserAccountDto(loginDto);
+        UserAccountDto userAccountDto = this.getUserAccountDto(loginVo);
         // 解密输入密码
-        String password = PasswordRsaUtils.decode(loginDto.getPassword());
+        String password = PasswordRsaUtils.decode(loginVo.getPassword());
         // 判断用户是否存在，密码是否一致
         AesResult aesResult = PasswordAesUtils.decode(
                 userAccountDto.getAuthentication(),
@@ -90,14 +90,14 @@ public class LoginServiceImpl implements ILoginService {
     /**
      * 根据手机号码获取数据
      *
-     * @param loginDto 表单
+     * @param loginVo 表单
      * @return UserAccountDto
      * @author 吴荣超
      * @date 18:40 2022/7/31
      */
-    private UserAccountDto getUserAccountDto(LoginDto loginDto) throws UserException {
+    private UserAccountDto getUserAccountDto(LoginVo loginVo) throws UserException {
         UserAccountDto userAccountDto = new UserAccountDto();
-        userAccountDto.setMobile(loginDto.getMobile());
+        userAccountDto.setMobile(loginVo.getMobile());
         String[] fieldArray = {
                 "user_id",
                 "mobile",

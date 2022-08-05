@@ -32,12 +32,13 @@ import java.util.Objects;
 @DubboService(version = "2.0.0")
 public class ModuleServiceImpl implements IModuleService {
 
-    @DubboReference
-    private os.api.v2.model.service.system.service.module.IModuleService iModuleService;
+    @DubboReference(version = "2.0.0")
+    protected os.api.v2.model.service.system.service.module.IModuleService iModuleService;
 
     @Override
     public Result<List<ModuleServiceDto>> getModuleByIdList(ModuleServiceVo moduleServiceVo) {
         String[] fieldArray = {
+                "id",
                 "name_en",
                 "name_zh",
                 "domain",

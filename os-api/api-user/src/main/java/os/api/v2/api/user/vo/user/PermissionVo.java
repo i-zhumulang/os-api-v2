@@ -5,22 +5,21 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-07-31 08:38
+// | Date  : 2022-08-05 23:35
 // +----------------------------------------------------------------------
-package os.api.v2.model.service.user.service.modulemenu;
+package os.api.v2.api.user.vo.user;
 
-import os.api.v2.common.base.common.Result;
-import os.api.v2.model.service.user.vo.modulemenu.ModuleMenuModelVo;
-
-import java.util.List;
+import lombok.Data;
 
 /**
- * os.api.v2.model.service.user.service.modulemenu.IModuleMenuService
+ * os.api.v2.api.user.vo.user.PermissionVo
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-07-31 08:38
+ * @date 2022-08-05 23:35
  */
-public interface IModuleMenuService {
-    Result<List<Integer>> permission(ModuleMenuModelVo moduleMenuModelVo);
+@Data
+public class PermissionVo {
+    private String module;
+    private Integer moduleId;
 }

@@ -7,25 +7,23 @@
 // +----------------------------------------------------------------------
 // | Date  : 2022-07-26 20:45
 // +----------------------------------------------------------------------
-package os.api.v2.api.user.dto.auth;
+package os.api.v2.api.user.vo.auth;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import java.io.Serializable;
 
 /**
- * os.api.v2.api.user.dto.auth.LoginDto
+ * os.api.v2.api.user.vo.auth.LoginDto
  *
  * @author 吴荣超
  * @version 2.0.0
  * @date 2022-07-26 20:45
  */
 @Data
-public class LoginDto implements Serializable {
+public class LoginVo implements Serializable {
     @NotBlank(message = "手机号码不能为空")
     @Length(min = 11, max = 11, message = "手机号码长度错误")
     private String mobile;

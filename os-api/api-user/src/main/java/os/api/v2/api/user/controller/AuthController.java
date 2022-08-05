@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import os.api.v2.api.user.dto.auth.LoginDto;
+import os.api.v2.api.user.vo.auth.LoginVo;
 import os.api.v2.api.user.service.auth.ILoginService;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.common.base.exception.UserException;
@@ -36,7 +36,7 @@ public class AuthController {
     protected ILoginService iLoginService;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Result<Map<String, Object>> login(@RequestBody @Valid LoginDto loginDto) throws UserException {
-        return iLoginService.login(loginDto);
+    public Result<Map<String, Object>> login(@RequestBody @Valid LoginVo loginVo) throws UserException {
+        return iLoginService.login(loginVo);
     }
 }
