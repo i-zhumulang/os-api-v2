@@ -21,7 +21,7 @@ import java.io.Serializable;
  * @date 2022-08-03 00:17
  */
 @Data
-public class ModuleDto implements Serializable {
+public class ModuleModelDto implements Serializable {
     private Integer id;
 
     /**

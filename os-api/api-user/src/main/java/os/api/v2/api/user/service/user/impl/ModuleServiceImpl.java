@@ -17,8 +17,9 @@ import org.springframework.stereotype.Service;
 import os.api.v2.api.user.service.user.IModuleService;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.common.base.utils.jwt.JwtUtils;
-import os.api.v2.model.service.system.dto.module.ModuleDto;
 import os.api.v2.model.service.user.service.userrole.IUserRoleService;
+import os.api.v2.service.service.system.dto.module.ModuleServiceDto;
+import os.api.v2.service.service.system.vo.module.ModuleServiceVo;
 
 import java.util.*;
 
@@ -36,7 +37,7 @@ public class ModuleServiceImpl implements IModuleService {
     protected IUserRoleService iUserRoleService;
 
     @DubboReference(version = "2.0.0")
-    protected os.api.v2.model.service.system.service.module.IModuleService iModuleService;
+    protected os.api.v2.service.service.system.service.module.IModuleService iModuleService;
 
     @Override
     public Result<List<Map<String, Object>>> module() {
@@ -45,19 +46,22 @@ public class ModuleServiceImpl implements IModuleService {
             return new Result<>(result.getFlag(), "暂无权限");
         }
         // 通过ID获取数据
-        List<ModuleDto> moduleDtoList = getModuleByIdList(result.getData());
+        Result<List<ModuleServiceDto>> moduleByIdList = getModuleByIdList(result.getData());
+        if (Objects.equals(moduleByIdList.getFlag(), Result.SUCCESS)) {
+            return new Result<>(result.getFlag(), "暂无权限:1001");
+        }
         // 返回处理结果
-        return complete(moduleDtoList);
+        return complete(moduleByIdList.getData());
     }
 
-    private Result<List<Map<String, Object>>> complete(List<ModuleDto> moduleDtoList) {
+    private Result<List<Map<String, Object>>> complete(List<ModuleServiceDto> moduleModelDtoList) {
         List<Map<String, Object>> list = new ArrayList<>();
-        for (ModuleDto moduleDto : moduleDtoList) {
+        for (ModuleServiceDto moduleServiceDto : moduleModelDtoList) {
             Map<String, Object> map = new HashMap<>();
-            map.put("nameEn", moduleDto.getNameEn());
-            map.put("nameZh", moduleDto.getNameZh());
-            map.put("domain", moduleDto.getDomain());
-            map.put("homePage", moduleDto.getHomePage());
+            map.put("nameEn", moduleServiceDto.getNameEn());
+            map.put("nameZh", moduleServiceDto.getNameZh());
+            map.put("domain", moduleServiceDto.getDomain());
+            map.put("homePage", moduleServiceDto.getHomePage());
             list.add(map);
         }
         return new Result<>(Result.SUCCESS, list);
@@ -71,15 +75,10 @@ public class ModuleServiceImpl implements IModuleService {
      * @author 吴荣超
      * @date 0:26 2022/8/3
      */
-    private List<ModuleDto> getModuleByIdList(List<Integer> id) {
-        String[] fieldArray = {
-                "name_en",
-                "name_zh",
-                "domain",
-                "home_page"
-        };
-        Result<List<ModuleDto>> result = iModuleService.getByIdList(id, fieldArray);
-        return result.getData();
+    private Result<List<ModuleServiceDto>> getModuleByIdList(List<Integer> id) {
+        ModuleServiceVo moduleServiceVo = new ModuleServiceVo();
+        moduleServiceVo.setIdList(id);
+        return iModuleService.getModuleByIdList(moduleServiceVo);
     }
 
     /**

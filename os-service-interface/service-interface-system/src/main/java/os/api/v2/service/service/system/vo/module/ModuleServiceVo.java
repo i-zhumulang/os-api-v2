@@ -1,26 +1,28 @@
 // +----------------------------------------------------------------------
 // | 
 // +----------------------------------------------------------------------
-// | Copyright © 2017 版权 All Rights Reserved.
+// | Copyright © 2022 版权 All Rights Reserved.
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-08-03 00:14
+// | Date  : 2022-08-05 20:07
 // +----------------------------------------------------------------------
-package os.api.v2.model.service.system.service.module;
+package os.api.v2.service.service.system.vo.module;
 
-import os.api.v2.common.base.common.Result;
-import os.api.v2.model.service.system.dto.module.ModuleModelDto;
+import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
- * os.api.v2.model.service.system.service.module.IModuleService
+ * os.api.v2.service.service.system.vo.module.ModuleVo
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-08-03 00:14
+ * @date 2022-08-05 20:07
  */
-public interface IModuleService {
-    public Result<List<ModuleModelDto>> getByIdList(List<Integer> id, String[] fieldArray);
+@Data
+public class ModuleServiceVo implements Serializable {
+    private List<Integer> idList;
+    private Integer id;
 }

@@ -17,7 +17,7 @@ import os.api.v2.common.base.common.Result;
 import os.api.v2.model.impl.common.utils.FieldValuesUtils;
 import os.api.v2.model.impl.system.mapper.ModuleMapper;
 import os.api.v2.model.impl.system.pojo.Module;
-import os.api.v2.model.service.system.dto.module.ModuleDto;
+import os.api.v2.model.service.system.dto.module.ModuleModelDto;
 import os.api.v2.model.service.system.service.module.IModuleService;
 
 import java.util.ArrayList;
@@ -34,17 +34,17 @@ import java.util.List;
 public class ModuleServiceImpl extends ServiceImpl<ModuleMapper, Module> implements IModuleService {
 
     @Override
-    public Result<List<ModuleDto>> getByIdList(List<Integer> id, String[] fieldArray) {
+    public Result<List<ModuleModelDto>> getByIdList(List<Integer> id, String[] fieldArray) {
         LambdaQueryWrapper<Module> queryWrapper = new FieldValuesUtils<>(Module.class, fieldArray).queryWrapper();
         queryWrapper.in(id != null, Module::getId, id);
         queryWrapper.orderByAsc(Module::getSorting);
         List<Module> modules = getBaseMapper().selectList(queryWrapper);
-        List<ModuleDto> moduleDtoList = new ArrayList<>();
+        List<ModuleModelDto> moduleModelDtoList = new ArrayList<>();
         for (Module module : modules) {
-            ModuleDto moduleDto = new ModuleDto();
-            BeanUtils.copyProperties(module, moduleDto);
-            moduleDtoList.add(moduleDto);
+            ModuleModelDto moduleModelDto = new ModuleModelDto();
+            BeanUtils.copyProperties(module, moduleModelDto);
+            moduleModelDtoList.add(moduleModelDto);
         }
-        return new Result<>(Result.SUCCESS, moduleDtoList);
+        return new Result<>(Result.SUCCESS, moduleModelDtoList);
     }
 }
