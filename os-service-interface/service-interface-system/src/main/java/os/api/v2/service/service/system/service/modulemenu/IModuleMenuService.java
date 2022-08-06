@@ -9,12 +9,6 @@
 // +----------------------------------------------------------------------
 package os.api.v2.service.service.system.service.modulemenu;
 
-import os.api.v2.common.base.common.Result;
-import os.api.v2.service.service.system.dto.modulemenu.PermissionServiceDto;
-
-import java.util.List;
-import java.util.Map;
-
 /**
  * os.api.v2.service.service.system.service.modulemenu.IModuleMenuService
  *
@@ -23,5 +17,4 @@ import java.util.Map;
  * @date 2022-08-06 01:06
  */
 public interface IModuleMenuService {
-    Result<List<PermissionServiceDto>> permission(List<Integer> idList);
 }

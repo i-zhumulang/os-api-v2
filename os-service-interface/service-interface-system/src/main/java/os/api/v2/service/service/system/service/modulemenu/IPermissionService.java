@@ -5,24 +5,22 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-08-05 23:34
+// | Date  : 2022-08-07 00:14
 // +----------------------------------------------------------------------
-package os.api.v2.api.user.service.user;
+package os.api.v2.service.service.system.service.modulemenu;
 
-import os.api.v2.api.user.vo.user.PermissionVo;
 import os.api.v2.common.base.common.Result;
-import os.api.v2.common.base.exception.UserException;
 import os.api.v2.service.service.system.dto.modulemenu.PermissionServiceDto;
 
 import java.util.List;
 
 /**
- * os.api.v2.api.user.service.user.IPermissionService
+ * os.api.v2.service.service.system.service.modulemenu.IPermissionService
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-08-05 23:34
+ * @date 2022-08-07 00:14
  */
 public interface IPermissionService {
-    Result<List<PermissionServiceDto>> permission(PermissionVo permissionVo) throws UserException;
+    Result<List<PermissionServiceDto>> permission(List<Integer> idList);
 }

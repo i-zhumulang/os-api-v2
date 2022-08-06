@@ -22,8 +22,6 @@ import os.api.v2.common.base.exception.UserException;
 import os.api.v2.service.service.system.dto.modulemenu.PermissionServiceDto;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

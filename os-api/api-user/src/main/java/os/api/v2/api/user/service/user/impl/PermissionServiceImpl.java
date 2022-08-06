@@ -27,7 +27,6 @@ import os.api.v2.model.service.user.vo.userrole.UserRoleModelVo;
 import os.api.v2.service.service.system.dto.modulemenu.PermissionServiceDto;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -46,24 +45,25 @@ public class PermissionServiceImpl implements IPermissionService {
     protected IModuleMenuService iModuleMenuService;
 
     @DubboReference(version = "2.0.0")
-    protected os.api.v2.service.service.system.service.modulemenu.IModuleMenuService iModuleMenuServiceSystem;
+    protected os.api.v2.service.service.system.service.modulemenu.IPermissionService iPermissionService;
 
     @Override
     public Result<List<PermissionServiceDto>> permission(PermissionVo permissionVo) throws UserException {
-        UserRoleModelDto userRoleModelDto = getRoleId();
+        long userId = getUserId();
+        UserRoleModelDto userRoleModelDto = getRoleId(userId);
         List<Integer> moduleMenuIdList = getModuleMenuIdList(userRoleModelDto.getRoleId(), permissionVo.getModuleId());
         return getModuleMenu(moduleMenuIdList);
     }
 
     private Result<List<PermissionServiceDto>> getModuleMenu(List<Integer> idList) {
-        return iModuleMenuServiceSystem.permission(idList);
+        return iPermissionService.permission(idList);
     }
 
     /**
      * getModuleMenuIdList
      * 
-     * @param roleId
-     * @param moduleId 
+     * @param roleId 角色ID
+     * @param moduleId 当前模块ID
      * @return List<Integer>
      * @author 吴荣超
      * @date 0:52 2022/8/6
@@ -82,13 +82,14 @@ public class PermissionServiceImpl implements IPermissionService {
     /**
      * getRoleId
      *
+     * @param userId long
      * @return UserRoleModelDto
      * @author 吴荣超
      * @date 0:42 2022/8/6
      */
-    private UserRoleModelDto getRoleId() throws UserException {
+    private UserRoleModelDto getRoleId(long userId) throws UserException {
         UserRoleModelVo userRoleModelVo = new UserRoleModelVo();
-        userRoleModelVo.setUserId(getUserId());
+        userRoleModelVo.setUserId(userId);
         Result<UserRoleModelDto> result = iUserRoleService.getRoleId(userRoleModelVo);
         if (Objects.equals(result.getFlag(), Result.FAILURE)) {
             throw new UserException("没有角色");
