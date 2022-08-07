@@ -1,6 +1,6 @@
 
 server:
-  port: ${port.os-api.api-system}
+  port: ${api-system.server.port}
 spring:
   application:
     name: api-system
@@ -18,15 +18,15 @@ spring:
         server-addr: ${spring.cloud.nacos.server.addr}
 dubbo:
   application:
-    name: api-user
+    name: api-system
   protocol:
-    port: 20880
+    port: ${api-system.dubbo.protocol.port}
     name: dubbo
   registry:
     address: ${spring.dubbo.registry.address}
     file: logs/dubbo-registry/api-system.properties
   scan:
-    base-packages: com.api.v2.api.system
+    base-packages: os.api.v2.api.system
   consumer:
     check: false
 #自定义属性
