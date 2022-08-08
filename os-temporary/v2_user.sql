@@ -11,11 +11,27 @@
  Target Server Version : 80029
  File Encoding         : 65001
 
- Date: 02/08/2022 09:45:56
+ Date: 08/08/2022 20:05:38
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for menu_operate
+-- ----------------------------
+DROP TABLE IF EXISTS `menu_operate`;
+CREATE TABLE `menu_operate`  (
+  `id` int(0) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `module_menu_id` int(0) UNSIGNED NOT NULL COMMENT '模块-菜单ID',
+  `system_menu_operate_id` int(0) UNSIGNED NOT NULL COMMENT '操作ID',
+  `sorting` tinyint(0) UNSIGNED NOT NULL COMMENT '排序',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '菜单-操作' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of menu_operate
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for module_menu
@@ -23,36 +39,13 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `module_menu`;
 CREATE TABLE `module_menu`  (
   `id` int(0) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `parent_id` int(0) UNSIGNED NOT NULL COMMENT '上级菜单ID',
-  `module_id` int(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '所属模块',
-  `name_en` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '英文名称',
-  `name_zh` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '中文名称',
-  `uri` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '地址',
-  `sorting` tinyint(0) NOT NULL DEFAULT 0 COMMENT '排序',
+  `role_module_id` int(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '角色-模块ID',
+  `system_module_menu_id` int(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '菜单ID(v2_system.module_menu表ID)',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '模块-菜单表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '模块-菜单' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of module_menu
--- ----------------------------
-
--- ----------------------------
--- Table structure for module_menu_operate
--- ----------------------------
-DROP TABLE IF EXISTS `module_menu_operate`;
-CREATE TABLE `module_menu_operate`  (
-  `id` int(0) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `module_menu_id` int(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '所属菜单',
-  `location` char(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '操作位置(TABLE:列表,TABLE-HEAD:表头,TABLE-BODY:表体)',
-  `name_en` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '操作名称(英文)',
-  `name_zh` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '操作名称(中文)',
-  `uri` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '地址',
-  `sorting` tinyint(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '排序',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '模块-菜单-操作表' ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of module_menu_operate
 -- ----------------------------
 
 -- ----------------------------
@@ -81,9 +74,9 @@ DROP TABLE IF EXISTS `role_module`;
 CREATE TABLE `role_module`  (
   `id` int(0) UNSIGNED NOT NULL AUTO_INCREMENT,
   `role_id` int(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '角色ID',
-  `module_id` int(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '模块ID',
+  `system_module_id` int(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '模块ID(v2_system.module表ID)',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色-模块表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色-模块' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of role_module
@@ -140,7 +133,7 @@ CREATE TABLE `user_account`  (
   `state` int(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '状态',
   `deleted_state` int(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除(0:否,1:是)',
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户-账号表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户-账号' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_account
@@ -157,7 +150,7 @@ CREATE TABLE `user_role`  (
   `user_id` bigint(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '用户ID',
   `created_at` bigint(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户-角色表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户-角色' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_role
