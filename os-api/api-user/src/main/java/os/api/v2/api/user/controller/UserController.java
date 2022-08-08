@@ -43,7 +43,7 @@ public class UserController {
     protected IPermissionService iPermissionService;
 
     @RequestMapping(value = "/module", method = RequestMethod.POST)
-    public Result<List<Map<String, Object>>> module() {
+    public Result<List<Map<String, Object>>> module() throws UserException {
         return iModuleService.module();
     }
 

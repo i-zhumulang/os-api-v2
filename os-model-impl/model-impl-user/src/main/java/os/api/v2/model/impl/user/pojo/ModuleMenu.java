@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author 吴荣超
- * @since 2022-07-30
+ * @since 2022-08-08
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -24,18 +24,14 @@ public class ModuleMenu implements Serializable {
     private Integer id;
 
     /**
-     * 角色ID
+     * 角色-模块ID
      */
-    private Integer roleId;
+    private Integer roleModuleId;
 
     /**
-     * 所属模块
+     * 菜单ID(v2_system.menu表ID)
      */
-    private Integer moduleId;
+    private Integer systemMenuId;
 
-    /**
-     * 菜单ID
-     */
-    private Integer moduleMenuId;
 
 }

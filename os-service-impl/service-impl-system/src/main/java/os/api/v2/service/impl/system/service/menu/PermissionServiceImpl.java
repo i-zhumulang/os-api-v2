@@ -7,20 +7,20 @@
 // +----------------------------------------------------------------------
 // | Date  : 2022-08-07 00:13
 // +----------------------------------------------------------------------
-package os.api.v2.service.impl.system.service.modulemenu;
+package os.api.v2.service.impl.system.service.menu;
 
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.BeanUtils;
 import os.api.v2.common.base.common.Result;
-import os.api.v2.model.service.system.dto.modulemenu.ModuleMenuModelDto;
+import os.api.v2.model.service.system.dto.menu.MenuModelDto;
 import os.api.v2.service.service.system.dto.modulemenu.PermissionServiceDto;
-import os.api.v2.service.service.system.service.modulemenu.IPermissionService;
+import os.api.v2.service.service.system.service.menu.IPermissionService;
 
 import java.util.*;
 
 /**
- * os.api.v2.service.impl.system.service.modulemenu.PermissionServiceImpl
+ * os.api.v2.service.impl.system.service.menu.PermissionServiceImpl
  *
  * @author 吴荣超
  * @version 2.0.0
@@ -29,7 +29,7 @@ import java.util.*;
 @DubboService(version = "2.0.0")
 public class PermissionServiceImpl implements IPermissionService {
     @DubboReference(version = "2.0.0")
-    protected os.api.v2.model.service.system.service.modulemenu.IModuleMenuService iModuleMenuService;
+    protected os.api.v2.model.service.system.service.menu.IMenuService iMenuService;
 
     @Override
     public Result<List<PermissionServiceDto>> permission(List<Integer> idList) {
@@ -39,13 +39,13 @@ public class PermissionServiceImpl implements IPermissionService {
                 "name_zh",
                 "uri",
         };
-        Result<List<ModuleMenuModelDto>> result = iModuleMenuService.permission(idList, fieldArray);
+        Result<List<MenuModelDto>> result = iMenuService.permission(idList, fieldArray);
         if (Objects.equals(result.getFlag(), Result.FAILURE)) {
             return new Result<>(result.getFlag(), null);
         }
 
         List<PermissionServiceDto> permissionServiceDtoList = new ArrayList<>();
-        for (ModuleMenuModelDto moduleMenuModelDto : result.getData()) {
+        for (MenuModelDto moduleMenuModelDto : result.getData()) {
             PermissionServiceDto permissionServiceDto = new PermissionServiceDto();
             BeanUtils.copyProperties(moduleMenuModelDto, permissionServiceDto);
             permissionServiceDtoList.add(permissionServiceDto);

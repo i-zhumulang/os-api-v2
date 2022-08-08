@@ -8,11 +8,11 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 角色-模块表
+ * 角色-模块
  * </p>
  *
  * @author 吴荣超
- * @since 2022-07-30
+ * @since 2022-08-08
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -29,9 +29,9 @@ public class RoleModule implements Serializable {
     private Integer roleId;
 
     /**
-     * 模块ID
+     * 模块ID(v2_system.module表ID)
      */
-    private Integer moduleId;
+    private Integer systemModuleId;
 
 
 }

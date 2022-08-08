@@ -10,6 +10,7 @@
 package os.api.v2.api.user.service.user;
 
 import os.api.v2.common.base.common.Result;
+import os.api.v2.common.base.exception.UserException;
 
 import java.util.List;
 import java.util.Map;
@@ -22,5 +23,5 @@ import java.util.Map;
  * @date 2022-08-02 23:33
  */
 public interface IModuleService {
-    Result<List<Map<String, Object>>> module();
+    Result<List<Map<String, Object>>> module() throws UserException;
 }

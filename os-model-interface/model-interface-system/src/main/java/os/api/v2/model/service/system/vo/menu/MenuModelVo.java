@@ -5,16 +5,22 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-08-06 01:06
+// | Date  : 2022-08-08 23:31
 // +----------------------------------------------------------------------
-package os.api.v2.service.service.system.service.modulemenu;
+package os.api.v2.model.service.system.vo.menu;
+
+import lombok.Data;
+
+import java.io.Serializable;
 
 /**
- * os.api.v2.service.service.system.service.modulemenu.IModuleMenuService
+ * os.api.v2.model.service.system.vo.menu.MenuModelVo
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-08-06 01:06
+ * @date 2022-08-08 23:31
  */
-public interface IModuleMenuService {
+@Data
+public class MenuModelVo implements Serializable {
+
 }

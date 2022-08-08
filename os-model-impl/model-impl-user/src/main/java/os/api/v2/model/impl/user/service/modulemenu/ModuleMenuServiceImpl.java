@@ -5,7 +5,7 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-07-31 08:41
+// | Date  : 2022-08-08 22:21
 // +----------------------------------------------------------------------
 package os.api.v2.model.impl.user.service.modulemenu;
 
@@ -27,21 +27,20 @@ import java.util.stream.Collectors;
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-07-31 08:41
+ * @date 2022-08-08 22:21
  */
 @DubboService(version = "2.0.0")
 public class ModuleMenuServiceImpl extends ServiceImpl<ModuleMenuMapper, ModuleMenu> implements IModuleMenuService {
     @Override
     public Result<List<Integer>> permission(ModuleMenuModelVo moduleMenuModelVo) {
-        String[] fieldArray = {"module_menu_id"};
+        String[] fieldArray = {"system_menu_id"};
         LambdaQueryWrapper<ModuleMenu> queryWrapper = new FieldValuesUtils<>(ModuleMenu.class, fieldArray).queryWrapper();
-        queryWrapper.eq(ModuleMenu::getRoleId, moduleMenuModelVo.getRoleId());
-        queryWrapper.eq(ModuleMenu::getModuleId, moduleMenuModelVo.getModuleId());
+        queryWrapper.eq(ModuleMenu::getRoleModuleId, moduleMenuModelVo.getRoleModuleId());
         List<ModuleMenu> moduleMenus = getBaseMapper().selectList(queryWrapper);
         if (moduleMenus.isEmpty()) {
             return new Result<>(Result.FAILURE, null);
         }
-        List<Integer> collect = moduleMenus.stream().map(ModuleMenu::getModuleMenuId).collect(Collectors.toList());
+        List<Integer> collect = moduleMenus.stream().map(ModuleMenu::getSystemMenuId).collect(Collectors.toList());
         return new Result<>(Result.SUCCESS, collect);
     }
 }

@@ -3,14 +3,14 @@
 <mapper namespace="os.api.v2.model.impl.user.mapper.UserRoleMapper">
     <select id="getMultiModuleIdByUserId" parameterType="long" resultType="Integer">
         SELECT
-            role_module.module_id
+            role_module.system_module_id
         FROM
             user_role user_role
             LEFT JOIN role_module role_module ON role_module.role_id = user_role.role_id
         WHERE
             user_id = #{userId}
         GROUP BY
-            role_module.module_id
+            role_module.system_module_id
         ORDER BY NULL
     </select>
 </mapper>

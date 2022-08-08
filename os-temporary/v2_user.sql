@@ -40,7 +40,7 @@ DROP TABLE IF EXISTS `module_menu`;
 CREATE TABLE `module_menu`  (
   `id` int(0) UNSIGNED NOT NULL AUTO_INCREMENT,
   `role_module_id` int(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '角色-模块ID',
-  `system_module_menu_id` int(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '菜单ID(v2_system.module_menu表ID)',
+  `system_menu_id` int(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '菜单ID(v2_system.menu表ID)',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '模块-菜单' ROW_FORMAT = DYNAMIC;
 

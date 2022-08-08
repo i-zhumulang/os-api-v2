@@ -1,6 +1,6 @@
 package os.api.v2.model.impl.system.mapper;
 
-import os.api.v2.model.impl.system.pojo.ModuleMenu;
+import os.api.v2.model.impl.system.pojo.Menu;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author 吴荣超
- * @since 2022-08-03
+ * @since 2022-08-08
  */
-public interface ModuleMenuMapper extends BaseMapper<ModuleMenu> {
+public interface MenuMapper extends BaseMapper<Menu> {
 
 }

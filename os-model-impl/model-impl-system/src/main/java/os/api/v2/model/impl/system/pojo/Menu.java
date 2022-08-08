@@ -12,11 +12,11 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author 吴荣超
- * @since 2022-08-03
+ * @since 2022-08-08
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class ModuleMenu implements Serializable {
+public class Menu implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

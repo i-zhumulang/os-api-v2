@@ -16,6 +16,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Service;
 import os.api.v2.api.user.service.user.IModuleService;
 import os.api.v2.common.base.common.Result;
+import os.api.v2.common.base.exception.UserException;
 import os.api.v2.common.base.utils.jwt.JwtUtils;
 import os.api.v2.model.service.user.service.userrole.IUserRoleService;
 import os.api.v2.service.service.system.dto.module.ModuleServiceDto;
@@ -40,18 +41,15 @@ public class ModuleServiceImpl implements IModuleService {
     protected os.api.v2.service.service.system.service.module.IModuleService iModuleService;
 
     @Override
-    public Result<List<Map<String, Object>>> module() {
+    public Result<List<Map<String, Object>>> module() throws UserException {
         Result<List<Integer>> result = iUserRoleService.getMultiModuleIdByUserId(getUserId());
         if (Objects.equals(result.getFlag(), Result.FAILURE)) {
             return new Result<>(result.getFlag(), "暂无权限");
         }
         // 通过ID获取数据
-        Result<List<ModuleServiceDto>> moduleByIdList = getModuleByIdList(result.getData());
-        if (Objects.equals(moduleByIdList.getFlag(), Result.FAILURE)) {
-            return new Result<>(result.getFlag(), "暂无权限:1001");
-        }
+        List<ModuleServiceDto> moduleByIdList = getModuleByIdList(result.getData());
         // 返回处理结果
-        return complete(moduleByIdList.getData());
+        return complete(moduleByIdList);
     }
 
     private Result<List<Map<String, Object>>> complete(List<ModuleServiceDto> moduleModelDtoList) {
@@ -76,10 +74,14 @@ public class ModuleServiceImpl implements IModuleService {
      * @author 吴荣超
      * @date 0:26 2022/8/3
      */
-    private Result<List<ModuleServiceDto>> getModuleByIdList(List<Integer> id) {
+    private List<ModuleServiceDto> getModuleByIdList(List<Integer> id) throws UserException {
         ModuleServiceVo moduleServiceVo = new ModuleServiceVo();
         moduleServiceVo.setIdList(id);
-        return iModuleService.getModuleByIdList(moduleServiceVo);
+        Result<List<ModuleServiceDto>> result = iModuleService.getModuleByIdList(moduleServiceVo);
+        if (Objects.equals(result.getFlag(), Result.FAILURE)) {
+            throw new UserException("暂无权限:1001");
+        }
+        return result.getData();
     }
 
     /**
