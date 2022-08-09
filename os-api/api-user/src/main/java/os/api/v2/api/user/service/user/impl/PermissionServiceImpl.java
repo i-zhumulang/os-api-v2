@@ -19,13 +19,10 @@ import os.api.v2.api.user.vo.user.PermissionVo;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.common.base.exception.UserException;
 import os.api.v2.common.base.utils.jwt.JwtUtils;
-import os.api.v2.model.service.user.dto.rolemodule.RoleModuleModelDto;
 import os.api.v2.model.service.user.dto.userrole.UserRoleModelDto;
 import os.api.v2.model.service.user.service.modulemenu.IModuleMenuService;
-import os.api.v2.model.service.user.service.rolemodule.IRoleModuleService;
 import os.api.v2.model.service.user.service.userrole.IUserRoleService;
 import os.api.v2.model.service.user.vo.modulemenu.ModuleMenuModelVo;
-import os.api.v2.model.service.user.vo.rolemodule.RoleModuleModelVo;
 import os.api.v2.model.service.user.vo.userrole.UserRoleModelVo;
 import os.api.v2.service.service.system.dto.modulemenu.PermissionServiceDto;
 
@@ -48,19 +45,15 @@ public class PermissionServiceImpl implements IPermissionService {
     protected IModuleMenuService iModuleMenuService;
 
     @DubboReference(version = "2.0.0")
-    protected IRoleModuleService iRoleModuleService;
-
-    @DubboReference(version = "2.0.0")
     protected os.api.v2.service.service.system.service.menu.IPermissionService iPermissionService;
 
     @Override
     public Result<List<PermissionServiceDto>> permission(PermissionVo permissionVo) throws UserException {
         long userId = getUserId();
+
         UserRoleModelDto userRoleModelDto = getRoleId(userId);
 
-        RoleModuleModelDto roleModuleModelDto = getRoleModule(userRoleModelDto.getRoleId(), permissionVo.getModuleId());
-
-        List<Integer> moduleMenuIdList = getSystemModuleMenuIdList(roleModuleModelDto.getId());
+        List<Integer> moduleMenuIdList = getSystemModuleMenuIdList(userRoleModelDto.getRoleId(), permissionVo.getModuleId());
         
         return getModuleMenu(moduleMenuIdList);
     }
@@ -77,37 +70,20 @@ public class PermissionServiceImpl implements IPermissionService {
         return iPermissionService.permission(idList);
     }
 
-    /**
-     * 获取角色模块
-     *
-     * @param roleId
-     * @param systemModuleId
-     * @return RoleModuleModelDto
-     * @author 吴荣超
-     * @date 22:59 2022/8/8
-     */
-    private RoleModuleModelDto getRoleModule(Integer roleId, Integer systemModuleId) throws UserException {
-        RoleModuleModelVo roleModuleModelVo = new RoleModuleModelVo();
-        roleModuleModelVo.setRoleId(roleId);
-        roleModuleModelVo.setSystemModuleId(systemModuleId);
-        Result<RoleModuleModelDto> result = iRoleModuleService.getSingle(roleModuleModelVo);
-        if (Objects.equals(result.getFlag(), Result.FAILURE)) {
-            throw new UserException("角色没有分配模块");
-        }
-        return result.getData();
-    }
 
     /**
      * getModuleMenuIdList
      *
-     * @param roleModuleId 角色ID
+     * @param roleId 角色ID
+     * @param systemModuleId 模块ID
      * @return List<Integer>
      * @author 吴荣超
      * @date 0:52 2022/8/6
      */
-    private List<Integer> getSystemModuleMenuIdList(Integer roleModuleId) throws UserException {
+    private List<Integer> getSystemModuleMenuIdList(Integer roleId, Integer systemModuleId) throws UserException {
         ModuleMenuModelVo moduleMenuModelVo = new ModuleMenuModelVo();
-        moduleMenuModelVo.setRoleModuleId(roleModuleId);
+        moduleMenuModelVo.setRoleId(roleId);
+        moduleMenuModelVo.setSystemModuleId(systemModuleId);
         Result<List<Integer>> result = iModuleMenuService.permission(moduleMenuModelVo);
         if (Objects.equals(result.getFlag(), Result.FAILURE)) {
             throw new UserException("模块没有分配菜单");

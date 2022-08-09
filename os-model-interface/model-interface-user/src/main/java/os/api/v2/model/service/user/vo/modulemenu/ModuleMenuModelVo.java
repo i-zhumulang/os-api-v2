@@ -31,6 +31,16 @@ public class ModuleMenuModelVo implements Serializable {
     private Integer roleModuleId;
 
     /**
+     * 角色ID
+     */
+    private Integer roleId;
+
+    /**
+     * 模块ID
+     */
+    private Integer systemModuleId;
+
+    /**
      * 菜单ID(v2_system.menu表ID)
      */
     private Integer systemMenuId;
