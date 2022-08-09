@@ -11,7 +11,7 @@
  Target Server Version : 80029
  File Encoding         : 65001
 
- Date: 08/08/2022 20:05:38
+ Date: 09/08/2022 17:58:15
 */
 
 SET NAMES utf8mb4;
@@ -23,15 +23,28 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `menu_operate`;
 CREATE TABLE `menu_operate`  (
   `id` int(0) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `module_menu_id` int(0) UNSIGNED NOT NULL COMMENT '模块-菜单ID',
-  `system_menu_operate_id` int(0) UNSIGNED NOT NULL COMMENT '操作ID',
-  `sorting` tinyint(0) UNSIGNED NOT NULL COMMENT '排序',
+  `module_menu_id` int(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '模块-菜单ID',
+  `role_id` int(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '角色ID',
+  `system_module_id` int(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '模块ID',
+  `system_menu_id` int(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '菜单ID',
+  `system_menu_operate_id` int(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '操作ID',
+  `sorting` tinyint(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '排序',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '菜单-操作' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of menu_operate
 -- ----------------------------
+INSERT INTO `menu_operate` VALUES (1, 2, 1, 1, 2, 1, 0);
+INSERT INTO `menu_operate` VALUES (2, 2, 1, 1, 2, 2, 0);
+INSERT INTO `menu_operate` VALUES (3, 2, 1, 1, 2, 3, 0);
+INSERT INTO `menu_operate` VALUES (4, 2, 1, 1, 2, 4, 0);
+INSERT INTO `menu_operate` VALUES (5, 2, 1, 1, 2, 5, 0);
+INSERT INTO `menu_operate` VALUES (6, 2, 1, 1, 2, 6, 0);
+INSERT INTO `menu_operate` VALUES (7, 2, 1, 1, 2, 7, 0);
+INSERT INTO `menu_operate` VALUES (8, 2, 1, 1, 2, 8, 0);
+INSERT INTO `menu_operate` VALUES (9, 2, 1, 1, 2, 9, 0);
+INSERT INTO `menu_operate` VALUES (10, 2, 1, 1, 2, 10, 0);
 
 -- ----------------------------
 -- Table structure for module_menu
@@ -40,6 +53,8 @@ DROP TABLE IF EXISTS `module_menu`;
 CREATE TABLE `module_menu`  (
   `id` int(0) UNSIGNED NOT NULL AUTO_INCREMENT,
   `role_module_id` int(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '角色-模块ID',
+  `role_id` int(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '角色ID',
+  `system_module_id` int(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '模块ID',
   `system_menu_id` int(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '菜单ID(v2_system.menu表ID)',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '模块-菜单' ROW_FORMAT = DYNAMIC;
@@ -47,6 +62,9 @@ CREATE TABLE `module_menu`  (
 -- ----------------------------
 -- Records of module_menu
 -- ----------------------------
+INSERT INTO `module_menu` VALUES (1, 1, 1, 1, 1);
+INSERT INTO `module_menu` VALUES (2, 1, 1, 1, 2);
+INSERT INTO `module_menu` VALUES (3, 1, 1, 1, 3);
 
 -- ----------------------------
 -- Table structure for role
