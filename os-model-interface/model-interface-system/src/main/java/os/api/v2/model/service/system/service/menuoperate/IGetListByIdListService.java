@@ -5,25 +5,22 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-08-07 18:56
+// | Date  : 2022-08-09 23:14
 // +----------------------------------------------------------------------
-package os.api.v2.api.system.dto.module;
+package os.api.v2.model.service.system.service.menuoperate;
 
-import lombok.Data;
-import os.api.v2.model.service.system.dto.module.ModuleModelDto;
+import os.api.v2.common.base.common.Result;
+import os.api.v2.model.service.system.dto.menuoperate.MenuOperateModelDto;
 
 import java.util.List;
-import java.util.Map;
 
 /**
- * os.api.v2.api.system.dto.module.IndexDto
+ * os.api.v2.model.service.system.service.menuoperate.GetListByIdList
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-08-07 18:56
+ * @date 2022-08-09 23:14
  */
-@Data
-public class IndexDto {
-    private ModuleModelDto data;
-    private List<Map<String, Object>> opts;
+public interface IGetListByIdListService {
+    Result<List<MenuOperateModelDto>> getListByIdList(List<Integer> idList, String[] fieldArray);
 }

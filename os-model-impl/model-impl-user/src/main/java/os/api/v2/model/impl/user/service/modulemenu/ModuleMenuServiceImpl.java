@@ -35,7 +35,8 @@ public class ModuleMenuServiceImpl extends ServiceImpl<ModuleMenuMapper, ModuleM
     public Result<List<Integer>> permission(ModuleMenuModelVo moduleMenuModelVo) {
         String[] fieldArray = {"system_menu_id"};
         LambdaQueryWrapper<ModuleMenu> queryWrapper = new FieldValuesUtils<>(ModuleMenu.class, fieldArray).queryWrapper();
-        queryWrapper.eq(ModuleMenu::getRoleModuleId, moduleMenuModelVo.getRoleModuleId());
+        queryWrapper.eq(ModuleMenu::getRoleId, moduleMenuModelVo.getRoleId());
+        queryWrapper.eq(ModuleMenu::getSystemModuleId, moduleMenuModelVo.getSystemModuleId());
         List<ModuleMenu> moduleMenus = getBaseMapper().selectList(queryWrapper);
         if (moduleMenus.isEmpty()) {
             return new Result<>(Result.FAILURE, null);

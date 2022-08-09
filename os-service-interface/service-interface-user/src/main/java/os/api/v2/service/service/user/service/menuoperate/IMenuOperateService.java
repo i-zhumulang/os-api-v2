@@ -5,16 +5,22 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-07-31 08:39
+// | Date  : 2022-08-09 21:51
 // +----------------------------------------------------------------------
-package os.api.v2.model.service.user.service.modulemenuoperate;
+package os.api.v2.service.service.user.service.menuoperate;
+
+import os.api.v2.common.base.common.Result;
+import os.api.v2.service.service.user.vo.menuoperate.MenuOperateServiceVo;
+
+import java.util.List;
 
 /**
- * os.api.v2.model.service.user.service.modulemenuoperate.IModuleMenuOperateService
+ * os.api.v2.service.service.user.service.menuoperate.IMenuOperateService
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-07-31 08:39
+ * @date 2022-08-09 21:51
  */
-public interface IModuleMenuOperateService {
+public interface IMenuOperateService {
+    Result<List<Integer>> getSystemMenuOperateIdList(MenuOperateServiceVo menuOperateServiceVo);
 }
