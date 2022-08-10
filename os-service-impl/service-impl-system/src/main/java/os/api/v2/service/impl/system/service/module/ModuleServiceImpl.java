@@ -44,7 +44,7 @@ public class ModuleServiceImpl implements IModuleService {
                 "domain",
                 "home_page"
         };
-        Result<List<ModuleModelDto>> result = iModuleService.getByIdList(moduleServiceVo.getIdList(), fieldArray);
+        Result<List<ModuleModelDto>> result = iModuleService.getModuleByIdList(moduleServiceVo.getIdList(), fieldArray);
 
         List<ModuleServiceDto> moduleServiceDtoList = new ArrayList<>();
 

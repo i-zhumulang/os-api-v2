@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import os.api.v2.api.system.dto.module.IndexDto;
 import os.api.v2.api.system.service.module.IIndexService;
+import os.api.v2.api.system.service.module.IStoreService;
 import os.api.v2.api.system.vo.module.IndexVo;
+import os.api.v2.api.system.vo.module.StoreVo;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.common.base.exception.UserException;
 import os.api.v2.model.service.system.dto.module.ModuleModelDto;
@@ -21,9 +23,18 @@ import java.util.List;
 public class ModuleController {
     @Autowired
     protected IIndexService iIndexService;
+
+    @Autowired
+    protected IStoreService iStoreService;
+
 //    @RequiresPermissions("SYSTEM:MODULE:INDEX")
     @RequestMapping(value = "/index", method = RequestMethod.POST)
     public Result<List<IndexDto>> index(@RequestBody @Valid IndexVo indexVo) throws UserException {
         return iIndexService.index(indexVo);
+    }
+
+    @RequestMapping(value = "/store")
+    public Result<String> store(@RequestBody @Valid StoreVo storeVo) {
+        return iStoreService.store(storeVo);
     }
 }
