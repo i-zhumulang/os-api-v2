@@ -10,17 +10,24 @@
 package os.api.v2.api.system.service.module.impl;
 
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Service;
 import os.api.v2.api.system.dto.module.IndexDto;
 import os.api.v2.api.system.service.module.IIndexService;
 import os.api.v2.api.system.vo.module.IndexVo;
 import os.api.v2.common.base.common.Result;
+import os.api.v2.common.base.exception.UserException;
+import os.api.v2.common.base.utils.jwt.JwtUtils;
+import os.api.v2.model.service.system.dto.menuoperate.MenuOperateModelDto;
 import os.api.v2.model.service.system.dto.module.ModuleModelDto;
+import os.api.v2.model.service.system.service.menuoperate.IGetListByIdListService;
 import os.api.v2.model.service.system.vo.module.IndexModelVo;
+import os.api.v2.service.service.user.service.menuoperate.IMenuOperateService;
+import os.api.v2.service.service.user.vo.menuoperate.MenuOperateServiceVo;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * os.api.v2.api.system.service.module.impl.IndexServiceImpl
@@ -34,20 +41,108 @@ public class IndexServiceImpl implements IIndexService {
     @DubboReference(version = "2.0.0")
     protected os.api.v2.model.service.system.service.module.IIndexService iIndexService;
 
+    @DubboReference(version = "2.0.0")
+    protected IMenuOperateService iMenuOperateService;
+
+    @DubboReference(version = "2.0.0")
+    protected IGetListByIdListService iGetListByIdListService;
+
     @Override
-    public Result<List<IndexDto>> index(IndexVo indexVo) {
-        IndexModelVo indexModelVo = new IndexModelVo();
-        String[] filedArray = {};
-        Result<List<ModuleModelDto>> index = iIndexService.index(indexModelVo, filedArray);
-        if (Objects.equals(index.getFlag(), Result.FAILURE)) {
-            return new Result<>(index.getFlag(), null);
-        }
+    public Result<List<IndexDto>> index(IndexVo indexVo) throws UserException {
+        Long userId = getUserId();
+        // 获取数据列表
+        List<ModuleModelDto> moduleModelDtoList = getModuleModelDtoList();
+        // 获取数据操作权限ID
+        List<Integer> menuOperateIdList = getMenuOperateIdList();
+        // 获取数据操作权限数据
+        List<Map<String, Object>> menuOperateList = getMenuOperateList(menuOperateIdList);
         List<IndexDto> indexDtoList = new ArrayList<>();
-        for (ModuleModelDto moduleModelDto : index.getData()) {
+        for (ModuleModelDto moduleModelDto : moduleModelDtoList) {
             IndexDto indexDto = new IndexDto();
             indexDto.setData(moduleModelDto);
+            indexDto.setOpts(menuOperateList);
             indexDtoList.add(indexDto);
         }
-        return new Result<>(index.getFlag(), indexDtoList);
+        return new Result<>(Result.SUCCESS, indexDtoList);
+    }
+
+    /**
+     * getMenuOperateList
+     * 
+     * @param menuOperateIdList 
+     * @return List<Map<String,Object>>
+     * @author 吴荣超
+     * @date 23:31 2022/8/9
+     */
+    private List<Map<String, Object>> getMenuOperateList(List<Integer> menuOperateIdList) {
+        String[] fieldArray = {
+                "location",
+                "name_en",
+                "name_zh",
+        };
+        Result<List<MenuOperateModelDto>> result = iGetListByIdListService.getListByIdList(menuOperateIdList, fieldArray);
+        List<Map<String, Object>> mapList = new ArrayList<>();
+        if (Objects.equals(result.getFlag(), Result.FAILURE)) {
+            return mapList;
+        }
+        for (MenuOperateModelDto menuOperateModelDto : result.getData()) {
+            if ("TABLE-BODY".equals(menuOperateModelDto.getLocation())) {
+                Map<String, Object> map = new HashMap<>();
+                map.put("nameEn", menuOperateModelDto.getNameEn());
+                map.put("nameZh", menuOperateModelDto.getNameZh());
+                mapList.add(map);
+            }
+        }
+        return mapList;
+    }
+
+    /**
+     * 获取数据操作权限ID
+     *
+     * @return List<Integer>
+     * @author 吴荣超
+     * @date 22:33 2022/8/9
+     */
+    private List<Integer> getMenuOperateIdList() {
+        MenuOperateServiceVo menuOperateServiceVo = new MenuOperateServiceVo();
+        menuOperateServiceVo.setRoleId(1);
+        menuOperateServiceVo.setSystemModuleId(1);
+        menuOperateServiceVo.setSystemMenuId(2);
+        Result<List<Integer>> result = iMenuOperateService.getSystemMenuOperateIdList(menuOperateServiceVo);
+        System.out.println(result);
+        if (Objects.equals(result.getFlag(), Result.FAILURE)) {
+            return new ArrayList<>();
+        }
+        return result.getData();
+    }
+
+    /**
+     * 获取数据列表
+     *
+     * @return List<ModuleModelDto>
+     * @author 吴荣超
+     * @date 21:15 2022/8/9
+     */
+    private List<ModuleModelDto> getModuleModelDtoList() throws UserException {
+        IndexModelVo indexModelVo = new IndexModelVo();
+        String[] filedArray = {};
+        Result<List<ModuleModelDto>> result = iIndexService.index(indexModelVo, filedArray);
+        if (Objects.equals(result.getFlag(), Result.FAILURE)) {
+            throw new UserException("没有数据");
+        }
+        return result.getData();
+    }
+
+    /**
+     * 获取当前登录ID
+     *
+     * @return long
+     * @author 吴荣超
+     * @date 21:13 2022/8/9
+     */
+    public Long getUserId() {
+        Subject subject = SecurityUtils.getSubject();
+        PrincipalCollection principal = subject.getPrincipals();
+        return JwtUtils.getUserId((String) principal.getPrimaryPrincipal());
     }
 }

@@ -32,6 +32,21 @@ public class MenuOperate implements Serializable {
     private Integer moduleMenuId;
 
     /**
+     * 角色ID
+     */
+    private Integer roleId;
+
+    /**
+     * 模块ID
+     */
+    private Integer systemModuleId;
+
+    /**
+     * 菜单ID
+     */
+    private Integer systemMenuId;
+
+    /**
      * 操作ID
      */
     private Integer systemMenuOperateId;
