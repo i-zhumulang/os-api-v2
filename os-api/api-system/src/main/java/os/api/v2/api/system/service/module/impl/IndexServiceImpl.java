@@ -49,13 +49,26 @@ public class IndexServiceImpl implements IIndexService {
 
     @Override
     public Result<List<IndexDto>> index(IndexVo indexVo) throws UserException {
-        Long userId = getUserId();
         // 获取数据列表
         List<ModuleModelDto> moduleModelDtoList = getModuleModelDtoList();
         // 获取数据操作权限ID
         List<Integer> menuOperateIdList = getMenuOperateIdList();
         // 获取数据操作权限数据
         List<Map<String, Object>> menuOperateList = getMenuOperateList(menuOperateIdList);
+        // 完善数据
+        return complete(moduleModelDtoList, menuOperateList);
+    }
+
+    /**
+     * complete
+     *
+     * @param moduleModelDtoList
+     * @param menuOperateList
+     * @return Result<List<IndexDto>>
+     * @author 吴荣超
+     * @date 1:49 2022/8/10
+     */
+    private Result<List<IndexDto>> complete(List<ModuleModelDto> moduleModelDtoList, List<Map<String, Object>> menuOperateList) {
         List<IndexDto> indexDtoList = new ArrayList<>();
         for (ModuleModelDto moduleModelDto : moduleModelDtoList) {
             IndexDto indexDto = new IndexDto();
@@ -109,7 +122,6 @@ public class IndexServiceImpl implements IIndexService {
         menuOperateServiceVo.setSystemModuleId(1);
         menuOperateServiceVo.setSystemMenuId(2);
         Result<List<Integer>> result = iMenuOperateService.getSystemMenuOperateIdList(menuOperateServiceVo);
-        System.out.println(result);
         if (Objects.equals(result.getFlag(), Result.FAILURE)) {
             return new ArrayList<>();
         }
