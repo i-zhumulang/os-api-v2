@@ -9,6 +9,7 @@
 // +----------------------------------------------------------------------
 package os.api.v2.common.auth.realm;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -36,6 +37,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2022-07-24 17:07
  */
 @Component
+@Slf4j
 public class ShiroRealm extends AuthorizingRealm {
     @Autowired
     protected StringRedisTemplate redisTemplate;
@@ -67,6 +69,7 @@ public class ShiroRealm extends AuthorizingRealm {
         if (userId == null) {
             return null;
         }
+        log.info(userId.toString());
         //创建授权信息
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         //创建set集合，存储权限
@@ -82,7 +85,7 @@ public class ShiroRealm extends AuthorizingRealm {
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        System.out.println("开始身份认证.....................");
+        log.info("开始身份认证.....................");
         //获取token
         String token = (String) authenticationToken.getCredentials();
         //创建字符串，存储用户信息

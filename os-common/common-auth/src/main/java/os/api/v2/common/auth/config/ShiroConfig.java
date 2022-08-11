@@ -54,9 +54,9 @@ public class ShiroConfig {
         //设置安全管理器
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         //设置组登录请求，其他路径一律自动跳转到这里
-        shiroFilterFactoryBean.setLoginUrl("/auth/authenticated?code=1");
+        shiroFilterFactoryBean.setLoginUrl("http://127.0.0.1:8301/auth/authenticated?code=1");
         //未授权跳转路径
-        shiroFilterFactoryBean.setUnauthorizedUrl("/auth/authenticated?code=2");
+        shiroFilterFactoryBean.setUnauthorizedUrl("http://127.0.0.1:8301/auth/authenticated?code=2");
         //设置拦截链map
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         //放行请求

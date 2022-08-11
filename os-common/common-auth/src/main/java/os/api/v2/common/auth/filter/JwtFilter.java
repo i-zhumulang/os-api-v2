@@ -47,6 +47,7 @@ public class JwtFilter extends BasicHttpAuthenticationFilter implements Filter {
             return false;
         }
         token = token.replaceAll("Bearer ", "");
+        log.info(token);
         JwtToken jwtToken = new JwtToken(token);
         // 提交给realm进行登入，如果错误他会抛出异常并被捕获
         try {
@@ -54,6 +55,7 @@ public class JwtFilter extends BasicHttpAuthenticationFilter implements Filter {
             // 如果没有抛出异常则代表登入成功，返回true
             return true;
         } catch (AuthenticationException e) {
+            log.info("进入 onAccessDenied 方法");
             return false;
         }
     }
@@ -86,7 +88,7 @@ public class JwtFilter extends BasicHttpAuthenticationFilter implements Filter {
      */
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
-        Result<String> result = new Result<>(Result.FAILURE, "认证失败");
+        Result<String> result = new Result<>(Result.FAILURE, "Authentication failed");
         Object parse = JSONObject.toJSON(result);
         response.setCharacterEncoding("utf-8");
         response.getWriter().print(parse);

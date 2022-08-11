@@ -33,8 +33,8 @@ public class StoreServiceImpl extends ServiceImpl<ModuleMapper, Module> implemen
         BeanUtils.copyProperties(storeModelVo, entity);
         int insert = getBaseMapper().insert(entity);
         if (insert > 0) {
-            return new Result<>(Result.FAILURE, "创建失败");
+            return new Result<>(Result.SUCCESS, "创建成功");
         }
-        return new Result<>(Result.SUCCESS, "创建成功");
+        return new Result<>(Result.FAILURE, "创建失败");
     }
 }
