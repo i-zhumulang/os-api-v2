@@ -1,13 +1,13 @@
 // +----------------------------------------------------------------------
-// | com.common.os.utils
+// | 
 // +----------------------------------------------------------------------
 // | Copyright © 2017 版权 All Rights Reserved.
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-07-24 19:48
+// | Date  : 2022-08-14 10:50
 // +----------------------------------------------------------------------
-package os.api.v2.common.auth.config;
+package os.api.v2.api.user.config;
 
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -19,6 +19,7 @@ import org.crazycake.shiro.RedisSessionDAO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import os.api.v2.api.user.realm.AuthRealm;
 import os.api.v2.common.auth.realm.ShiroRealm;
 import os.api.v2.common.auth.session.CustomSessionManager;
 
@@ -26,26 +27,36 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * os.api.v2.common.auth.config
+ * os.api.v2.api.user.config.ShiroConfig
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-07-24 19:48
+ * @date 2022-08-14 10:50
  */
 @Configuration
 public class ShiroConfig {
-
     @Value("${spring.redis.host}")
     private String host;
 
     @Value("${spring.redis.port}")
     private int port;
 
+    /**
+     * @return com.auth.common.shiro.realm.OsRealm
+     * @author 吴荣超
+     * @date 22:41 2022/5/10
+     */
     @Bean
     public ShiroRealm shiroRealm() {
-        return new ShiroRealm();
+        return new AuthRealm();
     }
 
+    /**
+     * @param shiroRealm ShiroRealm
+     * @return org.apache.shiro.mgt.SecurityManager
+     * @author 吴荣超
+     * @date 22:41 2022/5/10
+     */
     @Bean
     public SecurityManager getSecurityManager(ShiroRealm shiroRealm) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
@@ -57,6 +68,12 @@ public class ShiroConfig {
         return securityManager;
     }
 
+    /**
+     * @param securityManager SecurityManager
+     * @return org.apache.shiro.spring.web.ShiroFilterFactoryBean
+     * @author 吴荣超
+     * @date 22:41 2022/5/10
+     */
     @Bean
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
         // 创建过滤器工厂
@@ -78,6 +95,11 @@ public class ShiroConfig {
         return filterFactory;
     }
 
+    /**
+     * @return org.crazycake.shiro.RedisManager
+     * @author 吴荣超
+     * @date 22:41 2022/5/10
+     */
     public RedisManager redisManager() {
         RedisManager redisManager = new RedisManager();
         redisManager.setHost(host);
@@ -85,12 +107,22 @@ public class ShiroConfig {
         return redisManager;
     }
 
+    /**
+     * @return org.crazycake.shiro.RedisSessionDAO
+     * @author 吴荣超
+     * @date 22:42 2022/5/10
+     */
     public RedisSessionDAO redisSessionDAO() {
         RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
         redisSessionDAO.setRedisManager(redisManager());
         return redisSessionDAO;
     }
 
+    /**
+     * @return org.apache.shiro.web.session.mgt.DefaultWebSessionManager
+     * @author 吴荣超
+     * @date 22:42 2022/5/10
+     */
     public DefaultWebSessionManager sessionManager() {
         CustomSessionManager sessionManager = new CustomSessionManager();
         sessionManager.setSessionDAO(redisSessionDAO());
@@ -101,6 +133,11 @@ public class ShiroConfig {
         return sessionManager;
     }
 
+    /**
+     * @return org.crazycake.shiro.RedisCacheManager
+     * @author 吴荣超
+     * @date 22:42 2022/5/10
+     */
     public RedisCacheManager cacheManager() {
         RedisCacheManager redisCacheManager = new RedisCacheManager();
         redisCacheManager.setRedisManager(redisManager());

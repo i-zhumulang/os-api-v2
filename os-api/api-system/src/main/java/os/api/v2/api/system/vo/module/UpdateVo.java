@@ -5,7 +5,7 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-08-10 22:26
+// | Date  : 2022-08-13 08:03
 // +----------------------------------------------------------------------
 package os.api.v2.api.system.vo.module;
 
@@ -14,16 +14,24 @@ import lombok.Data;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 /**
- * os.api.v2.api.system.vo.module.StoreVo
+ * os.api.v2.api.system.vo.module.UpdateVo
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-08-10 22:26
+ * @date 2022-08-13 08:03
  */
 @Data
-public class StoreVo {
+public class UpdateVo {
+
+    /**
+     * 主键
+     */
+    @NotEmpty(message = "参数缺失")
+    private Integer id;
+
     /**
      * 模块名称(英文)
      */
@@ -51,7 +59,7 @@ public class StoreVo {
     /**
      * 排序
      */
-    @Min(value = 0, message = "排序必须大于等于0")
+    @Min(value = 0, message = "排序必须大于0")
     @Max(value = 1024, message = "排序必须小于1024")
     private Integer sorting;
 }

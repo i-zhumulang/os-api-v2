@@ -15,6 +15,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Service;
 import os.api.v2.api.user.service.user.IModuleService;
+import os.api.v2.common.auth.realm.Profile;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.common.base.exception.UserException;
 import os.api.v2.common.base.utils.jwt.JwtUtils;
@@ -117,6 +118,8 @@ public class ModuleServiceImpl implements IModuleService {
     public long getUserId() {
         Subject subject = SecurityUtils.getSubject();
         PrincipalCollection principal = subject.getPrincipals();
-        return JwtUtils.getUserId((String) principal.getPrimaryPrincipal());
+
+        Profile profile = (Profile) principal.getPrimaryPrincipal();
+        return profile.getId();
     }
 }

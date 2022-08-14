@@ -15,10 +15,9 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <!--shiro版本-->
-        <shiro.version>1.6.0</shiro.version>
-        <!--shiro-redis版本-->
-        <shiro-redis.version>3.1.0</shiro-redis.version>
+        <shiro.spring.version>1.9.1</shiro.spring.version>
+        <shiro.core.version>1.9.1</shiro.core.version>
+        <shiro.redis.version>3.0.0</shiro.redis.version>
     </properties>
 
     <dependencies>
@@ -27,23 +26,25 @@
             <artifactId>common-base</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        <!--shiro-->
+        <!-- shiro 与 spring 整合 -->
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring</artifactId>
-            <version>${shiro.version}</version>
+            <version>${shiro.spring.version}</version>
         </dependency>
-        <!-- shiro-redis -->
+        <!-- shiro 核心包 -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>${shiro.core.version}</version>
+        </dependency>
+        <!-- shiro 与 redis 整合 -->
+        <!-- https://mvnrepository.com/artifact/org.crazycake/shiro-redis -->
         <dependency>
             <groupId>org.crazycake</groupId>
             <artifactId>shiro-redis</artifactId>
-            <version>${shiro-redis.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.shiro</groupId>
-                    <artifactId>shiro-core</artifactId>
-                </exclusion>
-            </exclusions>
+            <version>${shiro.redis.version}</version>
         </dependency>
+
     </dependencies>
 </project>

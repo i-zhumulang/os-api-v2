@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import os.api.v2.api.system.dto.module.IndexDto;
 import os.api.v2.api.system.service.module.IIndexService;
 import os.api.v2.api.system.vo.module.IndexVo;
+import os.api.v2.common.auth.realm.Profile;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.common.base.exception.UserException;
 import os.api.v2.common.base.utils.jwt.JwtUtils;
@@ -155,6 +156,7 @@ public class IndexServiceImpl implements IIndexService {
     public Long getUserId() {
         Subject subject = SecurityUtils.getSubject();
         PrincipalCollection principal = subject.getPrincipals();
-        return JwtUtils.getUserId((String) principal.getPrimaryPrincipal());
+        Profile profile = (Profile) principal.getPrimaryPrincipal();
+        return profile.getId();
     }
 }

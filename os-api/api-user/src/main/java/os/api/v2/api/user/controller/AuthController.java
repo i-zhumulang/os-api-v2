@@ -39,4 +39,9 @@ public class AuthController {
     public Result<Map<String, Object>> login(@RequestBody @Valid LoginVo loginVo) throws UserException {
         return iLoginService.login(loginVo);
     }
+
+    @RequestMapping(value = "/authenticated", method = RequestMethod.GET)
+    public Result<String> authenticated() {
+        return new Result<>(Result.FAILURE, 401, "Unauthorized", "");
+    }
 }

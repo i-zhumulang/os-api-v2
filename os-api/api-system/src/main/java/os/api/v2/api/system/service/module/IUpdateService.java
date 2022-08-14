@@ -5,24 +5,24 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-08-03 00:14
+// | Date  : 2022-08-13 08:08
 // +----------------------------------------------------------------------
-package os.api.v2.model.service.system.service.module;
+package os.api.v2.api.system.service.module;
 
+import os.api.v2.api.system.dto.module.EditDto;
+import os.api.v2.api.system.vo.module.EditVo;
+import os.api.v2.api.system.vo.module.UpdateVo;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.model.service.system.dto.module.ModuleModelDto;
-import os.api.v2.model.service.system.vo.module.ModuleModelVo;
-
-import java.util.List;
 
 /**
- * os.api.v2.model.service.system.service.module.IModuleService
+ * os.api.v2.api.system.service.module.IUpdateService
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-08-03 00:14
+ * @date 2022-08-13 08:08
  */
-public interface IModuleService {
-    Result<List<ModuleModelDto>> getModuleByIdList(List<Integer> id, String[] fieldArray);
-    Result<ModuleModelDto> getModuleDto(ModuleModelVo moduleModelVo, String[] fieldArray);
+public interface IUpdateService {
+    Result<EditDto> edit(EditVo editVo);
+    Result<ModuleModelDto> update(UpdateVo updateVo);
 }

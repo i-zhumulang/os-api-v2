@@ -19,6 +19,7 @@ import os.api.v2.model.impl.system.mapper.ModuleMapper;
 import os.api.v2.model.impl.system.pojo.Module;
 import os.api.v2.model.service.system.dto.module.ModuleModelDto;
 import os.api.v2.model.service.system.service.module.IModuleService;
+import os.api.v2.model.service.system.vo.module.ModuleModelVo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,5 +47,18 @@ public class ModuleServiceImpl extends ServiceImpl<ModuleMapper, Module> impleme
             moduleModelDtoList.add(moduleModelDto);
         }
         return new Result<>(Result.SUCCESS, moduleModelDtoList);
+    }
+
+    @Override
+    public Result<ModuleModelDto> getModuleDto(ModuleModelVo moduleModelVo, String[] fieldArray) {
+        LambdaQueryWrapper<Module> queryWrapper = new FieldValuesUtils<>(Module.class, fieldArray).queryWrapper();
+        queryWrapper.eq(moduleModelVo.getId() != null, Module::getId, moduleModelVo.getId());
+        Module module = getBaseMapper().selectOne(queryWrapper);
+        if (module == null) {
+            return new Result<>(Result.FAILURE, "数据不存在", null);
+        }
+        ModuleModelDto moduleModelDto = new ModuleModelDto();
+        BeanUtils.copyProperties(module, moduleModelDto);
+        return new Result<>(Result.SUCCESS, moduleModelDto);
     }
 }

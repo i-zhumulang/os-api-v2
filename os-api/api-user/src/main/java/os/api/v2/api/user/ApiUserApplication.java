@@ -25,7 +25,6 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableDiscoveryClient
 @ComponentScan({
         "os.api.v2.api.user",
-        "os.api.v2.common.auth.config",
         "os.api.v2.common.auth.handle",
 })
 public class ApiUserApplication {
