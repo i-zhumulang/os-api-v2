@@ -10,11 +10,8 @@
 package os.api.v2.api.system.vo.module;
 
 import lombok.Data;
-
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 
 /**
  * os.api.v2.api.system.vo.module.UpdateVo
@@ -29,7 +26,7 @@ public class UpdateVo {
     /**
      * 主键
      */
-    @NotEmpty(message = "参数缺失")
+    @Range(min = 1, max = 1024)
     private Integer id;
 
     /**
@@ -59,7 +56,6 @@ public class UpdateVo {
     /**
      * 排序
      */
-    @Min(value = 0, message = "排序必须大于0")
-    @Max(value = 1024, message = "排序必须小于1024")
+    @Range(min = 0, max = 1024)
     private Integer sorting;
 }

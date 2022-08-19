@@ -10,8 +10,7 @@
 package os.api.v2.api.system.vo.module;
 
 import lombok.Data;
-
-import javax.validation.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
 
 /**
  * os.api.v2.api.system.vo.module.EditVo
@@ -22,6 +21,6 @@ import javax.validation.constraints.NotEmpty;
  */
 @Data
 public class EditVo {
-    @NotEmpty(message = "参数缺失")
+    @Range(min = 1)
     private Integer id;
 }

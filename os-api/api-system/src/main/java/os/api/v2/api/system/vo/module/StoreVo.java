@@ -10,10 +10,8 @@
 package os.api.v2.api.system.vo.module;
 
 import lombok.Data;
-
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Range;
 
 /**
  * os.api.v2.api.system.vo.module.StoreVo
@@ -51,7 +49,6 @@ public class StoreVo {
     /**
      * 排序
      */
-    @Min(value = 0, message = "排序必须大于等于0")
-    @Max(value = 1024, message = "排序必须小于1024")
+    @Range(min = 0, max = 1024)
     private Integer sorting;
 }
