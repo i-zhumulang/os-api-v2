@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import os.api.v2.api.system.dto.module.EditDto;
 import os.api.v2.api.system.dto.module.IndexDto;
 import os.api.v2.api.system.service.module.IIndexService;
+import os.api.v2.api.system.service.module.IOperateService;
 import os.api.v2.api.system.service.module.IStoreService;
 import os.api.v2.api.system.service.module.IUpdateService;
 import os.api.v2.api.system.vo.module.EditVo;
@@ -20,6 +21,7 @@ import os.api.v2.model.service.system.dto.module.ModuleModelDto;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/module")
@@ -32,6 +34,9 @@ public class ModuleController {
 
     @Autowired
     protected IUpdateService iUpdateService;
+
+    @Autowired
+    protected IOperateService iOperateService;
 
     //    @RequiresPermissions("SYSTEM:MODULE:INDEX")
     @RequestMapping(value = "/index", method = RequestMethod.POST)
@@ -52,5 +57,10 @@ public class ModuleController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public Result<ModuleModelDto> update(@RequestBody @Valid UpdateVo updateVo) {
         return iUpdateService.update(updateVo);
+    }
+
+    @RequestMapping(value = "/operate", method = RequestMethod.POST)
+    public Result<List<Map<String, Object>>> operate() {
+        return iOperateService.operate();
     }
 }

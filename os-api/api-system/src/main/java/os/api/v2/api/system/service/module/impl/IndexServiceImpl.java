@@ -20,7 +20,6 @@ import os.api.v2.api.system.vo.module.IndexVo;
 import os.api.v2.common.auth.realm.Profile;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.common.base.exception.UserException;
-import os.api.v2.common.base.utils.jwt.JwtUtils;
 import os.api.v2.model.service.system.dto.menuoperate.MenuOperateModelDto;
 import os.api.v2.model.service.system.dto.module.ModuleModelDto;
 import os.api.v2.model.service.system.service.menuoperate.IGetListByIdListService;

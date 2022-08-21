@@ -34,6 +34,11 @@ public class MenuOperate implements Serializable {
     private String location;
 
     /**
+     * element-plus button 对应type属性
+     */
+    private String type;
+
+    /**
      * 权限标识
      */
     private String permissionIdentify;
