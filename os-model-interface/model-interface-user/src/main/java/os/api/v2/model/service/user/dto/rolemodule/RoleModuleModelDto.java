@@ -27,7 +27,7 @@ public class RoleModuleModelDto implements Serializable {
     /**
      * 角色-模块ID
      */
-    private Integer roleModuleId;
+    private Long roleModuleId;
 
     /**
      * 菜单ID(v2_system.menu表ID)

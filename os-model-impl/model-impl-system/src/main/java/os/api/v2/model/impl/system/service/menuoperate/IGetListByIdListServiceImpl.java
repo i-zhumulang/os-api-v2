@@ -33,7 +33,7 @@ import java.util.List;
 @DubboService(version = "2.0.0")
 public class IGetListByIdListServiceImpl extends ServiceImpl<MenuOperateMapper, MenuOperate> implements IGetListByIdListService {
     @Override
-    public Result<List<MenuOperateModelDto>> getListByIdList(List<Integer> idList, String[] fieldArray) {
+    public Result<List<MenuOperateModelDto>> getListByIdList(List<Long> idList, String[] fieldArray) {
         LambdaQueryWrapper<MenuOperate> queryWrapper = new FieldValuesUtils<>(MenuOperate.class, fieldArray).queryWrapper();
         queryWrapper.in(MenuOperate::getId, idList);
         List<MenuOperate> menuOperates = getBaseMapper().selectList(queryWrapper);

@@ -20,13 +20,13 @@ public class MenuOperate implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    @TableId(value = "id", type = IdType.INPUT)
+    private Long id;
 
     /**
      * 所属菜单
      */
-    private Integer menuId;
+    private Long menuId;
 
     /**
      * 操作位置(TABLE-HEAD:表头,TABLE-BODY:表体)

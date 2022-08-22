@@ -22,17 +22,17 @@ import java.io.Serializable;
  */
 @Data
 public class MenuModelDto implements Serializable {
-    private Integer id;
+    private Long id;
 
     /**
      * 上级菜单ID
      */
-    private Integer parentId;
+    private Long parentId;
 
     /**
      * 所属模块
      */
-    private Integer moduleId;
+    private Long moduleId;
 
     /**
      * 英文名称

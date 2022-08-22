@@ -22,7 +22,7 @@ import java.io.Serializable;
  */
 @Data
 public class RoleModuleModelVo implements Serializable {
-    private Integer id;
+    private Long id;
 
     /**
      * 角色ID
@@ -32,5 +32,5 @@ public class RoleModuleModelVo implements Serializable {
     /**
      * 模块ID(v2_system.module表ID)
      */
-    private Integer systemModuleId;
+    private Long systemModuleId;
 }

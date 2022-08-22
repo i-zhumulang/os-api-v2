@@ -23,6 +23,6 @@ import java.util.List;
  */
 @Data
 public class ModuleServiceVo implements Serializable {
-    private List<Integer> idList;
+    private List<Long> idList;
     private Integer id;
 }

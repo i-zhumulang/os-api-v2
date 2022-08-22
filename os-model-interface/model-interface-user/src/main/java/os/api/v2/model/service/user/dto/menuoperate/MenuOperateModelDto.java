@@ -25,12 +25,12 @@ public class MenuOperateModelDto implements Serializable {
     /**
      * 主键
      */
-    private Integer id;
+    private Long id;
 
     /**
      * 模块-菜单ID
      */
-    private Integer moduleMenuId;
+    private Long moduleMenuId;
 
     /**
      * 角色ID
@@ -40,17 +40,17 @@ public class MenuOperateModelDto implements Serializable {
     /**
      * 模块ID
      */
-    private Integer systemModuleId;
+    private Long systemModuleId;
 
     /**
      * 菜单ID
      */
-    private Integer systemMenuId;
+    private Long systemMenuId;
 
     /**
      * 操作ID
      */
-    private Integer systemMenuOperateId;
+    private Long systemMenuOperateId;
 
     /**
      * 排序

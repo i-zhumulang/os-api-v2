@@ -22,5 +22,5 @@ import java.util.List;
  * @date 2022-08-07 00:14
  */
 public interface IPermissionService {
-    Result<List<PermissionServiceDto>> permission(List<Integer> idList);
+    Result<List<PermissionServiceDto>> permission(List<Long> idList);
 }

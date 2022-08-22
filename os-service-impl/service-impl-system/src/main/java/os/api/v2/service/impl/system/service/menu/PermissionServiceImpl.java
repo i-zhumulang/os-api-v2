@@ -32,7 +32,7 @@ public class PermissionServiceImpl implements IPermissionService {
     protected os.api.v2.model.service.system.service.menu.IMenuService iMenuService;
 
     @Override
-    public Result<List<PermissionServiceDto>> permission(List<Integer> idList) {
+    public Result<List<PermissionServiceDto>> permission(List<Long> idList) {
         String[] fieldArray = {
                 "id",
                 "parent_id",

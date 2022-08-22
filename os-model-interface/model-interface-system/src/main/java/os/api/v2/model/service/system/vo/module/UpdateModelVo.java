@@ -23,7 +23,7 @@ import java.io.Serializable;
 @Data
 public class UpdateModelVo implements Serializable {
 
-    private Integer id;
+    private Long id;
 
     /**
      * 模块名称(英文)

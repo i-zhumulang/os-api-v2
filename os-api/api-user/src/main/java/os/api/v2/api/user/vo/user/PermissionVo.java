@@ -21,5 +21,5 @@ import lombok.Data;
 @Data
 public class PermissionVo {
     private String module;
-    private Integer moduleId;
+    private Long moduleId;
 }

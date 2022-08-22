@@ -22,5 +22,5 @@ import java.util.List;
  * @date 2022-08-09 23:14
  */
 public interface IGetListByIdListService {
-    Result<List<MenuOperateModelDto>> getListByIdList(List<Integer> idList, String[] fieldArray);
+    Result<List<MenuOperateModelDto>> getListByIdList(List<Long> idList, String[] fieldArray);
 }

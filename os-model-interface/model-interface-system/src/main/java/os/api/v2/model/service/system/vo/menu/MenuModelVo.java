@@ -12,6 +12,7 @@ package os.api.v2.model.service.system.vo.menu;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * os.api.v2.model.service.system.vo.menu.MenuModelVo
@@ -22,5 +23,6 @@ import java.io.Serializable;
  */
 @Data
 public class MenuModelVo implements Serializable {
-
+    private List<Long> idList;
+    private String[] fieldArray;
 }

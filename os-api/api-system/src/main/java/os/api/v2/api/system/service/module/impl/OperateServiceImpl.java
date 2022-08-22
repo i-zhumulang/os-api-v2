@@ -39,7 +39,7 @@ public class OperateServiceImpl implements IOperateService {
     @Override
     public Result<List<Map<String, Object>>> operate() {
         // 获取数据操作权限ID
-        List<Integer> menuOperateIdList = getMenuOperateIdList();
+        List<Long> menuOperateIdList = getMenuOperateIdList();
         // 获取数据操作权限数据
         return getMenuOperateList(menuOperateIdList);
     }
@@ -51,19 +51,19 @@ public class OperateServiceImpl implements IOperateService {
      * @author 吴荣超
      * @date 0:54 2022/8/21
      */
-    private List<Integer> getMenuOperateIdList() {
+    private List<Long> getMenuOperateIdList() {
         MenuOperateServiceVo menuOperateServiceVo = new MenuOperateServiceVo();
         menuOperateServiceVo.setRoleId(1);
-        menuOperateServiceVo.setSystemModuleId(1);
-        menuOperateServiceVo.setSystemMenuId(2);
-        Result<List<Integer>> result = iMenuOperateService.getSystemMenuOperateIdList(menuOperateServiceVo);
+        menuOperateServiceVo.setSystemModuleId(1100176417150205952L);
+        menuOperateServiceVo.setSystemMenuId(1100177341767860224L);
+        Result<List<Long>> result = iMenuOperateService.getSystemMenuOperateIdList(menuOperateServiceVo);
         if (Objects.equals(result.getFlag(), Result.FAILURE)) {
             return new ArrayList<>();
         }
         return result.getData();
     }
 
-    private Result<List<Map<String, Object>>> getMenuOperateList(List<Integer> menuOperateIdList) {
+    private Result<List<Map<String, Object>>> getMenuOperateList(List<Long> menuOperateIdList) {
         String[] fieldArray = {
                 "location",
                 "name_en",

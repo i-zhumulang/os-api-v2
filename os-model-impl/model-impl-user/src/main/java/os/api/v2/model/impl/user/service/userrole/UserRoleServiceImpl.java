@@ -35,8 +35,8 @@ import java.util.stream.Collectors;
 @DubboService(version = "2.0.0")
 public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> implements IUserRoleService {
     @Override
-    public Result<List<Integer>> getMultiModuleIdByUserId(Long userId) {
-        List<Integer> list = getBaseMapper().getMultiModuleIdByUserId(userId);
+    public Result<List<Long>> getMultiModuleIdByUserId(Long userId) {
+        List<Long> list = getBaseMapper().getMultiModuleIdByUserId(userId);
         if (list.isEmpty()) {
             return new Result<>(Result.FAILURE, null);
         }

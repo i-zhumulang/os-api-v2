@@ -33,7 +33,7 @@ import java.util.List;
 @DubboService(version = "2.0.0")
 public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IMenuService {
     @Override
-    public Result<List<MenuModelDto>> permission(List<Integer> idList, String[] fieldArray) {
+    public Result<List<MenuModelDto>> permission(List<Long> idList, String[] fieldArray) {
         LambdaQueryWrapper<Menu> queryWrapper = new FieldValuesUtils<>(Menu.class, fieldArray).queryWrapper();
         queryWrapper.in(Menu::getId, idList);
         List<Menu> menus = getBaseMapper().selectList(queryWrapper);

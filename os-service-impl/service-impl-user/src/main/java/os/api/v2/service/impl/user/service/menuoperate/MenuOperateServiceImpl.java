@@ -35,7 +35,7 @@ public class MenuOperateServiceImpl implements IMenuOperateService {
     protected os.api.v2.model.service.user.service.menuoperate.IMenuOperateService iMenuOperateService;
 
     @Override
-    public Result<List<Integer>> getSystemMenuOperateIdList(MenuOperateServiceVo menuOperateServiceVo) {
+    public Result<List<Long>> getSystemMenuOperateIdList(MenuOperateServiceVo menuOperateServiceVo) {
         MenuOperateModelVo menuOperateModelVo = new MenuOperateModelVo();
         BeanUtils.copyProperties(menuOperateServiceVo, menuOperateModelVo);
         String[] fieldArray = {"system_menu_operate_id"};
@@ -43,7 +43,7 @@ public class MenuOperateServiceImpl implements IMenuOperateService {
         if (Objects.equals(result.getFlag(), Result.FAILURE)) {
             return new Result<>(result.getFlag(), null);
         }
-        List<Integer> collect = result.getData().stream().map(MenuOperateModelDto::getSystemMenuOperateId).collect(Collectors.toList());
+        List<Long> collect = result.getData().stream().map(MenuOperateModelDto::getSystemMenuOperateId).collect(Collectors.toList());
         return new Result<>(Result.SUCCESS, collect);
     }
 }

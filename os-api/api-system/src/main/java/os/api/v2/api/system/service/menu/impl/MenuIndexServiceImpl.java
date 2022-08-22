@@ -47,7 +47,7 @@ public class MenuIndexServiceImpl implements IMenuIndexService {
     public Result<List<IndexDto>> index(IndexVo indexVo) throws UserException {
         List<MenuModelDto> menuModelDtoList = getMenuModelDtoList(indexVo);
         // 获取数据操作权限ID
-        List<Integer> menuOperateIdList = getMenuOperateIdList();
+        List<Long> menuOperateIdList = getMenuOperateIdList();
         // 获取数据操作权限数据
         List<Map<String, Object>> menuOperateList = getMenuOperateList(menuOperateIdList);
         // 完善数据
@@ -82,7 +82,7 @@ public class MenuIndexServiceImpl implements IMenuIndexService {
      * @author 吴荣超
      * @date 11:43 2022/8/21
      */
-    private List<Map<String, Object>> getMenuOperateList(List<Integer> menuOperateIdList) {
+    private List<Map<String, Object>> getMenuOperateList(List<Long> menuOperateIdList) {
         String[] fieldArray = {
                 "location",
                 "name_en",
@@ -111,12 +111,12 @@ public class MenuIndexServiceImpl implements IMenuIndexService {
      * @author 吴荣超
      * @date 11:42 2022/8/21
      */
-    private List<Integer> getMenuOperateIdList() {
+    private List<Long> getMenuOperateIdList() {
         MenuOperateServiceVo menuOperateServiceVo = new MenuOperateServiceVo();
         menuOperateServiceVo.setRoleId(1);
-        menuOperateServiceVo.setSystemModuleId(1);
-        menuOperateServiceVo.setSystemMenuId(3);
-        Result<List<Integer>> result = iMenuOperateService.getSystemMenuOperateIdList(menuOperateServiceVo);
+        menuOperateServiceVo.setSystemModuleId(1100176417150205952L);
+        menuOperateServiceVo.setSystemMenuId(1100177342397005824L);
+        Result<List<Long>> result = iMenuOperateService.getSystemMenuOperateIdList(menuOperateServiceVo);
         if (Objects.equals(result.getFlag(), Result.FAILURE)) {
             return new ArrayList<>();
         }

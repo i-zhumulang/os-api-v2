@@ -22,5 +22,5 @@ import java.util.List;
  * @date 2022-08-08 23:30
  */
 public interface IMenuService {
-    Result<List<MenuModelDto>> permission(List<Integer> idList, String[] fieldArray);
+    Result<List<MenuModelDto>> permission(List<Long> idList, String[] fieldArray);
 }

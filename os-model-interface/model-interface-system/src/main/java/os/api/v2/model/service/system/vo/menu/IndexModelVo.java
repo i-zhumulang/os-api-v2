@@ -26,7 +26,7 @@ public class IndexModelVo implements Serializable {
     /**
      * 所属模块
      */
-    private Integer moduleId;
+    private Long moduleId;
 
     /**
      * 需要查询的字段

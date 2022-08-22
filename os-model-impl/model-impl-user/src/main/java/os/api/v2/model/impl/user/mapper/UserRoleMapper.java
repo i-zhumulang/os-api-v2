@@ -14,5 +14,5 @@ import java.util.List;
  * @since 2022-07-30
  */
 public interface UserRoleMapper extends BaseMapper<UserRole> {
-    List<Integer> getMultiModuleIdByUserId(Long userId);
+    List<Long> getMultiModuleIdByUserId(Long userId);
 }

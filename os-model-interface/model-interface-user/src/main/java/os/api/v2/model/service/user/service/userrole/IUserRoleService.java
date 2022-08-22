@@ -23,7 +23,7 @@ import java.util.List;
  * @date 2022-07-31 08:58
  */
 public interface IUserRoleService {
-    Result<List<Integer>> getMultiModuleIdByUserId(Long userId);
+    Result<List<Long>> getMultiModuleIdByUserId(Long userId);
 
     Result<UserRoleModelDto> getRoleId(UserRoleModelVo userRoleModelVo);
 }

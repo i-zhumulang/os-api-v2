@@ -22,5 +22,5 @@ import java.util.List;
  * @date 2022-07-31 08:38
  */
 public interface IModuleMenuService {
-    Result<List<Integer>> permission(ModuleMenuModelVo moduleMenuModelVo);
+    Result<List<Long>> permission(ModuleMenuModelVo moduleMenuModelVo);
 }

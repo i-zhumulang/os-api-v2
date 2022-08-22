@@ -20,18 +20,18 @@ public class Menu implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    @TableId(value = "id", type = IdType.INPUT)
+    private Long id;
 
     /**
      * 上级菜单ID
      */
-    private Integer parentId;
+    private Long parentId;
 
     /**
      * 所属模块
      */
-    private Integer moduleId;
+    private Long moduleId;
 
     /**
      * 英文名称

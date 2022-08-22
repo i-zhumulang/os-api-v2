@@ -26,7 +26,7 @@ public class MenuOperateServiceVo implements Serializable {
     /**
      * 模块-菜单ID
      */
-    private Integer moduleMenuId;
+    private Long moduleMenuId;
 
     /**
      * 角色ID
@@ -36,12 +36,12 @@ public class MenuOperateServiceVo implements Serializable {
     /**
      * 模块ID
      */
-    private Integer systemModuleId;
+    private Long systemModuleId;
 
     /**
      * 菜单ID
      */
-    private Integer systemMenuId;
+    private Long systemMenuId;
 
 
 }

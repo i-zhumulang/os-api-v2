@@ -26,7 +26,7 @@ public class ModuleModelVo implements Serializable {
     /**
      * ID
      */
-    private Integer id;
+    private Long id;
 
     /**
      * 模块名称(英文)

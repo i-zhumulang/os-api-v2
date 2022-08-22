@@ -22,12 +22,12 @@ import java.io.Serializable;
  */
 @Data
 public class MenuOperateModelDto implements Serializable {
-    private Integer id;
+    private Long id;
 
     /**
      * 所属菜单
      */
-    private Integer menuId;
+    private Long menuId;
 
     /**
      * 操作位置(TABLE-HEAD:表头,TABLE-BODY:表体)

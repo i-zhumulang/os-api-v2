@@ -45,7 +45,7 @@ public class ModuleServiceImpl implements IModuleService {
     public Result<List<Map<String, Object>>> module() throws UserException {
         Long userId = getUserId();
         // 获取角色下所有模块
-        List<Integer> idList = getModuleIdList(userId);
+        List<Long> idList = getModuleIdList(userId);
         // 通过ID获取数据
         List<ModuleServiceDto> moduleByIdList = getModuleByIdList(idList);
         // 返回处理结果
@@ -82,9 +82,9 @@ public class ModuleServiceImpl implements IModuleService {
      * @author 吴荣超
      * @date 0:26 2022/8/3
      */
-    private List<ModuleServiceDto> getModuleByIdList(List<Integer> id) throws UserException {
+    private List<ModuleServiceDto> getModuleByIdList(List<Long> idList) throws UserException {
         ModuleServiceVo moduleServiceVo = new ModuleServiceVo();
-        moduleServiceVo.setIdList(id);
+        moduleServiceVo.setIdList(idList);
         Result<List<ModuleServiceDto>> result = iModuleService.getModuleByIdList(moduleServiceVo);
         if (Objects.equals(result.getFlag(), Result.FAILURE)) {
             throw new UserException("暂无权限:1001");
@@ -100,8 +100,8 @@ public class ModuleServiceImpl implements IModuleService {
      * @author 吴荣超
      * @date 19:11 2022/8/9
      */
-    private List<Integer> getModuleIdList(Long userId) throws UserException {
-        Result<List<Integer>> result = iUserRoleService.getMultiModuleIdByUserId(userId);
+    private List<Long> getModuleIdList(Long userId) throws UserException {
+        Result<List<Long>> result = iUserRoleService.getMultiModuleIdByUserId(userId);
         if (Objects.equals(result.getFlag(), Result.FAILURE)) {
             throw new UserException("暂无权限");
         }

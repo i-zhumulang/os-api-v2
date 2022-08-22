@@ -35,7 +35,7 @@ import java.util.List;
 public class ModuleServiceImpl extends ServiceImpl<ModuleMapper, Module> implements IModuleService {
 
     @Override
-    public Result<List<ModuleModelDto>> getModuleByIdList(List<Integer> id, String[] fieldArray) {
+    public Result<List<ModuleModelDto>> getModuleByIdList(List<Long> id, String[] fieldArray) {
         LambdaQueryWrapper<Module> queryWrapper = new FieldValuesUtils<>(Module.class, fieldArray).queryWrapper();
         queryWrapper.in(id != null, Module::getId, id);
         queryWrapper.orderByAsc(Module::getSorting);

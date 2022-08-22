@@ -31,7 +31,7 @@ public class RoleModule implements Serializable {
     /**
      * 模块ID(v2_system.module表ID)
      */
-    private Integer systemModuleId;
+    private Long systemModuleId;
 
 
 }

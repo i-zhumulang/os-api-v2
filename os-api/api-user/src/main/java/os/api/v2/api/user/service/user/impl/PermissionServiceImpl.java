@@ -54,7 +54,7 @@ public class PermissionServiceImpl implements IPermissionService {
 
         UserRoleModelDto userRoleModelDto = getRoleId(userId);
 
-        List<Integer> moduleMenuIdList = getSystemModuleMenuIdList(userRoleModelDto.getRoleId(), permissionVo.getModuleId());
+        List<Long> moduleMenuIdList = getSystemModuleMenuIdList(userRoleModelDto.getRoleId(), permissionVo.getModuleId());
         
         return getModuleMenu(moduleMenuIdList);
     }
@@ -67,7 +67,7 @@ public class PermissionServiceImpl implements IPermissionService {
      * @author 吴荣超
      * @date 22:59 2022/8/8
      */
-    private Result<List<PermissionServiceDto>> getModuleMenu(List<Integer> idList) {
+    private Result<List<PermissionServiceDto>> getModuleMenu(List<Long> idList) {
         return iPermissionService.permission(idList);
     }
 
@@ -81,11 +81,11 @@ public class PermissionServiceImpl implements IPermissionService {
      * @author 吴荣超
      * @date 0:52 2022/8/6
      */
-    private List<Integer> getSystemModuleMenuIdList(Integer roleId, Integer systemModuleId) throws UserException {
+    private List<Long> getSystemModuleMenuIdList(Integer roleId, Long systemModuleId) throws UserException {
         ModuleMenuModelVo moduleMenuModelVo = new ModuleMenuModelVo();
         moduleMenuModelVo.setRoleId(roleId);
         moduleMenuModelVo.setSystemModuleId(systemModuleId);
-        Result<List<Integer>> result = iModuleMenuService.permission(moduleMenuModelVo);
+        Result<List<Long>> result = iModuleMenuService.permission(moduleMenuModelVo);
         if (Objects.equals(result.getFlag(), Result.FAILURE)) {
             throw new UserException("模块没有分配菜单");
         }

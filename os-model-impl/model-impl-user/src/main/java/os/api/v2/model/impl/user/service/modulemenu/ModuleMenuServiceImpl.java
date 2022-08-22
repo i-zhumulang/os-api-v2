@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 @DubboService(version = "2.0.0")
 public class ModuleMenuServiceImpl extends ServiceImpl<ModuleMenuMapper, ModuleMenu> implements IModuleMenuService {
     @Override
-    public Result<List<Integer>> permission(ModuleMenuModelVo moduleMenuModelVo) {
+    public Result<List<Long>> permission(ModuleMenuModelVo moduleMenuModelVo) {
         String[] fieldArray = {"system_menu_id"};
         LambdaQueryWrapper<ModuleMenu> queryWrapper = new FieldValuesUtils<>(ModuleMenu.class, fieldArray).queryWrapper();
         queryWrapper.eq(ModuleMenu::getRoleId, moduleMenuModelVo.getRoleId());
@@ -41,7 +41,7 @@ public class ModuleMenuServiceImpl extends ServiceImpl<ModuleMenuMapper, ModuleM
         if (moduleMenus.isEmpty()) {
             return new Result<>(Result.FAILURE, null);
         }
-        List<Integer> collect = moduleMenus.stream().map(ModuleMenu::getSystemMenuId).collect(Collectors.toList());
+        List<Long> collect = moduleMenus.stream().map(ModuleMenu::getSystemMenuId).collect(Collectors.toList());
         return new Result<>(Result.SUCCESS, collect);
     }
 }

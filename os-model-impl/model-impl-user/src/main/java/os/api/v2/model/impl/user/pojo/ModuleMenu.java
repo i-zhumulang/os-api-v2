@@ -20,13 +20,13 @@ public class ModuleMenu implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    @TableId(value = "id", type = IdType.INPUT)
+    private Long id;
 
     /**
      * 角色-模块ID
      */
-    private Integer roleModuleId;
+    private Long roleModuleId;
 
     /**
      * 角色ID
@@ -36,12 +36,12 @@ public class ModuleMenu implements Serializable {
     /**
      * 模块ID
      */
-    private Integer systemModuleId;
+    private Long systemModuleId;
 
     /**
      * 菜单ID(v2_system.menu表ID)
      */
-    private Integer systemMenuId;
+    private Long systemMenuId;
 
 
 }

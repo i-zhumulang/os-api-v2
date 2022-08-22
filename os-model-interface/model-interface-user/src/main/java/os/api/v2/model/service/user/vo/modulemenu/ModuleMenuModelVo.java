@@ -23,12 +23,12 @@ import java.io.Serializable;
 @Data
 public class ModuleMenuModelVo implements Serializable {
 
-    private Integer id;
+    private Long id;
 
     /**
      * 角色-模块ID
      */
-    private Integer roleModuleId;
+    private Long roleModuleId;
 
     /**
      * 角色ID
@@ -38,10 +38,10 @@ public class ModuleMenuModelVo implements Serializable {
     /**
      * 模块ID
      */
-    private Integer systemModuleId;
+    private Long systemModuleId;
 
     /**
      * 菜单ID(v2_system.menu表ID)
      */
-    private Integer systemMenuId;
+    private Long systemMenuId;
 }

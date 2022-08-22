@@ -22,5 +22,5 @@ import org.hibernate.validator.constraints.Range;
 @Data
 public class EditVo {
     @Range(min = 1)
-    private Integer id;
+    private Long id;
 }

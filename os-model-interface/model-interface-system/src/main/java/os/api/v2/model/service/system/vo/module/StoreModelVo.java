@@ -22,6 +22,8 @@ import java.io.Serializable;
  */
 @Data
 public class StoreModelVo implements Serializable {
+    private Long id;
+
     /**
      * 模块名称(英文)
      */
