@@ -11,7 +11,7 @@
  Target Server Version : 80029
  File Encoding         : 65001
 
- Date: 09/08/2022 17:58:22
+ Date: 22/08/2022 20:32:13
 */
 
 SET NAMES utf8mb4;
@@ -22,30 +22,30 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `menu`;
 CREATE TABLE `menu`  (
-  `id` int(0) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `parent_id` int(0) UNSIGNED NOT NULL COMMENT '上级菜单ID',
-  `module_id` int(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '所属模块',
-  `name_en` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '英文名称',
-  `name_zh` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '中文名称',
-  `uri` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '地址',
+  `id` bigint(0) UNSIGNED NOT NULL,
+  `parent_id` bigint(0) UNSIGNED NOT NULL COMMENT '上级菜单ID',
+  `module_id` bigint(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '所属模块',
+  `name_en` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '英文名称',
+  `name_zh` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '中文名称',
+  `uri` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '地址',
   `sorting` tinyint(0) NOT NULL DEFAULT 0 COMMENT '排序',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '模块-菜单' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '模块-菜单' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of menu
 -- ----------------------------
-INSERT INTO `menu` VALUES (1, 0, 1, 'system.module', '模块菜单', '#', 0);
-INSERT INTO `menu` VALUES (2, 1, 1, 'system.module.index', '模块列表', '/system/module/index', 0);
-INSERT INTO `menu` VALUES (3, 1, 1, 'system.menu.index', '菜单列表', '/system/menu/index', 1);
+INSERT INTO `menu` VALUES (1100177340668952576, 0, 1100176417150205952, 'system.module', '模块菜单', '#', 0);
+INSERT INTO `menu` VALUES (1100177341767860224, 1100177340668952576, 1100176417150205952, 'system.module.index', '模块列表', '/system/module/index', 0);
+INSERT INTO `menu` VALUES (1100177342397005824, 1100177340668952576, 1100176417150205952, 'system.menu.index', '菜单列表', '/system/menu/index', 1);
 
 -- ----------------------------
 -- Table structure for menu_operate
 -- ----------------------------
 DROP TABLE IF EXISTS `menu_operate`;
 CREATE TABLE `menu_operate`  (
-  `id` int(0) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `menu_id` int(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '所属菜单',
+  `id` bigint(0) UNSIGNED NOT NULL,
+  `menu_id` bigint(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '所属菜单',
   `location` char(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '操作位置(TABLE-HEAD:表头,TABLE-BODY:表体)',
   `type` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT 'element-plus button 对应type属性',
   `permission_identify` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '权限标识',
@@ -54,28 +54,22 @@ CREATE TABLE `menu_operate`  (
   `uri` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '地址',
   `sorting` tinyint(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '排序',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '模块-菜单-操作' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '模块-菜单-操作' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of menu_operate
 -- ----------------------------
-INSERT INTO `menu_operate` VALUES (1, 2, 'TABLE', '', 'SYSTEM:MODULE:INDEX', 'index', '列表', '/module/index', 0);
-INSERT INTO `menu_operate` VALUES (2, 2, 'TABLE-HEAD', '', 'SYSTEM:MODULE:CREATE', 'create', '添加', '/module/store', 0);
-INSERT INTO `menu_operate` VALUES (3, 2, 'TABLE-BODY', '', 'SYSTEM:MODULE:UPDATE', 'update', '编辑', '/module/update', 0);
-INSERT INTO `menu_operate` VALUES (4, 2, 'TABLE-BODY', '', 'SYSTEM:MODULE:DESTROY', 'destroy', '删除', '/module/destroy', 0);
-INSERT INTO `menu_operate` VALUES (5, 2, 'TABLE-BODY', '', 'SYSTEM:MODULE:LOGS', 'logs', '日志', '/module/logs', 0);
-INSERT INTO `menu_operate` VALUES (6, 2, 'TABLE-BODY', '', 'SYSTEM:MODULE:ACTIVE', 'active', '启用', '/module/active', 0);
-INSERT INTO `menu_operate` VALUES (7, 2, 'TABLE-HEAD', '', 'SYSTEM:MODULE:BATCH-ACTIVE', 'batchActive', '批量启用', '/module/batchactive', 0);
-INSERT INTO `menu_operate` VALUES (8, 2, 'TABLE-BODY', '', 'SYSTEM:MODULE:INACTIVE', 'inactive', '禁用', '/module/inactive', 0);
-INSERT INTO `menu_operate` VALUES (9, 2, 'TABLE-HEAD', '', 'SYSTEM:MODULE:BATCH-INACTIVE', 'batchInActive', '批量禁用', '/module/batchinactive', 0);
-INSERT INTO `menu_operate` VALUES (10, 2, 'TABLE-HEAD', '', 'SYSTEM:MODULE:BATCH-DESTROY', 'batchDestroy', '批量删除', '/module/batchdestroy', 0);
+INSERT INTO `menu_operate` VALUES (1100230273204809728, 1100177341767860224, 'TABLE', '', 'SYSTEM:MODULE:INDEX', 'index', '列表', '/module/index', 0);
+INSERT INTO `menu_operate` VALUES (1100230273687154688, 1100177341767860224, 'TABLE-HEAD', '', 'SYSTEM:MODULE:CREATE', 'create', '添加', '/module/store', 0);
+INSERT INTO `menu_operate` VALUES (1100230274244997120, 1100177341767860224, 'TABLE-BODY', '', 'SYSTEM:MODULE:UPDATE', 'update', '编辑', '/module/update', 0);
+INSERT INTO `menu_operate` VALUES (1100230275067080704, 1100177341767860224, 'TABLE-BODY', '', 'SYSTEM:MODULE:DESTROY', 'destroy', '删除', '/module/destroy', 0);
 
 -- ----------------------------
 -- Table structure for module
 -- ----------------------------
 DROP TABLE IF EXISTS `module`;
 CREATE TABLE `module`  (
-  `id` int(0) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint(0) UNSIGNED NOT NULL,
   `name_en` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '模块名称(英文)',
   `name_zh` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '模块名称(中文)',
   `domain` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '模块域名',
@@ -87,8 +81,9 @@ CREATE TABLE `module`  (
 -- ----------------------------
 -- Records of module
 -- ----------------------------
-INSERT INTO `module` VALUES (1, 'SYSTEM', '系统管理', 'http://127.0.0.1:8080/system', '/module/index', 0);
-INSERT INTO `module` VALUES (2, 'USER', '个人中心', 'http://127.0.0.1:8080/user', '/user/index', 0);
+INSERT INTO `module` VALUES (1100176417150205952, 'SYSTEM', '系统管理', 'http://127.0.0.1:8080', '/system/module/index', 0);
+INSERT INTO `module` VALUES (1100176417951318016, 'USER', '个人中心', 'http://127.0.0.1:8080', '/user/user/index', 0);
+INSERT INTO `module` VALUES (1100176418634989568, 'DOCUMENT', '操作手册', 'http://127.0.0.1:8080', '/document/system/index', 1);
 
 -- ----------------------------
 -- Table structure for undo_log
