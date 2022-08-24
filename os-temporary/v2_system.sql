@@ -11,7 +11,7 @@
  Target Server Version : 80029
  File Encoding         : 65001
 
- Date: 22/08/2022 20:32:13
+ Date: 24/08/2022 17:08:59
 */
 
 SET NAMES utf8mb4;
@@ -30,7 +30,7 @@ CREATE TABLE `menu`  (
   `uri` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '地址',
   `sorting` tinyint(0) NOT NULL DEFAULT 0 COMMENT '排序',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '模块-菜单' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '模块-菜单' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of menu
@@ -54,15 +54,19 @@ CREATE TABLE `menu_operate`  (
   `uri` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '地址',
   `sorting` tinyint(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '排序',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '模块-菜单-操作' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '模块-菜单-操作' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of menu_operate
 -- ----------------------------
 INSERT INTO `menu_operate` VALUES (1100230273204809728, 1100177341767860224, 'TABLE', '', 'SYSTEM:MODULE:INDEX', 'index', '列表', '/module/index', 0);
-INSERT INTO `menu_operate` VALUES (1100230273687154688, 1100177341767860224, 'TABLE-HEAD', '', 'SYSTEM:MODULE:CREATE', 'create', '添加', '/module/store', 0);
+INSERT INTO `menu_operate` VALUES (1100230273687154688, 1100177341767860224, 'TABLE-HEAD', 'primary', 'SYSTEM:MODULE:CREATE', 'create', '添加', '/module/store', 0);
 INSERT INTO `menu_operate` VALUES (1100230274244997120, 1100177341767860224, 'TABLE-BODY', '', 'SYSTEM:MODULE:UPDATE', 'update', '编辑', '/module/update', 0);
 INSERT INTO `menu_operate` VALUES (1100230275067080704, 1100177341767860224, 'TABLE-BODY', '', 'SYSTEM:MODULE:DESTROY', 'destroy', '删除', '/module/destroy', 0);
+INSERT INTO `menu_operate` VALUES (1100236041077444608, 1100177342397005824, 'TABLE', '', 'SYSTEM:MENU:INDEX', 'index', '列表', '/menu/index', 0);
+INSERT INTO `menu_operate` VALUES (1100236041568178176, 1100177342397005824, 'TABLE-HEAD', 'primary', 'SYSTEM:MENU:CREATE', 'create', '添加', '/menu/store', 0);
+INSERT INTO `menu_operate` VALUES (1100236042088271872, 1100177342397005824, 'TABLE-BODY', '', 'SYSTEM:MENU:UPDATE', 'update', '编辑', '/menu/update', 0);
+INSERT INTO `menu_operate` VALUES (1100236042570616832, 1100177342397005824, 'TABLE-BODY', '', 'SYSTEM:MENU:DESTROY', 'destroy', '删除', '/menu/destroy', 0);
 
 -- ----------------------------
 -- Table structure for module
@@ -76,7 +80,7 @@ CREATE TABLE `module`  (
   `home_page` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '模块首页',
   `sorting` tinyint(0) NOT NULL DEFAULT 0 COMMENT '排序',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '模块' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '模块' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of module
@@ -98,7 +102,7 @@ CREATE TABLE `undo_log`  (
   `log_created` datetime(6) NOT NULL COMMENT 'create datetime',
   `log_modified` datetime(6) NOT NULL COMMENT 'modify datetime',
   UNIQUE INDEX `ux_undo_log`(`xid`, `branch_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'AT transaction mode undo table' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'AT transaction mode undo table' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of undo_log
