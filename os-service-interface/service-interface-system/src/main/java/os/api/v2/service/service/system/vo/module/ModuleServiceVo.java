@@ -24,5 +24,5 @@ import java.util.List;
 @Data
 public class ModuleServiceVo implements Serializable {
     private List<Long> idList;
-    private Integer id;
+    private Long id;
 }

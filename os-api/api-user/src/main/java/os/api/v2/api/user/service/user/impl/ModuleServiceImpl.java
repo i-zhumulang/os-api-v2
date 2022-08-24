@@ -64,7 +64,7 @@ public class ModuleServiceImpl implements IModuleService {
         List<Map<String, Object>> list = new ArrayList<>();
         for (ModuleServiceDto moduleServiceDto : moduleModelDtoList) {
             Map<String, Object> map = new HashMap<>();
-            map.put("id", moduleServiceDto.getId());
+            map.put("id", moduleServiceDto.getId().toString());
             map.put("nameEn", moduleServiceDto.getNameEn());
             map.put("nameZh", moduleServiceDto.getNameZh());
             map.put("domain", moduleServiceDto.getDomain());
@@ -77,7 +77,7 @@ public class ModuleServiceImpl implements IModuleService {
     /**
      * getModuleByIdList
      *
-     * @param id array
+     * @param idList List<Long>
      * @return List<ModuleDto>
      * @author 吴荣超
      * @date 0:26 2022/8/3

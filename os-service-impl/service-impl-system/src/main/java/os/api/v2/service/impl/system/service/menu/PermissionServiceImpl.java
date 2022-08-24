@@ -58,7 +58,7 @@ public class PermissionServiceImpl implements IPermissionService {
         //存返回数据
         List<PermissionServiceDto> totalType = new ArrayList<>();
         //使用map来装前面查到的所有数据
-        Map<Integer, PermissionServiceDto> map = new HashMap<>();
+        Map<Long, PermissionServiceDto> map = new HashMap<>();
 
         for (PermissionServiceDto p : permissionServiceDtoList) {
             map.put(p.getId(), p);
