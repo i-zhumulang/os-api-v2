@@ -16,6 +16,9 @@ spring:
     nacos:
       discovery:
         server-addr: ${spring.cloud.nacos.server.addr}
+  jackson:
+    generator:
+      write_numbers_as_strings: true
 dubbo:
   application:
     name: api-system
