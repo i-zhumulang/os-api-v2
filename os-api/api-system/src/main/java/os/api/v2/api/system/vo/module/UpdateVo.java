@@ -26,8 +26,8 @@ public class UpdateVo {
     /**
      * 主键
      */
-    @Range(min = 1, max = 1024)
-    private Integer id;
+    @Range(min = 1)
+    private Long id;
 
     /**
      * 模块名称(英文)

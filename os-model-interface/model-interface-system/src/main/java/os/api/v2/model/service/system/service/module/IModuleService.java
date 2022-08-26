@@ -23,6 +23,6 @@ import java.util.List;
  * @date 2022-08-03 00:14
  */
 public interface IModuleService {
-    Result<List<ModuleModelDto>> getModuleByIdList(List<Long> id, String[] fieldArray);
-    Result<ModuleModelDto> getModuleDto(ModuleModelVo moduleModelVo, String[] fieldArray);
+    Result<String> destroy(ModuleModelVo moduleModelVo);
+    Result<List<ModuleModelDto>> getModuleList(ModuleModelVo moduleModelVo);
 }

@@ -12,6 +12,7 @@ package os.api.v2.model.service.system.vo.module;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * os.api.v2.model.service.system.vo.module.ModleModelVo
@@ -27,6 +28,8 @@ public class ModuleModelVo implements Serializable {
      * ID
      */
     private Long id;
+
+    private List<Long> idList;
 
     /**
      * 模块名称(英文)
@@ -52,4 +55,9 @@ public class ModuleModelVo implements Serializable {
      * 排序
      */
     private Integer sorting;
+
+    /**
+     * 查询字段
+     */
+    private String[] fieldArray;
 }

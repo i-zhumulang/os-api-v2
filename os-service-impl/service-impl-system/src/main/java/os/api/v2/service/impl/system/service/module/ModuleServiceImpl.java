@@ -14,6 +14,7 @@ import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.BeanUtils;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.model.service.system.dto.module.ModuleModelDto;
+import os.api.v2.model.service.system.vo.module.ModuleModelVo;
 import os.api.v2.service.service.system.dto.module.ModuleServiceDto;
 import os.api.v2.service.service.system.service.module.IModuleService;
 import os.api.v2.service.service.system.vo.module.ModuleServiceVo;
@@ -44,12 +45,15 @@ public class ModuleServiceImpl implements IModuleService {
                 "domain",
                 "home_page"
         };
-        Result<List<ModuleModelDto>> result = iModuleService.getModuleByIdList(moduleServiceVo.getIdList(), fieldArray);
+        ModuleModelVo moduleModelVo = new ModuleModelVo();
+        moduleModelVo.setIdList(moduleServiceVo.getIdList());
+        moduleModelVo.setFieldArray(fieldArray);
+        Result<List<ModuleModelDto>> result = iModuleService.getModuleList(moduleModelVo);
 
         List<ModuleServiceDto> moduleServiceDtoList = new ArrayList<>();
 
         if (Objects.equals(result.getFlag(), Result.FAILURE)) {
-            return new Result<>(result.getFlag(), "没有数据", moduleServiceDtoList);
+            return new Result<>(result.getFlag(), result.getMessage(), moduleServiceDtoList);
         }
 
         for (ModuleModelDto moduleModelDto : result.getData()) {

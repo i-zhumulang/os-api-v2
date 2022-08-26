@@ -35,11 +35,24 @@ import java.util.List;
 public class ModuleServiceImpl extends ServiceImpl<ModuleMapper, Module> implements IModuleService {
 
     @Override
-    public Result<List<ModuleModelDto>> getModuleByIdList(List<Long> id, String[] fieldArray) {
-        LambdaQueryWrapper<Module> queryWrapper = new FieldValuesUtils<>(Module.class, fieldArray).queryWrapper();
-        queryWrapper.in(id != null, Module::getId, id);
+    public Result<String> destroy(ModuleModelVo moduleModelVo) {
+        int result = getBaseMapper().deleteById(moduleModelVo.getId());
+        if (result > 0) {
+            return new Result<>(Result.SUCCESS, "删除成功");
+        }
+        return new Result<>(Result.FAILURE, "删除失败");
+    }
+
+    @Override
+    public Result<List<ModuleModelDto>> getModuleList(ModuleModelVo moduleModelVo) {
+        LambdaQueryWrapper<Module> queryWrapper = new FieldValuesUtils<>(Module.class, moduleModelVo.getFieldArray()).queryWrapper();
+        queryWrapper.eq(moduleModelVo.getId() != null, Module::getId, moduleModelVo.getId());
+        queryWrapper.in(moduleModelVo.getIdList() != null, Module::getId, moduleModelVo.getIdList());
         queryWrapper.orderByAsc(Module::getSorting);
         List<Module> modules = getBaseMapper().selectList(queryWrapper);
+        if (modules.isEmpty()) {
+            return new Result<>(Result.FAILURE, "数据不存在");
+        }
         List<ModuleModelDto> moduleModelDtoList = new ArrayList<>();
         for (Module module : modules) {
             ModuleModelDto moduleModelDto = new ModuleModelDto();
@@ -47,18 +60,5 @@ public class ModuleServiceImpl extends ServiceImpl<ModuleMapper, Module> impleme
             moduleModelDtoList.add(moduleModelDto);
         }
         return new Result<>(Result.SUCCESS, moduleModelDtoList);
-    }
-
-    @Override
-    public Result<ModuleModelDto> getModuleDto(ModuleModelVo moduleModelVo, String[] fieldArray) {
-        LambdaQueryWrapper<Module> queryWrapper = new FieldValuesUtils<>(Module.class, fieldArray).queryWrapper();
-        queryWrapper.eq(moduleModelVo.getId() != null, Module::getId, moduleModelVo.getId());
-        Module module = getBaseMapper().selectOne(queryWrapper);
-        if (module == null) {
-            return new Result<>(Result.FAILURE, "数据不存在", null);
-        }
-        ModuleModelDto moduleModelDto = new ModuleModelDto();
-        BeanUtils.copyProperties(module, moduleModelDto);
-        return new Result<>(Result.SUCCESS, moduleModelDto);
     }
 }

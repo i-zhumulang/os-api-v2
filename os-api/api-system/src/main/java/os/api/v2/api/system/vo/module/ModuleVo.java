@@ -5,22 +5,20 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-08-13 00:00
+// | Date  : 2022-08-26 22:20
 // +----------------------------------------------------------------------
 package os.api.v2.api.system.vo.module;
 
 import lombok.Data;
-import org.hibernate.validator.constraints.Range;
 
 /**
- * os.api.v2.api.system.vo.module.EditVo
+ * os.api.v2.api.system.vo.module.ModuleVo
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-08-13 00:00
+ * @date 2022-08-26 22:20
  */
 @Data
-public class EditVo {
-    @Range(min = 1)
+public class ModuleVo {
     private Long id;
 }

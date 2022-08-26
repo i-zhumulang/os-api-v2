@@ -7,14 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import os.api.v2.api.system.dto.module.EditDto;
 import os.api.v2.api.system.dto.module.IndexDto;
-import os.api.v2.api.system.service.module.IIndexService;
-import os.api.v2.api.system.service.module.IOperateService;
-import os.api.v2.api.system.service.module.IStoreService;
-import os.api.v2.api.system.service.module.IUpdateService;
-import os.api.v2.api.system.vo.module.EditVo;
-import os.api.v2.api.system.vo.module.IndexVo;
-import os.api.v2.api.system.vo.module.StoreVo;
-import os.api.v2.api.system.vo.module.UpdateVo;
+import os.api.v2.api.system.service.module.*;
+import os.api.v2.api.system.vo.module.*;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.common.base.exception.UserException;
 import os.api.v2.model.service.system.dto.module.ModuleModelDto;
@@ -38,6 +32,9 @@ public class ModuleController {
     @Autowired
     protected IOperateService iOperateService;
 
+    @Autowired
+    protected IDestroyService iDestroyService;
+
     //    @RequiresPermissions("SYSTEM:MODULE:INDEX")
     @RequestMapping(value = "/index", method = RequestMethod.POST)
     public Result<List<IndexDto>> index(@RequestBody @Valid IndexVo indexVo) throws UserException {
@@ -50,8 +47,8 @@ public class ModuleController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public Result<EditDto> edit(@RequestBody @Valid EditVo editVo) {
-        return iUpdateService.edit(editVo);
+    public Result<EditDto> edit(@RequestBody @Valid ModuleVo moduleVo) {
+        return iUpdateService.edit(moduleVo);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -62,5 +59,10 @@ public class ModuleController {
     @RequestMapping(value = "/operate", method = RequestMethod.POST)
     public Result<List<Map<String, Object>>> operate() {
         return iOperateService.operate();
+    }
+
+    @RequestMapping(value = "/destroy", method = RequestMethod.POST)
+    public Result<String> destroy(@RequestBody ModuleVo moduleVo) {
+        return iDestroyService.destroy(moduleVo);
     }
 }

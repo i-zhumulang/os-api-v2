@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import os.api.v2.api.system.service.module.IStoreService;
 import os.api.v2.api.system.vo.module.StoreVo;
 import os.api.v2.common.base.common.Result;
+import os.api.v2.common.base.utils.IdWorkerUtils;
 import os.api.v2.model.service.system.vo.module.StoreModelVo;
 
 /**
@@ -33,6 +34,7 @@ public class StoreServiceImpl implements IStoreService {
     public Result<String> store(StoreVo storeVo) {
         StoreModelVo storeModelVo = new StoreModelVo();
         BeanUtils.copyProperties(storeVo, storeModelVo);
+        storeModelVo.setId(new IdWorkerUtils().nextId());
         return iStoreService.store(storeModelVo);
     }
 }

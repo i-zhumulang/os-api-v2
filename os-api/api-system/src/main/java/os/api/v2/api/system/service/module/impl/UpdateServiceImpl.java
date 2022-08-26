@@ -11,17 +11,17 @@ package os.api.v2.api.system.service.module.impl;
 
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import os.api.v2.api.system.dto.module.EditDto;
 import os.api.v2.api.system.service.module.IUpdateService;
-import os.api.v2.api.system.vo.module.EditVo;
+import os.api.v2.api.system.vo.module.ModuleVo;
 import os.api.v2.api.system.vo.module.UpdateVo;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.model.service.system.dto.module.ModuleModelDto;
 import os.api.v2.model.service.system.service.module.IModuleService;
 import os.api.v2.model.service.system.vo.module.ModuleModelVo;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -41,9 +41,7 @@ public class UpdateServiceImpl implements IUpdateService {
     protected os.api.v2.model.service.system.service.module.IUpdateService iUpdateService;
 
     @Override
-    public Result<EditDto> edit(EditVo editVo) {
-        ModuleModelVo moduleModelVo = new ModuleModelVo();
-        moduleModelVo.setId(editVo.getId());
+    public Result<EditDto> edit(ModuleVo moduleVo) {
         String[] fieldArray = {
                 "id",
                 "name_en",
@@ -52,14 +50,17 @@ public class UpdateServiceImpl implements IUpdateService {
                 "home_page",
                 "sorting"
         };
-        Result<ModuleModelDto> result = iModuleService.getModuleDto(moduleModelVo, fieldArray);
+        ModuleModelVo moduleModelVo = new ModuleModelVo();
+        moduleModelVo.setId(moduleVo.getId());
+        moduleModelVo.setFieldArray(fieldArray);
+        Result<List<ModuleModelDto>> result = iModuleService.getModuleList(moduleModelVo);
 
         if (Objects.equals(Result.FAILURE, result.getFlag())) {
             return new Result<>(result.getFlag(), null);
         }
 
         EditDto editDto = new EditDto();
-        BeanUtils.copyProperties(result.getData(), editDto);
+        BeanUtils.copyProperties(result.getData().stream().findFirst(), editDto);
         return new Result<>(result.getFlag(), editDto);
     }
 
