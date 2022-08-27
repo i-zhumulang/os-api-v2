@@ -14,6 +14,7 @@ import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.BeanUtils;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.model.service.system.dto.menu.MenuModelDto;
+import os.api.v2.model.service.system.vo.menu.MenuModelVo;
 import os.api.v2.service.service.system.dto.modulemenu.PermissionServiceDto;
 import os.api.v2.service.service.system.service.menu.IPermissionService;
 
@@ -33,13 +34,15 @@ public class PermissionServiceImpl implements IPermissionService {
 
     @Override
     public Result<List<PermissionServiceDto>> permission(List<Long> idList) {
-        String[] fieldArray = {
+        MenuModelVo menuModelVo = new MenuModelVo();
+        menuModelVo.setIdList(idList);
+        menuModelVo.setFieldArray(new String[]{
                 "id",
                 "parent_id",
                 "name_zh",
                 "uri",
-        };
-        Result<List<MenuModelDto>> result = iMenuService.permission(idList, fieldArray);
+        });
+        Result<List<MenuModelDto>> result = iMenuService.getMenuList(menuModelVo);
         if (Objects.equals(result.getFlag(), Result.FAILURE)) {
             return new Result<>(result.getFlag(), null);
         }

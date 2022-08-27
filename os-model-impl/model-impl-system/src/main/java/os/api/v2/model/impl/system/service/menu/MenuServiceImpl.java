@@ -19,6 +19,7 @@ import os.api.v2.model.impl.system.mapper.MenuMapper;
 import os.api.v2.model.impl.system.pojo.Menu;
 import os.api.v2.model.service.system.dto.menu.MenuModelDto;
 import os.api.v2.model.service.system.service.menu.IMenuService;
+import os.api.v2.model.service.system.vo.menu.MenuModelVo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,14 +34,18 @@ import java.util.List;
 @DubboService(version = "2.0.0")
 public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IMenuService {
     @Override
-    public Result<List<MenuModelDto>> permission(List<Long> idList, String[] fieldArray) {
-        LambdaQueryWrapper<Menu> queryWrapper = new FieldValuesUtils<>(Menu.class, fieldArray).queryWrapper();
-        queryWrapper.in(Menu::getId, idList);
+    public Result<List<MenuModelDto>> getMenuList(MenuModelVo menuModelVo) {
+        LambdaQueryWrapper<Menu> queryWrapper = new FieldValuesUtils<>(Menu.class, menuModelVo.getFieldArray()).queryWrapper();
+        queryWrapper.eq(menuModelVo.getId() != null, Menu::getId, menuModelVo.getId());
+        queryWrapper.eq(menuModelVo.getParentId() != null, Menu::getParentId, menuModelVo.getParentId());
+        queryWrapper.in(menuModelVo.getIdList() != null, Menu::getId, menuModelVo.getIdList());
+
         List<Menu> menus = getBaseMapper().selectList(queryWrapper);
-        if (menus.isEmpty()) {
-            return new Result<>(Result.FAILURE, null);
-        }
         List<MenuModelDto> menuModelDtoList = new ArrayList<>();
+
+        if (menus.isEmpty()) {
+            return new Result<>(Result.FAILURE, "暂无数据", menuModelDtoList);
+        }
 
         for (Menu moduleMenu : menus) {
             MenuModelDto menuModelDto = new MenuModelDto();

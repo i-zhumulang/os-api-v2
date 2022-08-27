@@ -5,23 +5,26 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-08-08 23:30
+// | Date  : 2022-08-28 00:07
 // +----------------------------------------------------------------------
-package os.api.v2.model.service.system.service.menu;
+package os.api.v2.api.system.service.menu.impl;
 
+import org.springframework.stereotype.Service;
+import os.api.v2.api.system.service.menu.IMenuStoreService;
+import os.api.v2.api.system.vo.menu.StoreVo;
 import os.api.v2.common.base.common.Result;
-import os.api.v2.model.service.system.dto.menu.MenuModelDto;
-import os.api.v2.model.service.system.vo.menu.MenuModelVo;
-
-import java.util.List;
 
 /**
- * os.api.v2.model.service.system.service.menu.IMenuService
+ * os.api.v2.api.system.service.menu.impl.MenuStoreServiceImpl
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-08-08 23:30
+ * @date 2022-08-28 00:07
  */
-public interface IMenuService {
-    Result<List<MenuModelDto>> getMenuList(MenuModelVo menuModelVo);
+@Service
+public class MenuStoreServiceImpl implements IMenuStoreService {
+    @Override
+    public Result<String> store(StoreVo storeVo) {
+        return null;
+    }
 }

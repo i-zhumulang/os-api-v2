@@ -23,6 +23,8 @@ import java.util.List;
  */
 @Data
 public class MenuModelVo implements Serializable {
+    private Long id;
     private List<Long> idList;
+    private Long parentId;
     private String[] fieldArray;
 }
