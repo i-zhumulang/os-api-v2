@@ -36,9 +36,12 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     @Override
     public Result<List<MenuModelDto>> getMenuList(MenuModelVo menuModelVo) {
         LambdaQueryWrapper<Menu> queryWrapper = new FieldValuesUtils<>(Menu.class, menuModelVo.getFieldArray()).queryWrapper();
+
         queryWrapper.eq(menuModelVo.getId() != null, Menu::getId, menuModelVo.getId());
         queryWrapper.eq(menuModelVo.getParentId() != null, Menu::getParentId, menuModelVo.getParentId());
         queryWrapper.in(menuModelVo.getIdList() != null, Menu::getId, menuModelVo.getIdList());
+
+        queryWrapper.orderByAsc(Menu::getSorting);
 
         List<Menu> menus = getBaseMapper().selectList(queryWrapper);
         List<MenuModelDto> menuModelDtoList = new ArrayList<>();

@@ -5,32 +5,20 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-08-27 21:47
+// | Date  : 2022-08-28 10:38
 // +----------------------------------------------------------------------
-package os.api.v2.api.system.vo.menu;
+package os.api.v2.model.service.system.service.menu;
 
-import lombok.Data;
+import os.api.v2.common.base.common.Result;
+import os.api.v2.model.service.system.vo.menu.StoreModelVo;
 
 /**
- * os.api.v2.api.system.vo.menu.StoreVo
+ * os.api.v2.model.service.system.service.menu.IMenuStoreService
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-08-27 21:47
+ * @date 2022-08-28 10:38
  */
-@Data
-public class StoreVo {
-
-    private Long moduleId;
-
-    private Long parentId;
-
-    private String uri;
-
-    private String nameZh;
-
-    private String nameEn;
-
-    private Integer sorting;
-
+public interface IMenuStoreService {
+    Result<String> store(StoreModelVo storeModelVo);
 }

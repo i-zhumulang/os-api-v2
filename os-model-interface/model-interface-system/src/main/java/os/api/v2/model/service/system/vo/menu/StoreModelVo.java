@@ -5,32 +5,52 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-08-27 21:47
+// | Date  : 2022-08-28 10:39
 // +----------------------------------------------------------------------
-package os.api.v2.api.system.vo.menu;
+package os.api.v2.model.service.system.vo.menu;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
- * os.api.v2.api.system.vo.menu.StoreVo
+ * os.api.v2.model.service.system.vo.menu.StoreModelVo
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-08-27 21:47
+ * @date 2022-08-28 10:39
  */
 @Data
-public class StoreVo {
+public class StoreModelVo implements Serializable {
+    private Long id;
 
-    private Long moduleId;
-
+    /**
+     * 上级菜单ID
+     */
     private Long parentId;
 
-    private String uri;
+    /**
+     * 所属模块
+     */
+    private Long moduleId;
 
-    private String nameZh;
-
+    /**
+     * 英文名称
+     */
     private String nameEn;
 
-    private Integer sorting;
+    /**
+     * 中文名称
+     */
+    private String nameZh;
 
+    /**
+     * 地址
+     */
+    private String uri;
+
+    /**
+     * 排序
+     */
+    private Integer sorting;
 }
