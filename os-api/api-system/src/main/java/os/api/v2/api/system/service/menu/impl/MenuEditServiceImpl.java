@@ -5,14 +5,14 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-08-27 22:03
+// | Date  : 2022-08-28 12:55
 // +----------------------------------------------------------------------
 package os.api.v2.api.system.service.menu.impl;
 
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.stereotype.Service;
 import os.api.v2.api.system.dto.menu.CreateDto;
-import os.api.v2.api.system.service.menu.IMenuCreateService;
+import os.api.v2.api.system.service.menu.IMenuEditService;
 import os.api.v2.api.system.vo.menu.MenuVo;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.model.service.system.dto.menu.MenuModelDto;
@@ -29,14 +29,14 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * os.api.v2.api.system.service.menu.impl.MenuCreateServiceImpl
+ * os.api.v2.api.system.service.menu.impl.MenuEditServiceImpl
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-08-27 22:03
+ * @date 2022-08-28 12:55
  */
 @Service
-public class MenuCreateServiceImpl implements IMenuCreateService {
+public class MenuEditServiceImpl implements IMenuEditService {
     @DubboReference(version = "2.0.0")
     protected IModuleService iModuleService;
 
@@ -44,7 +44,7 @@ public class MenuCreateServiceImpl implements IMenuCreateService {
     protected IMenuService iMenuService;
 
     @Override
-    public Result<CreateDto> create() {
+    public Result<CreateDto> edit(MenuVo menuVo) {
         List<ModuleModelDto> moduleModelDtoList = moduleModelDtoList();
         Map<Long, List<MenuModelDto>> longListMap = menuModelDtoList();
 

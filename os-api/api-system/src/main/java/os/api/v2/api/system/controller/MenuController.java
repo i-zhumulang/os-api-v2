@@ -14,16 +14,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import os.api.v2.api.system.dto.menu.CreateDto;
 import os.api.v2.api.system.dto.menu.IndexDto;
-import os.api.v2.api.system.service.menu.IMenuCreateService;
-import os.api.v2.api.system.service.menu.IMenuIndexService;
-import os.api.v2.api.system.service.menu.IMenuOperateService;
-import os.api.v2.api.system.service.menu.IMenuStoreService;
+import os.api.v2.api.system.service.menu.*;
 import os.api.v2.api.system.vo.menu.IndexVo;
 import os.api.v2.api.system.vo.menu.MenuVo;
 import os.api.v2.api.system.vo.menu.StoreVo;
+import os.api.v2.api.system.vo.menu.UpdateVo;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.common.base.exception.UserException;
+import os.api.v2.model.service.system.dto.menu.MenuModelDto;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -51,19 +51,35 @@ public class MenuController {
     @Autowired
     protected IMenuStoreService iMenuStoreService;
 
+    @Autowired
+    protected IMenuEditService iMenuEditService;
+
+    @Autowired
+    protected IMenuUpdateService iMenuUpdateService;
+
     @RequestMapping(value = "/index", method = RequestMethod.POST)
     public Result<List<IndexDto>> index(@RequestBody IndexVo indexVo) throws UserException {
         return iMenuIndexService.index(indexVo);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public Result<Map<Long, Map<String, Object>>> create() {
+    public Result<CreateDto> create() {
         return iMenuCreateService.create();
     }
 
     @RequestMapping(value = "/store", method = RequestMethod.POST)
     public Result<String> store(@RequestBody @Valid StoreVo storeVo) {
         return iMenuStoreService.store(storeVo);
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public Result<CreateDto> edit(@RequestBody @Valid MenuVo menuVo) {
+        return iMenuEditService.edit(menuVo);
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public Result<MenuModelDto> update(@RequestBody @Valid UpdateVo updateVo) {
+        return iMenuUpdateService.update(updateVo);
     }
 
     @RequestMapping(value = "/operate", method = RequestMethod.POST)

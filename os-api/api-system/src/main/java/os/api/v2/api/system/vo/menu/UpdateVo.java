@@ -5,20 +5,33 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-08-27 21:44
+// | Date  : 2022-08-28 16:43
 // +----------------------------------------------------------------------
-package os.api.v2.api.system.service.menu;
+package os.api.v2.api.system.vo.menu;
 
-import os.api.v2.api.system.dto.menu.CreateDto;
-import os.api.v2.common.base.common.Result;
+import lombok.Data;
 
 /**
- * os.api.v2.api.system.service.menu.IMenuCreateService
+ * os.api.v2.api.system.vo.menu.UpdateVo
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-08-27 21:44
+ * @date 2022-08-28 16:43
  */
-public interface IMenuCreateService {
-    Result<CreateDto> create();
+@Data
+public class UpdateVo {
+
+    private Long id;
+
+    private Long moduleId;
+
+    private Long parentId;
+
+    private String uri;
+
+    private String nameZh;
+
+    private String nameEn;
+
+    private Integer sorting;
 }
