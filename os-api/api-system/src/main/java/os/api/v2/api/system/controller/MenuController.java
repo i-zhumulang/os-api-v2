@@ -21,6 +21,7 @@ import os.api.v2.api.system.vo.menu.IndexVo;
 import os.api.v2.api.system.vo.menu.MenuVo;
 import os.api.v2.api.system.vo.menu.StoreVo;
 import os.api.v2.api.system.vo.menu.UpdateVo;
+import os.api.v2.api.system.vo.module.ModuleVo;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.common.base.exception.UserException;
 import os.api.v2.model.service.system.dto.menu.MenuModelDto;
@@ -57,6 +58,9 @@ public class MenuController {
     @Autowired
     protected IMenuUpdateService iMenuUpdateService;
 
+    @Autowired
+    protected IMenuDestroyService iMenuDestroyService;
+
     @RequestMapping(value = "/index", method = RequestMethod.POST)
     public Result<List<IndexDto>> index(@RequestBody IndexVo indexVo) throws UserException {
         return iMenuIndexService.index(indexVo);
@@ -80,6 +84,11 @@ public class MenuController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public Result<MenuModelDto> update(@RequestBody @Valid UpdateVo updateVo) {
         return iMenuUpdateService.update(updateVo);
+    }
+
+    @RequestMapping(value = "/destroy", method = RequestMethod.POST)
+    public Result<String> destroy(@RequestBody MenuVo menuVo) {
+        return iMenuDestroyService.destroy(menuVo);
     }
 
     @RequestMapping(value = "/operate", method = RequestMethod.POST)

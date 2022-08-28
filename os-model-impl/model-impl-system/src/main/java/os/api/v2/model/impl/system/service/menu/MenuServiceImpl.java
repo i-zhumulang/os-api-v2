@@ -34,6 +34,15 @@ import java.util.List;
 @DubboService(version = "2.0.0")
 public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IMenuService {
     @Override
+    public Result<String> destroy(MenuModelVo menuModelVo) {
+        int result = getBaseMapper().deleteById(menuModelVo.getId());
+        if (result > 0) {
+            return new Result<>(Result.SUCCESS, "删除成功");
+        }
+        return new Result<>(Result.FAILURE, "删除失败");
+    }
+
+    @Override
     public Result<List<MenuModelDto>> getMenuList(MenuModelVo menuModelVo) {
         LambdaQueryWrapper<Menu> queryWrapper = new FieldValuesUtils<>(Menu.class, menuModelVo.getFieldArray()).queryWrapper();
 
