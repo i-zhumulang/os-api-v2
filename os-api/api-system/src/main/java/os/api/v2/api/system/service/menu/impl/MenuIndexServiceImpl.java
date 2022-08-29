@@ -10,6 +10,7 @@
 package os.api.v2.api.system.service.menu.impl;
 
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import os.api.v2.api.system.dto.menu.IndexDto;
 import os.api.v2.api.system.service.menu.IMenuIndexService;
@@ -59,7 +60,7 @@ public class MenuIndexServiceImpl implements IMenuIndexService {
      *
      * @param menuModelDtoList
      * @param menuOperateList
-     * @return Result<List<IndexDto>>
+     * @return Result<List < IndexDto>>
      * @author 吴荣超
      * @date 11:47 2022/8/21
      */
@@ -67,18 +68,21 @@ public class MenuIndexServiceImpl implements IMenuIndexService {
         List<IndexDto> indexDtoList = new ArrayList<>();
         for (MenuModelDto menuModelDto : menuModelDtoList) {
             IndexDto indexDto = new IndexDto();
-            indexDto.setData(menuModelDto);
+            BeanUtils.copyProperties(menuModelDto, indexDto);
+            if (menuModelDto.getParentId() != 0) {
+                indexDto.setHasChildren(1);
+            }
             indexDto.setOpts(menuOperateList);
             indexDtoList.add(indexDto);
         }
-        return new Result<>(Result.SUCCESS, indexDtoList);
+        return new Result<>(Result.SUCCESS, process(indexDtoList));
     }
 
     /**
      * getMenuOperateList
      *
      * @param menuOperateIdList
-     * @return List<Map<String,Object>>
+     * @return List<Map < String, Object>>
      * @author 吴荣超
      * @date 11:43 2022/8/21
      */
@@ -139,5 +143,35 @@ public class MenuIndexServiceImpl implements IMenuIndexService {
             throw new UserException("没有数据");
         }
         return result.getData();
+    }
+
+    /**
+     * process
+     *
+     * @param permissionServiceDtoList
+     * @return List<IndexDto>
+     * @author 吴荣超
+     * @date 20:14 2022/8/29
+     */
+    public List<IndexDto> process(List<IndexDto> indexDtoList) {
+        //存返回数据
+        List<IndexDto> totalType = new ArrayList<>();
+        //使用map来装前面查到的所有数据
+        Map<Long, IndexDto> map = new HashMap<>();
+
+        for (IndexDto p : indexDtoList) {
+            map.put(p.getId(), p);
+        }
+
+        //遍历所有类型，如果是最顶级父类型就直接装, 然后用这个父类型的children集合取装取当前数据
+        for (IndexDto p : indexDtoList) {
+            if (p.getParentId() == 0) {
+                totalType.add(p);
+            } else {
+                IndexDto parents = map.get(p.getParentId());
+                parents.getChildren().add(p);
+            }
+        }
+        return totalType;
     }
 }

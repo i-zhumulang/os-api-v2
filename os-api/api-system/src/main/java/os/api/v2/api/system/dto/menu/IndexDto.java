@@ -24,6 +24,44 @@ import java.util.Map;
  */
 @Data
 public class IndexDto {
-    private MenuModelDto data;
+    private Long id;
+
+    /**
+     * 上级菜单ID
+     */
+    private Long parentId;
+
+    /**
+     * 所属模块
+     */
+    private Long moduleId;
+
+    /**
+     * 英文名称
+     */
+    private String nameEn;
+
+    /**
+     * 中文名称
+     */
+    private String nameZh;
+
+    /**
+     * 地址
+     */
+    private String uri;
+
+    /**
+     * 排序
+     */
+    private Integer sorting;
+
+    /**
+     * 是否有下级
+     */
+    private Integer hasChildren;
+
+    private List<IndexDto> children;
+
     private List<Map<String, Object>> opts;
 }
