@@ -11,7 +11,7 @@
  Target Server Version : 80029
  File Encoding         : 65001
 
- Date: 24/08/2022 17:08:59
+ Date: 29/08/2022 20:37:26
 */
 
 SET NAMES utf8mb4;
@@ -23,12 +23,12 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `menu`;
 CREATE TABLE `menu`  (
   `id` bigint(0) UNSIGNED NOT NULL,
-  `parent_id` bigint(0) UNSIGNED NOT NULL COMMENT '上级菜单ID',
+  `parent_id` bigint(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '上级菜单ID',
   `module_id` bigint(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '所属模块',
-  `name_en` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '英文名称',
-  `name_zh` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '中文名称',
+  `name_en` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '英文名称',
+  `name_zh` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '中文名称',
   `uri` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '地址',
-  `sorting` tinyint(0) NOT NULL DEFAULT 0 COMMENT '排序',
+  `sorting` tinyint(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '排序',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '模块-菜单' ROW_FORMAT = DYNAMIC;
 
@@ -46,7 +46,7 @@ DROP TABLE IF EXISTS `menu_operate`;
 CREATE TABLE `menu_operate`  (
   `id` bigint(0) UNSIGNED NOT NULL,
   `menu_id` bigint(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '所属菜单',
-  `location` char(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '操作位置(TABLE-HEAD:表头,TABLE-BODY:表体)',
+  `location` char(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '操作位置(TABLE:表格数据,TABLE-HEAD:表头,TABLE-BODY:表体)',
   `type` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT 'element-plus button 对应type属性',
   `permission_identify` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '权限标识',
   `name_en` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '操作名称(英文)',
@@ -88,6 +88,25 @@ CREATE TABLE `module`  (
 INSERT INTO `module` VALUES (1100176417150205952, 'SYSTEM', '系统管理', 'http://127.0.0.1:8080', '/system/module/index', 0);
 INSERT INTO `module` VALUES (1100176417951318016, 'USER', '个人中心', 'http://127.0.0.1:8080', '/user/user/index', 0);
 INSERT INTO `module` VALUES (1100176418634989568, 'DOCUMENT', '操作手册', 'http://127.0.0.1:8080', '/document/system/index', 1);
+
+-- ----------------------------
+-- Table structure for role
+-- ----------------------------
+DROP TABLE IF EXISTS `role`;
+CREATE TABLE `role`  (
+  `id` int(0) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name_en` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '角色名称(英文)',
+  `name_zh` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '角色名称(中文)',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of role
+-- ----------------------------
+INSERT INTO `role` VALUES (1, '超级管理员', '超级管理员');
+INSERT INTO `role` VALUES (2, '普通用户', '普通用户');
+INSERT INTO `role` VALUES (3, '公司管理员', '公司管理员');
+INSERT INTO `role` VALUES (4, '集团管理员', '集团管理员');
 
 -- ----------------------------
 -- Table structure for undo_log
