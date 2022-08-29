@@ -72,6 +72,7 @@ public class MenuIndexServiceImpl implements IMenuIndexService {
             if (menuModelDto.getParentId() != 0) {
                 indexDto.setHasChildren(1);
             }
+            indexDto.setChildren(new ArrayList<>());
             indexDto.setOpts(menuOperateList);
             indexDtoList.add(indexDto);
         }
@@ -137,6 +138,7 @@ public class MenuIndexServiceImpl implements IMenuIndexService {
      */
     private List<MenuModelDto> getMenuModelDtoList(IndexVo indexVo) throws UserException {
         IndexModelVo indexModelVo = new IndexModelVo();
+        indexModelVo.setModuleId(indexVo.getModuleId());
         indexModelVo.setFieldArray(new String[]{});
         Result<List<MenuModelDto>> result = iMenuIndexService.index(indexModelVo);
         if (Objects.equals(result.getFlag(), Result.FAILURE)) {
@@ -148,7 +150,7 @@ public class MenuIndexServiceImpl implements IMenuIndexService {
     /**
      * process
      *
-     * @param permissionServiceDtoList
+     * @param indexDtoList
      * @return List<IndexDto>
      * @author 吴荣超
      * @date 20:14 2022/8/29

@@ -36,6 +36,7 @@ public class MenuIndexServiceImpl extends ServiceImpl<MenuMapper, Menu> implemen
     @Override
     public Result<List<MenuModelDto>> index(IndexModelVo indexModelVo) {
         LambdaQueryWrapper<Menu> queryWrapper = new FieldValuesUtils<>(Menu.class, indexModelVo.getFieldArray()).queryWrapper();
+        queryWrapper.eq(indexModelVo.getModuleId() != null, Menu::getModuleId, indexModelVo.getModuleId());
         queryWrapper.orderByAsc(Menu::getSorting);
         List<Menu> menus = getBaseMapper().selectList(queryWrapper);
         if (menus.isEmpty()) {

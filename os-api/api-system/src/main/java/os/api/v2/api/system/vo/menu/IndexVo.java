@@ -20,4 +20,5 @@ import lombok.Data;
  */
 @Data
 public class IndexVo {
+    private Long moduleId;
 }

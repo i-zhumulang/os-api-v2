@@ -21,7 +21,6 @@ import os.api.v2.api.system.vo.menu.IndexVo;
 import os.api.v2.api.system.vo.menu.MenuVo;
 import os.api.v2.api.system.vo.menu.StoreVo;
 import os.api.v2.api.system.vo.menu.UpdateVo;
-import os.api.v2.api.system.vo.module.ModuleVo;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.common.base.exception.UserException;
 import os.api.v2.model.service.system.dto.menu.MenuModelDto;
@@ -44,9 +43,6 @@ public class MenuController {
     protected IMenuIndexService iMenuIndexService;
 
     @Autowired
-    protected IMenuOperateService iMenuOperateService;
-
-    @Autowired
     protected IMenuCreateService iMenuCreateService;
 
     @Autowired
@@ -60,6 +56,9 @@ public class MenuController {
 
     @Autowired
     protected IMenuDestroyService iMenuDestroyService;
+
+    @Autowired
+    protected IMenuOptionsService iMenuOptionsService;
 
     @RequestMapping(value = "/index", method = RequestMethod.POST)
     public Result<List<IndexDto>> index(@RequestBody IndexVo indexVo) throws UserException {
@@ -91,8 +90,8 @@ public class MenuController {
         return iMenuDestroyService.destroy(menuVo);
     }
 
-    @RequestMapping(value = "/operate", method = RequestMethod.POST)
-    public Result<List<Map<String, Object>>> operate() {
-        return iMenuOperateService.operate();
+    @RequestMapping(value = "/options", method = RequestMethod.POST)
+    public Result<Map<String, Object>> options() {
+        return iMenuOptionsService.options();
     }
 }

@@ -35,23 +35,23 @@ public class MenuListToTreeUtils<T> {
     // 获取根节点
     public List<T> getRootNode() {
         List<T> rootNode = new ArrayList<>();
-        for (T menu : menuList) {
-            if (menu.getParentId().equals(0)) {
-                rootNode.add(menu);
-            }
-        }
+//        for (T menu : menuList) {
+//            if (menu.getParentId().equals(0)) {
+//                rootNode.add(menu);
+//            }
+//        }
         return rootNode;
     }
 
     // 构建子树
     public T buildChildren(T rootNode) {
         List<T> childrenTree = new ArrayList<>();
-        for (T menu : menuList) {
-            if (menu.getParentId().equals(rootNode.getId())) {
-                childrenTree.add(buildChildren(menu));
-            }
-        }
-        rootNode.setChildren(childrenTree);
+//        for (T menu : menuList) {
+//            if (menu.getParentId().equals(rootNode.getId())) {
+//                childrenTree.add(buildChildren(menu));
+//            }
+//        }
+//        rootNode.setChildren(childrenTree);
         return rootNode;
     }
 
