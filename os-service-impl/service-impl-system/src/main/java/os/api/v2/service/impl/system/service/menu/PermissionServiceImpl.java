@@ -15,7 +15,7 @@ import org.springframework.beans.BeanUtils;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.model.service.system.dto.menu.MenuModelDto;
 import os.api.v2.model.service.system.vo.menu.MenuModelVo;
-import os.api.v2.service.service.system.dto.modulemenu.PermissionServiceDto;
+import os.api.v2.service.service.system.dto.menu.PermissionServiceDto;
 import os.api.v2.service.service.system.service.menu.IPermissionService;
 
 import java.util.*;

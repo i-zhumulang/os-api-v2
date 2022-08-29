@@ -19,13 +19,12 @@ import os.api.v2.api.user.vo.user.PermissionVo;
 import os.api.v2.common.auth.realm.Profile;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.common.base.exception.UserException;
-import os.api.v2.common.base.utils.jwt.JwtUtils;
 import os.api.v2.model.service.user.dto.userrole.UserRoleModelDto;
 import os.api.v2.model.service.user.service.modulemenu.IModuleMenuService;
 import os.api.v2.model.service.user.service.userrole.IUserRoleService;
 import os.api.v2.model.service.user.vo.modulemenu.ModuleMenuModelVo;
 import os.api.v2.model.service.user.vo.userrole.UserRoleModelVo;
-import os.api.v2.service.service.system.dto.modulemenu.PermissionServiceDto;
+import os.api.v2.service.service.system.dto.menu.PermissionServiceDto;
 
 import java.util.List;
 import java.util.Objects;

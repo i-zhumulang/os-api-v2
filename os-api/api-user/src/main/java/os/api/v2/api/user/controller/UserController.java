@@ -19,7 +19,7 @@ import os.api.v2.api.user.service.user.IPermissionService;
 import os.api.v2.api.user.vo.user.PermissionVo;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.common.base.exception.UserException;
-import os.api.v2.service.service.system.dto.modulemenu.PermissionServiceDto;
+import os.api.v2.service.service.system.dto.menu.PermissionServiceDto;
 
 import javax.validation.Valid;
 import java.util.List;

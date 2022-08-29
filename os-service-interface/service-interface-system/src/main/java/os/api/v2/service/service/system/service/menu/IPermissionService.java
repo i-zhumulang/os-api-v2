@@ -10,7 +10,7 @@
 package os.api.v2.service.service.system.service.menu;
 
 import os.api.v2.common.base.common.Result;
-import os.api.v2.service.service.system.dto.modulemenu.PermissionServiceDto;
+import os.api.v2.service.service.system.dto.menu.PermissionServiceDto;
 
 import java.util.List;
 

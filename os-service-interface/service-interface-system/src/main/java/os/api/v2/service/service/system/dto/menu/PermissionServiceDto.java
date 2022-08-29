@@ -7,7 +7,7 @@
 // +----------------------------------------------------------------------
 // | Date  : 2022-08-06 01:20
 // +----------------------------------------------------------------------
-package os.api.v2.service.service.system.dto.modulemenu;
+package os.api.v2.service.service.system.dto.menu;
 
 import lombok.Data;
 

@@ -18,7 +18,6 @@ import os.api.v2.api.user.service.user.IModuleService;
 import os.api.v2.common.auth.realm.Profile;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.common.base.exception.UserException;
-import os.api.v2.common.base.utils.jwt.JwtUtils;
 import os.api.v2.model.service.user.service.userrole.IUserRoleService;
 import os.api.v2.service.service.system.dto.module.ModuleServiceDto;
 import os.api.v2.service.service.system.vo.module.ModuleServiceVo;

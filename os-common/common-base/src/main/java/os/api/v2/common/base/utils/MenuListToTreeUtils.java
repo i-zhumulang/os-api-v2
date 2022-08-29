@@ -13,13 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * os.api.v2.common.base.utils.ListToTree
+ * os.api.v2.common.base.utils.MenuListToTreeUtils
  *
  * @author 吴荣超
  * @version 2.0.0
  * @date 2022-08-28 23:52
  */
-public class ListToTreeUtils<T> {
+public class MenuListToTreeUtils<T> {
 
     // 流程：数据库查出的菜单记录装载在承载菜单的列表中---
     //         构建树（获取根节点，遍历根节点，对每一个根节点构建子树）---得到最终树形菜单
@@ -28,7 +28,7 @@ public class ListToTreeUtils<T> {
     private List<T> menuList = new ArrayList<>();
 
     // 带参构造器，将数据库中的菜单数据记录，装载在我们承载菜单的列表中
-    public ListToTreeUtils(List<T> menuList) {
+    public MenuListToTreeUtils(List<T> menuList) {
         this.menuList = menuList;
     }
 
