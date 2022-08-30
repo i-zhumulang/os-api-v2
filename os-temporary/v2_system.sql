@@ -35,9 +35,17 @@ CREATE TABLE `menu`  (
 -- ----------------------------
 -- Records of menu
 -- ----------------------------
-INSERT INTO `menu` VALUES (1100177340668952576, 0, 1100176417150205952, 'system.module', '模块菜单', '#', 0);
-INSERT INTO `menu` VALUES (1100177341767860224, 1100177340668952576, 1100176417150205952, 'system.module.index', '模块列表', '/system/module/index', 0);
-INSERT INTO `menu` VALUES (1100177342397005824, 1100177340668952576, 1100176417150205952, 'system.menu.index', '菜单列表', '/system/menu/index', 1);
+INSERT INTO `menu` VALUES ('1100177340668952576', '0', '1100176417150205952', 'system.module', '模块菜单', '#', '0');
+INSERT INTO `menu` VALUES ('1100177341767860224', '1100177340668952576', '1100176417150205952', 'system.module.index', '模块列表', '/system/module/index', '0');
+INSERT INTO `menu` VALUES ('1100177342397005824', '1100177340668952576', '1100176417150205952', 'system.menu.index', '菜单列表', '/system/menu/index', '1');
+INSERT INTO `menu` VALUES ('1102868720906162176', '1100177340668952576', '1100176417150205952', 'system.operate.index', '菜单操作', 'system/operate/index', '2');
+INSERT INTO `menu` VALUES ('1102871794815094784', '0', '1100176417951318016', 'user.user', '会员管理', '#', '2');
+INSERT INTO `menu` VALUES ('1102872191327817728', '1102871794815094784', '1100176417951318016', 'user.user.index', '会员列表', '/user/user/index', '0');
+INSERT INTO `menu` VALUES ('1102872407070232576', '1102871794815094784', '1100176417951318016', 'user.role.index', '角色列表', '/user/role/index', '1');
+INSERT INTO `menu` VALUES ('1102873120315822080', '1102871794815094784', '1100176417951318016', 'user.rolemodule.index', '角色模块', '/user/rolemodule/index', '2');
+INSERT INTO `menu` VALUES ('1102873569563529216', '1102871794815094784', '1100176417951318016', 'user.rolemenu.index', '角色菜单', '/user/rolemenu/index', '3');
+INSERT INTO `menu` VALUES ('1102873731409137664', '1102871794815094784', '1100176417951318016', 'user.roleoperate.index', '角色操作', '/user/roleoperate/index', '4');
+
 
 -- ----------------------------
 -- Table structure for menu_operate

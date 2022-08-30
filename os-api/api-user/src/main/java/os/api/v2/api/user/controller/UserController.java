@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import os.api.v2.api.user.service.user.IModuleService;
 import os.api.v2.api.user.service.user.IPermissionService;
+import os.api.v2.api.user.service.user.IRegisterService;
 import os.api.v2.api.user.vo.user.PermissionVo;
+import os.api.v2.api.user.vo.user.RegisterVo;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.common.base.exception.UserException;
 import os.api.v2.service.service.system.dto.menu.PermissionServiceDto;
@@ -42,6 +44,9 @@ public class UserController {
     @Autowired
     protected IPermissionService iPermissionService;
 
+    @Autowired
+    protected IRegisterService iRegisterService;
+
     @RequestMapping(value = "/module", method = RequestMethod.POST)
     public Result<List<Map<String, Object>>> module() throws UserException {
         return iModuleService.module();
@@ -50,5 +55,10 @@ public class UserController {
     @RequestMapping(value = "/permission", method = RequestMethod.POST)
     public Result<List<PermissionServiceDto>> permission(@RequestBody @Valid PermissionVo permissionVo) throws UserException {
         return iPermissionService.permission(permissionVo);
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public Result<Integer> register(@RequestBody @Valid RegisterVo registerVo) {
+        return iRegisterService.register(registerVo);
     }
 }
