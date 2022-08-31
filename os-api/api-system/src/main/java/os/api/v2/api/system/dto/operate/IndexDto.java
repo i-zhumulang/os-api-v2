@@ -5,23 +5,21 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-08-09 23:14
+// | Date  : 2022-08-31 22:00
 // +----------------------------------------------------------------------
-package os.api.v2.model.service.system.dto.menuoperate;
+package os.api.v2.api.system.dto.operate;
 
 import lombok.Data;
 
-import java.io.Serializable;
-
 /**
- * os.api.v2.model.service.system.dto.menuoperate.MenuOperateModelDto
+ * os.api.v2.api.system.dto.operate.IndexDto
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-08-09 23:14
+ * @date 2022-08-31 22:00
  */
 @Data
-public class MenuOperateModelDto implements Serializable {
+public class IndexDto {
     private Long id;
 
     /**
@@ -32,7 +30,17 @@ public class MenuOperateModelDto implements Serializable {
     /**
      * 所属菜单
      */
+    private String moduleNameZh;
+
+    /**
+     * 所属菜单
+     */
     private Long menuId;
+
+    /**
+     * 所属菜单
+     */
+    private String menuNameZh;
 
     /**
      * 操作位置(TABLE-HEAD:表头,TABLE-BODY:表体)

@@ -24,6 +24,11 @@ public class MenuOperate implements Serializable {
     private Long id;
 
     /**
+     * 所属模块
+     */
+    private Long moduleId;
+
+    /**
      * 所属菜单
      */
     private Long menuId;
