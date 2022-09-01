@@ -11,6 +11,9 @@ package os.api.v2.api.system.dto.operate;
 
 import lombok.Data;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * os.api.v2.api.system.dto.operate.IndexDto
  *
@@ -76,4 +79,6 @@ public class IndexDto {
      * 排序
      */
     private Integer sorting;
+
+    private List<Map<String, Object>> opts;
 }
