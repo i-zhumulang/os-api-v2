@@ -45,8 +45,8 @@ public class MenuCreateServiceImpl implements IMenuCreateService {
 
     @Override
     public Result<CreateDto> create() {
-        List<ModuleModelDto> moduleModelDtoList = moduleModelDtoList();
-        Map<Long, List<MenuModelDto>> longListMap = menuModelDtoList();
+        List<ModuleModelDto> moduleModelDtoList = getModuleList();
+        Map<Long, List<MenuModelDto>> longListMap = getMenuList();
 
         Map<Long, Map<String, Object>> map = new HashMap<>();
         for (ModuleModelDto moduleModelDto: moduleModelDtoList) {
@@ -61,7 +61,7 @@ public class MenuCreateServiceImpl implements IMenuCreateService {
         return new Result<>(Result.SUCCESS, createDto);
     }
 
-    private List<ModuleModelDto> moduleModelDtoList() {
+    private List<ModuleModelDto> getModuleList() {
         ModuleModelVo moduleModelVo = new ModuleModelVo();
         moduleModelVo.setFieldArray(new String[]{
                 "id",
@@ -71,7 +71,7 @@ public class MenuCreateServiceImpl implements IMenuCreateService {
         return result.getData();
     }
 
-    private Map<Long, List<MenuModelDto>> menuModelDtoList() {
+    private Map<Long, List<MenuModelDto>> getMenuList() {
         MenuModelVo menuModelVo = new MenuModelVo();
         menuModelVo.setParentId(0L);
         menuModelVo.setFieldArray(new String[]{
