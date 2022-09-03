@@ -5,22 +5,23 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-08-21 00:32
+// | Date  : 2022-09-03 21:08
 // +----------------------------------------------------------------------
-package os.api.v2.api.system.service.module;
+package os.api.v2.api.system.dto.operate;
 
-import os.api.v2.common.base.common.Result;
+import lombok.Data;
 
 import java.util.List;
 import java.util.Map;
 
 /**
- * os.api.v2.api.system.service.module.IOperateService
+ * os.api.v2.api.system.dto.operate.CreateDto
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-08-21 00:32
+ * @date 2022-09-03 21:08
  */
-public interface IOperateService {
-    Result<List<Map<String, Object>>> operate();
+@Data
+public class CreateDto {
+    private List<CreateModuleDto> moduleDto;
 }

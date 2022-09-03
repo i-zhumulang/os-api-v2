@@ -5,15 +5,14 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-08-21 00:36
+// | Date  : 2022-09-03 16:56
 // +----------------------------------------------------------------------
 package os.api.v2.api.system.service.module.impl;
 
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.stereotype.Service;
-import os.api.v2.api.system.service.module.IOperateService;
+import os.api.v2.api.system.service.module.IModuleOptionsService;
 import os.api.v2.common.base.common.Result;
-import os.api.v2.model.service.system.dto.menuoperate.MenuOperateModelDto;
 import os.api.v2.model.service.system.service.menuoperate.IGetListByIdListService;
 import os.api.v2.service.service.user.service.menuoperate.IMenuOperateService;
 import os.api.v2.service.service.user.vo.menuoperate.MenuOperateServiceVo;
@@ -21,15 +20,14 @@ import os.api.v2.service.service.user.vo.menuoperate.MenuOperateServiceVo;
 import java.util.*;
 
 /**
- * os.api.v2.api.system.service.module.impl.OperateServiceImpl
+ * os.api.v2.api.system.service.module.impl.ModuleOptionsServiceImpl
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-08-21 00:36
+ * @date 2022-09-03 16:56
  */
 @Service
-public class OperateServiceImpl implements IOperateService {
-
+public class ModuleOptionsServiceImpl implements IModuleOptionsService {
     @DubboReference(version = "2.0.0")
     protected IMenuOperateService iMenuOperateService;
 
@@ -37,20 +35,16 @@ public class OperateServiceImpl implements IOperateService {
     protected IGetListByIdListService iGetListByIdListService;
 
     @Override
-    public Result<List<Map<String, Object>>> operate() {
+    public Result<Map<String, Object>> options() {
         // 获取数据操作权限ID
         List<Long> menuOperateIdList = getMenuOperateIdList();
         // 获取数据操作权限数据
-        return getMenuOperateList(menuOperateIdList);
+        Map<String, Object> map = new HashMap<>();
+        List<Map<String, Object>> menuOperateList = getMenuOperateList(menuOperateIdList);
+        map.put("operate", menuOperateList);
+        return new Result<>(Result.SUCCESS, map);
     }
 
-    /**
-     * 获取数据操作权限ID
-     *
-     * @return List<Integer>
-     * @author 吴荣超
-     * @date 0:54 2022/8/21
-     */
     private List<Long> getMenuOperateIdList() {
         MenuOperateServiceVo menuOperateServiceVo = new MenuOperateServiceVo();
         menuOperateServiceVo.setRoleId(1);
@@ -63,27 +57,11 @@ public class OperateServiceImpl implements IOperateService {
         return result.getData();
     }
 
-    private Result<List<Map<String, Object>>> getMenuOperateList(List<Long> menuOperateIdList) {
-        String[] fieldArray = {
-                "location",
-                "name_en",
-                "name_zh",
-                "type",
-        };
-        Result<List<MenuOperateModelDto>> result = iGetListByIdListService.getListByIdList(menuOperateIdList, fieldArray);
+    private List<Map<String, Object>> getMenuOperateList(List<Long> menuOperateIdList) {
         List<Map<String, Object>> mapList = new ArrayList<>();
-        if (Objects.equals(result.getFlag(), Result.FAILURE)) {
-            return new Result<>(result.getFlag(), mapList);
+        if (menuOperateIdList.isEmpty()) {
+            return mapList;
         }
-        for (MenuOperateModelDto menuOperateModelDto : result.getData()) {
-            if ("TABLE-HEAD".equals(menuOperateModelDto.getLocation())) {
-                Map<String, Object> map = new HashMap<>();
-                map.put("nameEn", menuOperateModelDto.getNameEn());
-                map.put("nameZh", menuOperateModelDto.getNameZh());
-                map.put("type", menuOperateModelDto.getType());
-                mapList.add(map);
-            }
-        }
-        return new Result<>(result.getFlag(), mapList);
+        return iGetListByIdListService.getTableHeadListByIdList(menuOperateIdList);
     }
 }

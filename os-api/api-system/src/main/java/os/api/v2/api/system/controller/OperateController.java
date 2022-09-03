@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import os.api.v2.api.system.dto.operate.CreateDto;
 import os.api.v2.api.system.dto.operate.IndexDto;
+import os.api.v2.api.system.service.operate.IOperateCreateService;
 import os.api.v2.api.system.service.operate.IOperateIndexService;
 import os.api.v2.api.system.service.operate.IOperateOptionsService;
 import os.api.v2.api.system.vo.operate.IndexVo;
@@ -40,6 +42,9 @@ public class OperateController {
     @Autowired
     protected IOperateOptionsService iOperateOptionsService;
 
+    @Autowired
+    protected IOperateCreateService iOperateCreateService;
+
     @RequestMapping(value = "/index", method = RequestMethod.POST)
     public Result<List<IndexDto>> index(@RequestBody IndexVo indexVo) throws UserException {
         return iOperateIndexService.index(indexVo);
@@ -48,5 +53,10 @@ public class OperateController {
     @RequestMapping(value = "/options", method = RequestMethod.POST)
     public Result<Map<String, Object>> options() {
         return iOperateOptionsService.options();
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public Result<CreateDto> create() {
+        return iOperateCreateService.create();
     }
 }

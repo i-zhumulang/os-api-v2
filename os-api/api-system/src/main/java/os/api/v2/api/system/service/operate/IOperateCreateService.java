@@ -5,24 +5,20 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-08-09 23:14
+// | Date  : 2022-09-03 21:07
 // +----------------------------------------------------------------------
-package os.api.v2.model.service.system.service.menuoperate;
+package os.api.v2.api.system.service.operate;
 
+import os.api.v2.api.system.dto.operate.CreateDto;
 import os.api.v2.common.base.common.Result;
-import os.api.v2.model.service.system.dto.menuoperate.MenuOperateModelDto;
-
-import java.util.List;
-import java.util.Map;
 
 /**
- * os.api.v2.model.service.system.service.menuoperate.GetListByIdList
+ * os.api.v2.api.system.service.operate.IOperateCreateService
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-08-09 23:14
+ * @date 2022-09-03 21:07
  */
-public interface IGetListByIdListService {
-    Result<List<MenuOperateModelDto>> getListByIdList(List<Long> idList, String[] fieldArray);
-    List<Map<String, Object>> getTableHeadListByIdList(List<Long> idList);
+public interface IOperateCreateService {
+    Result<CreateDto> create();
 }

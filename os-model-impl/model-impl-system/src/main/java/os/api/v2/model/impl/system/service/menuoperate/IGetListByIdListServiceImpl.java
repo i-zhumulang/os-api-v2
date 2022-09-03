@@ -21,7 +21,9 @@ import os.api.v2.model.service.system.dto.menuoperate.MenuOperateModelDto;
 import os.api.v2.model.service.system.service.menuoperate.IGetListByIdListService;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * os.api.v2.model.impl.system.service.menuoperate.GetListByIdListServiceImpl
@@ -47,5 +49,35 @@ public class IGetListByIdListServiceImpl extends ServiceImpl<MenuOperateMapper, 
             menuOperateModelDtoList.add(menuOperateModelDto);
         }
         return new Result<>(Result.SUCCESS, menuOperateModelDtoList);
+    }
+
+    @Override
+    public List<Map<String, Object>> getTableHeadListByIdList(List<Long> idList) {
+        List<Map<String, Object>> mapList = new ArrayList<>();
+        if (idList.isEmpty()) {
+            return mapList;
+        }
+        String[] fieldArray = {
+                "location",
+                "name_en",
+                "name_zh",
+                "type",
+        };
+        LambdaQueryWrapper<MenuOperate> queryWrapper = new FieldValuesUtils<>(MenuOperate.class, fieldArray).queryWrapper();
+        queryWrapper.in(MenuOperate::getId, idList);
+        List<MenuOperate> menuOperates = getBaseMapper().selectList(queryWrapper);
+        if (menuOperates.isEmpty()) {
+            return mapList;
+        }
+        for (MenuOperate menuOperate : menuOperates) {
+            if ("TABLE-HEAD".equals(menuOperate.getLocation())) {
+                Map<String, Object> map = new HashMap<>();
+                map.put("nameEn", menuOperate.getNameEn());
+                map.put("nameZh", menuOperate.getNameZh());
+                map.put("type", menuOperate.getType());
+                mapList.add(map);
+            }
+        }
+        return mapList;
     }
 }

@@ -13,7 +13,6 @@ import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.stereotype.Service;
 import os.api.v2.api.system.service.operate.IOperateOptionsService;
 import os.api.v2.common.base.common.Result;
-import os.api.v2.model.service.system.dto.menuoperate.MenuOperateModelDto;
 import os.api.v2.model.service.system.dto.module.ModuleModelDto;
 import os.api.v2.model.service.system.service.menuoperate.IGetListByIdListService;
 import os.api.v2.model.service.system.service.module.IModuleService;
@@ -64,7 +63,7 @@ public class OperateOptionsServiceImpl implements IOperateOptionsService {
         MenuOperateServiceVo menuOperateServiceVo = new MenuOperateServiceVo();
         menuOperateServiceVo.setRoleId(1);
         menuOperateServiceVo.setSystemModuleId(1100176417150205952L);
-        menuOperateServiceVo.setSystemMenuId(1100176417150205952L);
+        menuOperateServiceVo.setSystemMenuId(1102868720906162176L);
         Result<List<Long>> result = iMenuOperateService.getSystemMenuOperateIdList(menuOperateServiceVo);
         if (Objects.equals(result.getFlag(), Result.FAILURE)) {
             return new ArrayList<>();
@@ -81,27 +80,11 @@ public class OperateOptionsServiceImpl implements IOperateOptionsService {
      * @date 22:25 2022/8/29
      */
     private List<Map<String, Object>> getMenuOperateList(List<Long> menuOperateIdList) {
-        String[] fieldArray = {
-                "location",
-                "name_en",
-                "name_zh",
-                "type",
-        };
-        Result<List<MenuOperateModelDto>> result = iGetListByIdListService.getListByIdList(menuOperateIdList, fieldArray);
         List<Map<String, Object>> mapList = new ArrayList<>();
-        if (Objects.equals(result.getFlag(), Result.FAILURE)) {
+        if (menuOperateIdList.isEmpty()) {
             return mapList;
         }
-        for (MenuOperateModelDto menuOperateModelDto : result.getData()) {
-            if ("TABLE-HEAD".equals(menuOperateModelDto.getLocation())) {
-                Map<String, Object> map = new HashMap<>();
-                map.put("nameEn", menuOperateModelDto.getNameEn());
-                map.put("nameZh", menuOperateModelDto.getNameZh());
-                map.put("type", menuOperateModelDto.getType());
-                mapList.add(map);
-            }
-        }
-        return mapList;
+        return iGetListByIdListService.getTableHeadListByIdList(menuOperateIdList);
     }
 
     /**

@@ -24,14 +24,13 @@ public class ModuleController {
     protected IIndexService iIndexService;
 
     @Autowired
+    protected IModuleOptionsService iModuleOptionsService;
+
+    @Autowired
     protected IStoreService iStoreService;
 
     @Autowired
     protected IUpdateService iUpdateService;
-
-    @Autowired
-    protected IOperateService iOperateService;
-
     @Autowired
     protected IDestroyService iDestroyService;
 
@@ -39,6 +38,11 @@ public class ModuleController {
     @RequestMapping(value = "/index", method = RequestMethod.POST)
     public Result<List<IndexDto>> index(@RequestBody @Valid IndexVo indexVo) throws UserException {
         return iIndexService.index(indexVo);
+    }
+
+    @RequestMapping(value = "/options", method = RequestMethod.POST)
+    public Result<Map<String, Object>> options() {
+        return iModuleOptionsService.options();
     }
 
     @RequestMapping(value = "/store", method = RequestMethod.POST)
@@ -54,11 +58,6 @@ public class ModuleController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public Result<ModuleModelDto> update(@RequestBody @Valid UpdateVo updateVo) {
         return iUpdateService.update(updateVo);
-    }
-
-    @RequestMapping(value = "/operate", method = RequestMethod.POST)
-    public Result<List<Map<String, Object>>> operate() {
-        return iOperateService.operate();
     }
 
     @RequestMapping(value = "/destroy", method = RequestMethod.POST)
