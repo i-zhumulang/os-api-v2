@@ -16,14 +16,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import os.api.v2.api.system.dto.operate.CreateDto;
 import os.api.v2.api.system.dto.operate.IndexDto;
-import os.api.v2.api.system.service.operate.IOperateCreateService;
-import os.api.v2.api.system.service.operate.IOperateIndexService;
-import os.api.v2.api.system.service.operate.IOperateOptionsService;
-import os.api.v2.api.system.service.operate.IOperateStoreService;
+import os.api.v2.api.system.service.operate.*;
 import os.api.v2.api.system.vo.operate.IndexVo;
 import os.api.v2.api.system.vo.operate.StoreVo;
+import os.api.v2.api.system.vo.operate.UpdateVo;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.common.base.exception.UserException;
+import os.api.v2.model.service.system.dto.menuoperate.MenuOperateModelDto;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -51,6 +50,12 @@ public class OperateController {
     @Autowired
     protected IOperateStoreService iOperateStoreService;
 
+    @Autowired
+    protected IOperateEditService iOperateEditService;
+
+    @Autowired
+    protected IOperateUpdateService iOperateUpdateService;
+
     @RequestMapping(value = "/index", method = RequestMethod.POST)
     public Result<List<IndexDto>> index(@RequestBody IndexVo indexVo) throws UserException {
         return iOperateIndexService.index(indexVo);
@@ -69,5 +74,15 @@ public class OperateController {
     @RequestMapping(value = "/store", method = RequestMethod.POST)
     public Result<String> store(@RequestBody @Valid StoreVo storeVo) {
         return iOperateStoreService.store(storeVo);
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public Result<CreateDto> edit() {
+        return iOperateEditService.edit();
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public Result<MenuOperateModelDto> update(@RequestBody @Valid UpdateVo updateVo) {
+        return iOperateUpdateService.update(updateVo);
     }
 }

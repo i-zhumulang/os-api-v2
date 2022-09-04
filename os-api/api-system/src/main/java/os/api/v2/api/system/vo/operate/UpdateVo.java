@@ -5,25 +5,28 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-09-03 21:26
+// | Date  : 2022-09-04 23:58
 // +----------------------------------------------------------------------
-package os.api.v2.api.system.dto.operate;
+package os.api.v2.api.system.vo.operate;
 
 import lombok.Data;
 
-import java.util.List;
-import java.util.Map;
-
 /**
- * os.api.v2.api.system.dto.operate.CreateModuleDto
+ * os.api.v2.api.system.vo.operate.UpdateVo
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-09-03 21:26
+ * @date 2022-09-04 23:58
  */
 @Data
-public class CreateModuleDto {
+public class UpdateVo {
     private Long id;
+    private Long moduleId;
+    private Long menuId;
+    private String location;
+    private String permissionIdentify;
+    private String nameEn;
     private String nameZh;
-    private List<CreateMenuDto> menu;
+    private String uri;
+    private Integer sorting;
 }

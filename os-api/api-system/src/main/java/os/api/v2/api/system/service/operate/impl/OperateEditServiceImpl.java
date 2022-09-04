@@ -5,7 +5,7 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-09-03 21:35
+// | Date  : 2022-09-05 00:10
 // +----------------------------------------------------------------------
 package os.api.v2.api.system.service.operate.impl;
 
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import os.api.v2.api.system.dto.operate.CreateDto;
 import os.api.v2.api.system.dto.operate.CreateMenuDto;
 import os.api.v2.api.system.dto.operate.CreateModuleDto;
-import os.api.v2.api.system.service.operate.IOperateCreateService;
+import os.api.v2.api.system.service.operate.IOperateEditService;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.model.service.system.dto.menu.MenuModelDto;
 import os.api.v2.model.service.system.dto.module.ModuleModelDto;
@@ -23,17 +23,20 @@ import os.api.v2.model.service.system.service.module.IModuleService;
 import os.api.v2.model.service.system.vo.menu.MenuModelVo;
 import os.api.v2.model.service.system.vo.module.ModuleModelVo;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
- * os.api.v2.api.system.service.operate.impl.OperateCreateServiceImpl
+ * os.api.v2.api.system.service.operate.impl.OperateEditServiceImpl
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-09-03 21:35
+ * @date 2022-09-05 00:10
  */
 @Service
-public class OperateCreateServiceImpl implements IOperateCreateService {
+public class OperateEditServiceImpl implements IOperateEditService {
     @DubboReference(version = "2.0.0")
     protected IModuleService iModuleService;
 
@@ -41,7 +44,7 @@ public class OperateCreateServiceImpl implements IOperateCreateService {
     protected IMenuService iMenuService;
 
     @Override
-    public Result<CreateDto> create() {
+    public Result<CreateDto> edit() {
         List<CreateModuleDto> moduleList = getModuleList();
         List<CreateMenuDto> menuDtoList = getMenuList();
         return complete(moduleList, menuDtoList);

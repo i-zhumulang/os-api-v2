@@ -5,25 +5,21 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-09-03 21:26
+// | Date  : 2022-09-05 00:17
 // +----------------------------------------------------------------------
-package os.api.v2.api.system.dto.operate;
+package os.api.v2.model.service.system.service.menuoperate;
 
-import lombok.Data;
-
-import java.util.List;
-import java.util.Map;
+import os.api.v2.common.base.common.Result;
+import os.api.v2.model.service.system.dto.menuoperate.MenuOperateModelDto;
+import os.api.v2.model.service.system.vo.menuoperate.UpdateModelVo;
 
 /**
- * os.api.v2.api.system.dto.operate.CreateModuleDto
+ * os.api.v2.model.service.system.service.menuoperate.IOperateUpdateService
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-09-03 21:26
+ * @date 2022-09-05 00:17
  */
-@Data
-public class CreateModuleDto {
-    private Long id;
-    private String nameZh;
-    private List<CreateMenuDto> menu;
+public interface IOperateUpdateService {
+    Result<MenuOperateModelDto> update(UpdateModelVo updateModelVo);
 }

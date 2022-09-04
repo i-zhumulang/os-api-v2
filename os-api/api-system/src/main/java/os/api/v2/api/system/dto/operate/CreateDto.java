@@ -23,5 +23,5 @@ import java.util.Map;
  */
 @Data
 public class CreateDto {
-    private List<CreateModuleDto> moduleDto;
+    private List<CreateModuleDto> module;
 }
