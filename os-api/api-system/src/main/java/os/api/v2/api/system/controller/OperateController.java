@@ -19,10 +19,13 @@ import os.api.v2.api.system.dto.operate.IndexDto;
 import os.api.v2.api.system.service.operate.IOperateCreateService;
 import os.api.v2.api.system.service.operate.IOperateIndexService;
 import os.api.v2.api.system.service.operate.IOperateOptionsService;
+import os.api.v2.api.system.service.operate.IOperateStoreService;
 import os.api.v2.api.system.vo.operate.IndexVo;
+import os.api.v2.api.system.vo.operate.StoreVo;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.common.base.exception.UserException;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -45,6 +48,9 @@ public class OperateController {
     @Autowired
     protected IOperateCreateService iOperateCreateService;
 
+    @Autowired
+    protected IOperateStoreService iOperateStoreService;
+
     @RequestMapping(value = "/index", method = RequestMethod.POST)
     public Result<List<IndexDto>> index(@RequestBody IndexVo indexVo) throws UserException {
         return iOperateIndexService.index(indexVo);
@@ -58,5 +64,10 @@ public class OperateController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public Result<CreateDto> create() {
         return iOperateCreateService.create();
+    }
+
+    @RequestMapping(value = "/store", method = RequestMethod.POST)
+    public Result<String> store(@RequestBody @Valid StoreVo storeVo) {
+        return iOperateStoreService.store(storeVo);
     }
 }
