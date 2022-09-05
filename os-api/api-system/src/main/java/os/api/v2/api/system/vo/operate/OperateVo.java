@@ -5,20 +5,20 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-09-04 22:45
+// | Date  : 2022-09-05 21:10
 // +----------------------------------------------------------------------
-package os.api.v2.model.service.system.service.menuoperate;
+package os.api.v2.api.system.vo.operate;
 
-import os.api.v2.common.base.common.Result;
-import os.api.v2.model.service.system.dto.menuoperate.MenuOperateModelDto;
+import lombok.Data;
 
 /**
- * os.api.v2.model.service.system.service.menuoperate.IOperateService
+ * os.api.v2.api.system.vo.operate.OperateVo
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-09-04 22:45
+ * @date 2022-09-05 21:10
  */
-public interface IOperateService {
-    Result<String> destroy(MenuOperateModelDto menuOperateModelDto);
+@Data
+public class OperateVo {
+    private Long id;
 }
