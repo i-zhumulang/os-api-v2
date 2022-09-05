@@ -21,11 +21,11 @@ import os.api.v2.model.service.system.dto.menu.MenuModelDto;
 import os.api.v2.model.service.system.dto.menuoperate.MenuOperateModelDto;
 import os.api.v2.model.service.system.dto.module.ModuleModelDto;
 import os.api.v2.model.service.system.service.menu.IMenuService;
-import os.api.v2.model.service.system.service.menuoperate.IGetListByIdListService;
 import os.api.v2.model.service.system.service.module.IModuleService;
 import os.api.v2.model.service.system.vo.menu.MenuModelVo;
 import os.api.v2.model.service.system.vo.menuoperate.IndexModelVo;
 import os.api.v2.model.service.system.vo.module.ModuleModelVo;
+import os.api.v2.service.service.system.service.menuoperate.IGetListByIdListService;
 import os.api.v2.service.service.user.service.menuoperate.IMenuOperateService;
 import os.api.v2.service.service.user.vo.menuoperate.MenuOperateServiceVo;
 
@@ -142,24 +142,7 @@ public class OperateIndexServiceImpl implements IOperateIndexService {
         if (menuOperateIdList.isEmpty()) {
             return mapList;
         }
-        String[] fieldArray = {
-                "location",
-                "name_en",
-                "name_zh",
-        };
-        Result<List<MenuOperateModelDto>> result = iGetListByIdListService.getListByIdList(menuOperateIdList, fieldArray);
-        if (Objects.equals(result.getFlag(), Result.FAILURE)) {
-            return mapList;
-        }
-        for (MenuOperateModelDto menuOperateModelDto : result.getData()) {
-            if ("TABLE-BODY".equals(menuOperateModelDto.getLocation())) {
-                Map<String, Object> map = new HashMap<>();
-                map.put("nameEn", menuOperateModelDto.getNameEn());
-                map.put("nameZh", menuOperateModelDto.getNameZh());
-                mapList.add(map);
-            }
-        }
-        return mapList;
+        return iGetListByIdListService.getTableBodyListByIdList(menuOperateIdList);
     }
 
     /**

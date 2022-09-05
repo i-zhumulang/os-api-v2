@@ -5,17 +5,17 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-09-01 22:44
+// | Date  : 2022-09-05 22:22
 // +----------------------------------------------------------------------
-package os.api.v2.api.system.service.operate.impl;
+package os.api.v2.api.user.service.role.impl;
 
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.stereotype.Service;
-import os.api.v2.api.system.service.operate.IOperateOptionsService;
+import os.api.v2.api.user.dto.role.IndexDto;
+import os.api.v2.api.user.service.role.IRoleIndexService;
 import os.api.v2.common.base.common.Result;
-import os.api.v2.model.service.system.dto.module.ModuleModelDto;
-import os.api.v2.model.service.system.service.module.IModuleService;
-import os.api.v2.model.service.system.vo.module.ModuleModelVo;
+import os.api.v2.model.service.user.dto.role.RoleModelDto;
+import os.api.v2.model.service.user.vo.role.IndexModelVo;
 import os.api.v2.service.service.system.service.menuoperate.IGetListByIdListService;
 import os.api.v2.service.service.user.service.menuoperate.IMenuOperateService;
 import os.api.v2.service.service.user.vo.menuoperate.MenuOperateServiceVo;
@@ -23,17 +23,16 @@ import os.api.v2.service.service.user.vo.menuoperate.MenuOperateServiceVo;
 import java.util.*;
 
 /**
- * os.api.v2.api.system.service.operate.impl.OperateOptionsServiceImpl
+ * os.api.v2.api.user.service.role.impl.RoleIndexServiceImpl
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-09-01 22:44
+ * @date 2022-09-05 22:22
  */
 @Service
-public class OperateOptionsServiceImpl implements IOperateOptionsService {
+public class RoleIndexServiceImpl implements IRoleIndexService {
     @DubboReference(version = "2.0.0")
-    protected IModuleService iModuleService;
-
+    protected os.api.v2.model.service.user.service.role.IRoleIndexService iRoleIndexService;
     @DubboReference(version = "2.0.0")
     protected IMenuOperateService iMenuOperateService;
 
@@ -41,29 +40,29 @@ public class OperateOptionsServiceImpl implements IOperateOptionsService {
     protected IGetListByIdListService iGetListByIdListService;
 
     @Override
-    public Result<Map<String, Object>> options() {
+    public Result<List<IndexDto>> index() {
+        // 获取数据列表
+        List<RoleModelDto> roleModelDtoList = getRoleModelDtoList();
         // 获取数据操作权限ID
         List<Long> menuOperateIdList = getMenuOperateIdList();
         // 获取数据操作权限数据
         List<Map<String, Object>> menuOperateList = getMenuOperateList(menuOperateIdList);
-        Map<String, Object> map = new HashMap<>();
-        map.put("operate", menuOperateList);
-        List<ModuleModelDto> moduleModelDtoList = getModuleModelDtoList();
-        map.put("module", moduleModelDtoList);
-        return new Result<>(Result.SUCCESS, map);
+        // 完善数据
+        return complete(roleModelDtoList, menuOperateList);
     }
-    /**
-     * 获取数据操作权限ID
-     *
-     * @return List<Long>
-     * @author 吴荣超
-     * @date 22:25 2022/8/29
-     */
+
+    private List<RoleModelDto> getRoleModelDtoList() {
+        IndexModelVo indexModelVo = new IndexModelVo();
+        indexModelVo.setFieldArray(new String[]{});
+        Result<List<RoleModelDto>> result = iRoleIndexService.index(indexModelVo);
+        return result.getData();
+    }
+
     private List<Long> getMenuOperateIdList() {
         MenuOperateServiceVo menuOperateServiceVo = new MenuOperateServiceVo();
         menuOperateServiceVo.setRoleId(1);
-        menuOperateServiceVo.setSystemModuleId(1100176417150205952L);
-        menuOperateServiceVo.setSystemMenuId(1102868720906162176L);
+        menuOperateServiceVo.setSystemModuleId(1100176417951318016L);
+        menuOperateServiceVo.setSystemMenuId(1102872407070232576L);
         Result<List<Long>> result = iMenuOperateService.getSystemMenuOperateIdList(menuOperateServiceVo);
         if (Objects.equals(result.getFlag(), Result.FAILURE)) {
             return new ArrayList<>();
@@ -71,14 +70,6 @@ public class OperateOptionsServiceImpl implements IOperateOptionsService {
         return result.getData();
     }
 
-    /**
-     * getMenuOperateList
-     *
-     * @param menuOperateIdList
-     * @return List<Map<String,Object>>
-     * @author 吴荣超
-     * @date 22:25 2022/8/29
-     */
     private List<Map<String, Object>> getMenuOperateList(List<Long> menuOperateIdList) {
         List<Map<String, Object>> mapList = new ArrayList<>();
         if (menuOperateIdList.isEmpty()) {
@@ -87,20 +78,14 @@ public class OperateOptionsServiceImpl implements IOperateOptionsService {
         return iGetListByIdListService.getTableHeadListByIdList(menuOperateIdList);
     }
 
-    /**
-     * getModuleModelDtoList
-     *
-     * @return List<ModuleModelDto>
-     * @author 吴荣超
-     * @date 22:28 2022/8/29
-     */
-    private List<ModuleModelDto> getModuleModelDtoList() {
-        ModuleModelVo moduleModelVo = new ModuleModelVo();
-        moduleModelVo.setFieldArray(new String[]{
-                "id",
-                "name_zh"
-        });
-        Result<List<ModuleModelDto>> result = iModuleService.getModuleList(moduleModelVo);
-        return result.getData();
+    private Result<List<IndexDto>> complete(List<RoleModelDto> roleModelDtoList, List<Map<String, Object>> menuOperateList) {
+        List<IndexDto> indexDtoList = new ArrayList<>();
+        for (RoleModelDto roleModelDto: roleModelDtoList) {
+            IndexDto indexDto = new IndexDto();
+            indexDto.setData(roleModelDto);
+            indexDto.setOpts(menuOperateList);
+            indexDtoList.add(indexDto);
+        }
+        return new Result<>(Result.SUCCESS, indexDtoList);
     }
 }

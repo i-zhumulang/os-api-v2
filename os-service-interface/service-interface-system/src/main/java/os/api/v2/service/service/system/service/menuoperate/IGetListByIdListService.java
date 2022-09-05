@@ -5,23 +5,21 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-08-09 23:14
+// | Date  : 2022-09-05 22:41
 // +----------------------------------------------------------------------
-package os.api.v2.model.service.system.service.menuoperate;
-
-import os.api.v2.common.base.common.Result;
-import os.api.v2.model.service.system.dto.menuoperate.MenuOperateModelDto;
+package os.api.v2.service.service.system.service.menuoperate;
 
 import java.util.List;
 import java.util.Map;
 
 /**
- * os.api.v2.model.service.system.service.menuoperate.GetListByIdList
+ * os.api.v2.service.service.system.service.menuoperate.IGetListByIdListService
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-08-09 23:14
+ * @date 2022-09-05 22:41
  */
 public interface IGetListByIdListService {
-    Result<List<MenuOperateModelDto>> getListByIdList(List<Long> idList, String[] fieldArray);
+    List<Map<String, Object>> getTableHeadListByIdList(List<Long> idList);
+    List<Map<String, Object>> getTableBodyListByIdList(List<Long> idList);
 }

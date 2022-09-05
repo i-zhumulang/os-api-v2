@@ -5,23 +5,22 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-08-09 23:14
+// | Date  : 2022-09-05 22:21
 // +----------------------------------------------------------------------
-package os.api.v2.model.service.system.service.menuoperate;
+package os.api.v2.api.user.service.role;
 
+import os.api.v2.api.user.dto.role.IndexDto;
 import os.api.v2.common.base.common.Result;
-import os.api.v2.model.service.system.dto.menuoperate.MenuOperateModelDto;
 
 import java.util.List;
-import java.util.Map;
 
 /**
- * os.api.v2.model.service.system.service.menuoperate.GetListByIdList
+ * os.api.v2.api.user.service.role.IRoleIndexService
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-08-09 23:14
+ * @date 2022-09-05 22:21
  */
-public interface IGetListByIdListService {
-    Result<List<MenuOperateModelDto>> getListByIdList(List<Long> idList, String[] fieldArray);
+public interface IRoleIndexService {
+    Result<List<IndexDto>> index();
 }

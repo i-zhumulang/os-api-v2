@@ -18,9 +18,8 @@ import os.api.v2.api.system.vo.menu.IndexVo;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.common.base.exception.UserException;
 import os.api.v2.model.service.system.dto.menu.MenuModelDto;
-import os.api.v2.model.service.system.dto.menuoperate.MenuOperateModelDto;
-import os.api.v2.model.service.system.service.menuoperate.IGetListByIdListService;
 import os.api.v2.model.service.system.vo.menu.IndexModelVo;
+import os.api.v2.service.service.system.service.menuoperate.IGetListByIdListService;
 import os.api.v2.service.service.user.service.menuoperate.IMenuOperateService;
 import os.api.v2.service.service.user.vo.menuoperate.MenuOperateServiceVo;
 
@@ -88,25 +87,11 @@ public class MenuIndexServiceImpl implements IMenuIndexService {
      * @date 11:43 2022/8/21
      */
     private List<Map<String, Object>> getMenuOperateList(List<Long> menuOperateIdList) {
-        String[] fieldArray = {
-                "location",
-                "name_en",
-                "name_zh",
-        };
-        Result<List<MenuOperateModelDto>> result = iGetListByIdListService.getListByIdList(menuOperateIdList, fieldArray);
         List<Map<String, Object>> mapList = new ArrayList<>();
-        if (Objects.equals(result.getFlag(), Result.FAILURE)) {
+        if (menuOperateIdList.isEmpty()) {
             return mapList;
         }
-        for (MenuOperateModelDto menuOperateModelDto : result.getData()) {
-            if ("TABLE-BODY".equals(menuOperateModelDto.getLocation())) {
-                Map<String, Object> map = new HashMap<>();
-                map.put("nameEn", menuOperateModelDto.getNameEn());
-                map.put("nameZh", menuOperateModelDto.getNameZh());
-                mapList.add(map);
-            }
-        }
-        return mapList;
+        return iGetListByIdListService.getTableBodyListByIdList(menuOperateIdList);
     }
 
     /**

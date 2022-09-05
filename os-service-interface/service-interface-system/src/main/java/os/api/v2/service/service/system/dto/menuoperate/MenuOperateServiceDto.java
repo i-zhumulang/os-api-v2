@@ -5,23 +5,19 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-08-09 23:14
+// | Date  : 2022-09-05 22:42
 // +----------------------------------------------------------------------
-package os.api.v2.model.service.system.service.menuoperate;
+package os.api.v2.service.service.system.dto.menuoperate;
 
-import os.api.v2.common.base.common.Result;
-import os.api.v2.model.service.system.dto.menuoperate.MenuOperateModelDto;
-
-import java.util.List;
-import java.util.Map;
+import lombok.Data;
 
 /**
- * os.api.v2.model.service.system.service.menuoperate.GetListByIdList
+ * os.api.v2.service.service.system.dto.menuoperate.MenuOperateServiceDto
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-08-09 23:14
+ * @date 2022-09-05 22:42
  */
-public interface IGetListByIdListService {
-    Result<List<MenuOperateModelDto>> getListByIdList(List<Long> idList, String[] fieldArray);
+@Data
+public class MenuOperateServiceDto {
 }
