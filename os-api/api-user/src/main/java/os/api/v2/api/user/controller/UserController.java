@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import os.api.v2.api.user.dto.user.IndexDto;
 import os.api.v2.api.user.service.user.IModuleService;
 import os.api.v2.api.user.service.user.IPermissionService;
 import os.api.v2.api.user.service.user.IRegisterService;
+import os.api.v2.api.user.service.user.IUserIndexService;
+import os.api.v2.api.user.vo.user.IndexVo;
 import os.api.v2.api.user.vo.user.PermissionVo;
 import os.api.v2.api.user.vo.user.RegisterVo;
 import os.api.v2.common.base.common.Result;
@@ -47,6 +50,9 @@ public class UserController {
     @Autowired
     protected IRegisterService iRegisterService;
 
+    @Autowired
+    protected IUserIndexService iUserIndexService;
+
     @RequestMapping(value = "/module", method = RequestMethod.POST)
     public Result<List<Map<String, Object>>> module() throws UserException {
         return iModuleService.module();
@@ -60,5 +66,10 @@ public class UserController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public Result<Integer> register(@RequestBody @Valid RegisterVo registerVo) {
         return iRegisterService.register(registerVo);
+    }
+
+    @RequestMapping(value = "/index", method = RequestMethod.POST)
+    public Result<IndexDto> index(@RequestBody IndexVo indexVo) {
+        return iUserIndexService.index(indexVo);
     }
 }
