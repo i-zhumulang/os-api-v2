@@ -21,7 +21,9 @@ import os.api.v2.service.service.system.vo.module.ModuleServiceVo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * os.api.v2.service.impl.system.service.module.ModuleServiceImpl
@@ -63,5 +65,20 @@ public class ModuleServiceImpl implements IModuleService {
         }
 
         return new Result<>(Result.SUCCESS, moduleServiceDtoList);
+    }
+
+    @Override
+    public Result<Map<Long, String>> getModuleIdName() {
+        String[] fieldArray = {
+                "id",
+                "name_en",
+        };
+        ModuleModelVo moduleModelVo = new ModuleModelVo();
+        moduleModelVo.setFieldArray(fieldArray);
+        Result<List<ModuleModelDto>> result = iModuleService.getModuleList(moduleModelVo);
+        Map<Long, String> idName = result.getData()
+                .stream()
+                .collect(Collectors.toMap(ModuleModelDto::getId, ModuleModelDto::getNameZh));
+        return new Result<>(Result.SUCCESS, idName);
     }
 }

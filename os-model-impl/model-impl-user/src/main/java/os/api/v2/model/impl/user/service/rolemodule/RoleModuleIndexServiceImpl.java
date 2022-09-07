@@ -5,65 +5,67 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-09-06 22:20
+// | Date  : 2022-09-07 22:10
 // +----------------------------------------------------------------------
-package os.api.v2.model.impl.user.service.user;
+package os.api.v2.model.impl.user.service.rolemodule;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.springframework.beans.BeanUtils;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.model.impl.common.utils.FieldValuesUtils;
-import os.api.v2.model.impl.user.mapper.UserMapper;
-import os.api.v2.model.impl.user.pojo.User;
-import os.api.v2.model.service.user.dto.user.IndexDataModelDto;
-import os.api.v2.model.service.user.dto.user.IndexModelDto;
-import os.api.v2.model.service.user.service.user.IUserIndexService;
-import os.api.v2.model.service.user.vo.user.IndexModelVo;
+import os.api.v2.model.impl.user.mapper.RoleModuleMapper;
+import os.api.v2.model.impl.user.pojo.RoleModule;
+import os.api.v2.model.service.user.dto.rolemodule.IndexModelDto;
+import os.api.v2.model.service.user.dto.rolemodule.IndexDataModelDto;
+import os.api.v2.model.service.user.service.rolemodule.IRoleModuleIndexService;
+import os.api.v2.model.service.user.vo.rolemodule.IndexModelVo;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * os.api.v2.model.impl.user.service.user.UserIndexServiceImpl
+ * os.api.v2.model.impl.user.service.rolemodule.RoleModuleIndexServiceImpl
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-09-06 22:20
+ * @date 2022-09-07 22:10
  */
 @DubboService(version = "2.0.0")
-public class UserIndexServiceImpl extends ServiceImpl<UserMapper, User> implements IUserIndexService {
+public class RoleModuleIndexServiceImpl extends ServiceImpl<RoleModuleMapper, RoleModule> implements IRoleModuleIndexService {
     @Override
     public Result<IndexModelDto> index(IndexModelVo indexModelVo) {
-        LambdaQueryWrapper<User> queryWrapper = queryWrapper(indexModelVo, new String[]{});
-        Page<User> page = new Page<>();
+        LambdaQueryWrapper<RoleModule> queryWrapper = queryWrapper(indexModelVo);
+        Page<RoleModule> page = new Page<>();
         getBaseMapper().selectPage(page, queryWrapper);
         IndexModelDto indexModelDto = new IndexModelDto();
         indexModelDto.setTotal(page.getTotal());
+
         if (indexModelDto.getTotal() == 0) {
             return new Result<>(Result.SUCCESS, indexModelDto);
         }
-        List<User> userList = page.getRecords();
         List<IndexDataModelDto> indexDataModelDtoList = new ArrayList<>();
-        for (User user: userList) {
+        List<RoleModule> roleModuleList = page.getRecords();
+        for (RoleModule roleModule : roleModuleList) {
             IndexDataModelDto indexDataModelDto = new IndexDataModelDto();
-            indexDataModelDto.setId(user.getId());
-            indexDataModelDto.setName(user.getName());
-            indexDataModelDto.setMobile(user.getMobile());
-            // 时间转换时间戳
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            indexDataModelDto.setCreatedAtFormat(simpleDateFormat.format(user.getCreatedAt()));
+            BeanUtils.copyProperties(roleModule, indexDataModelDto);
             indexDataModelDtoList.add(indexDataModelDto);
         }
         indexModelDto.setData(indexDataModelDtoList);
         return new Result<>(Result.SUCCESS, indexModelDto);
     }
 
-    private LambdaQueryWrapper<User> queryWrapper(IndexModelVo indexModelVo, String[] fieldArray) {
-        LambdaQueryWrapper<User> queryWrapper = new FieldValuesUtils<>(User.class, fieldArray).queryWrapper();
-        queryWrapper.eq(indexModelVo.getMobile() != null, User::getMobile, indexModelVo.getMobile());
+    private LambdaQueryWrapper<RoleModule> queryWrapper(IndexModelVo indexModelVo) {
+        String[] fieldArray = new String[]{
+                "id",
+                "role_id",
+                "system_module_id"
+        };
+        LambdaQueryWrapper<RoleModule> queryWrapper = new FieldValuesUtils<>(RoleModule.class, fieldArray).queryWrapper();
+        queryWrapper.eq(indexModelVo.getRoleId() != null, RoleModule::getRoleId, indexModelVo.getRoleId());
+        queryWrapper.eq(indexModelVo.getSystemModuleId() != null, RoleModule::getSystemModuleId, indexModelVo.getSystemModuleId());
         return queryWrapper;
     }
 }

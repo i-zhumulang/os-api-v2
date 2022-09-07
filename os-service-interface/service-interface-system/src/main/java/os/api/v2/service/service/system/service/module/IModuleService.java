@@ -14,6 +14,7 @@ import os.api.v2.service.service.system.dto.module.ModuleServiceDto;
 import os.api.v2.service.service.system.vo.module.ModuleServiceVo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * os.api.v2.service.service.system.service.module.IModuleService
@@ -24,4 +25,5 @@ import java.util.List;
  */
 public interface IModuleService {
     Result<List<ModuleServiceDto>> getModuleByIdList(ModuleServiceVo moduleServiceVo);
+    Result<Map<Long, String>> getModuleIdName();
 }
