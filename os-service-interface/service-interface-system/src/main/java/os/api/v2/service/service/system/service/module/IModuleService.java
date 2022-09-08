@@ -25,5 +25,6 @@ import java.util.Map;
  */
 public interface IModuleService {
     Result<List<ModuleServiceDto>> getModuleByIdList(ModuleServiceVo moduleServiceVo);
-    Result<Map<Long, String>> getModuleIdName();
+    Result<Map<Long, String>> getModuleIdNameMap();
+    Result<List<ModuleServiceDto>> getModuleIdNameList(ModuleServiceVo moduleServiceVo);
 }

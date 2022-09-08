@@ -14,6 +14,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * os.api.v2.model.impl.user.ModelImplUserApplication
@@ -24,6 +25,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @SpringBootApplication(scanBasePackages = "os.api.v2.model.impl.user")
 @MapperScan(value = "os.api.v2.model.impl.user.mapper")
+@ComponentScan({
+        "os.api.v2.model.impl.common.config",
+})
 @EnableDiscoveryClient
 public class ModelImplUserApplication {
 

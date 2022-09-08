@@ -12,12 +12,17 @@ package os.api.v2.api.user.service.user.impl;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import os.api.v2.api.user.dto.user.IndexDataDto;
 import os.api.v2.api.user.dto.user.IndexDto;
 import os.api.v2.api.user.service.user.IUserIndexService;
 import os.api.v2.api.user.vo.user.IndexVo;
 import os.api.v2.common.base.common.Result;
+import os.api.v2.model.service.user.dto.user.IndexDataModelDto;
 import os.api.v2.model.service.user.dto.user.IndexModelDto;
 import os.api.v2.model.service.user.vo.user.IndexModelVo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * os.api.v2.api.user.service.user.impl.UserIndexServiceImpl
@@ -37,7 +42,15 @@ public class UserIndexServiceImpl implements IUserIndexService {
         BeanUtils.copyProperties(indexVo, indexModelVo);
         Result<IndexModelDto> result = iUserIndexService.index(indexModelVo);
         IndexDto indexDto = new IndexDto();
-        BeanUtils.copyProperties(result.getData(), indexDto);
+        indexDto.setTotal(result.getData().getTotal());
+        List<IndexDataDto> indexDataDtoList = new ArrayList<>();
+        for (IndexDataModelDto indexDataModelDto : result.getData().getData()) {
+            IndexDataDto indexDataDto = new IndexDataDto();
+            BeanUtils.copyProperties(indexDataModelDto, indexDataDto);
+            indexDataDto.setOpts(new ArrayList<>());
+            indexDataDtoList.add(indexDataDto);
+        }
+        indexDto.setData(indexDataDtoList);
         return new Result<>(Result.SUCCESS, indexDto);
     }
 }

@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `module`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `module` (
-  `id` bigint(20) unsigned NOT NULL,
+  `id` bigint(20) unsigned NOT NULL DEFAULT '0',
   `name_en` varchar(20) NOT NULL DEFAULT '' COMMENT '模块名称(英文)',
   `name_zh` varchar(20) NOT NULL DEFAULT '' COMMENT '模块名称(中文)',
   `domain` varchar(50) NOT NULL DEFAULT '' COMMENT '模块域名',
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-01 22:48:53
+-- Dump completed on 2022-09-09  0:54:19

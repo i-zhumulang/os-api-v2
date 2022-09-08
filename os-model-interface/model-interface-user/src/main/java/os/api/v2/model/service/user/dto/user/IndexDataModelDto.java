@@ -11,6 +11,8 @@ package os.api.v2.model.service.user.dto.user;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * os.api.v2.model.service.user.dto.user.IndexDataModelDto
  *
@@ -19,7 +21,7 @@ import lombok.Data;
  * @date 2022-09-06 22:32
  */
 @Data
-public class IndexDataModelDto {
+public class IndexDataModelDto implements Serializable {
     private Long id;
 
     /**

@@ -51,7 +51,7 @@ public class RoleModuleIndexServiceImpl implements IRoleModuleIndexService {
         if (indexDto.getTotal() == 0) {
             return new Result<>(Result.SUCCESS, indexDto);
         }
-        Result<Map<Long, String>> module = iModuleService.getModuleIdName();
+        Result<Map<Long, String>> module = iModuleService.getModuleIdNameMap();
         List<IndexDataDto> indexDataDtoList = new ArrayList<>();
         for (IndexDataModelDto indexDataModelDto : result.getData().getData()) {
             IndexDataDto indexDataDto = new IndexDataDto();

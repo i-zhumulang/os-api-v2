@@ -5,40 +5,21 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-09-06 22:17
+// | Date  : 2022-09-09 00:00
 // +----------------------------------------------------------------------
-package os.api.v2.api.user.dto.user;
+package os.api.v2.api.user.service.user;
 
-import lombok.Data;
+import os.api.v2.common.base.common.Result;
 
-import java.util.List;
 import java.util.Map;
 
 /**
- * os.api.v2.api.user.dto.user.IndexDataDto
+ * os.api.v2.api.user.service.user.IUserOptionsService
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-09-06 22:17
+ * @date 2022-09-09 00:00
  */
-@Data
-public class IndexDataDto {
-    private Long id;
-
-    /**
-     * 手机号码
-     */
-    private String mobile;
-
-    /**
-     * 姓名
-     */
-    private String name;
-
-    /**
-     * 创建时间
-     */
-    private String createdAtFormat;
-
-    private List<Map<String, Object>> opts;
+public interface IUserOptionsService {
+    Result<Map<String, Object>> options();
 }

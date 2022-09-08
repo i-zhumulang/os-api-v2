@@ -39,13 +39,13 @@ public class UserIndexServiceImpl extends ServiceImpl<UserMapper, User> implemen
     public Result<IndexModelDto> index(IndexModelVo indexModelVo) {
         LambdaQueryWrapper<User> queryWrapper = queryWrapper(indexModelVo, new String[]{});
         Page<User> page = new Page<>();
-        getBaseMapper().selectPage(page, queryWrapper);
+        Page<User> userPage = getBaseMapper().selectPage(page, queryWrapper);
         IndexModelDto indexModelDto = new IndexModelDto();
-        indexModelDto.setTotal(page.getTotal());
+        indexModelDto.setTotal(userPage.getTotal());
         if (indexModelDto.getTotal() == 0) {
             return new Result<>(Result.SUCCESS, indexModelDto);
         }
-        List<User> userList = page.getRecords();
+        List<User> userList = userPage.getRecords();
         List<IndexDataModelDto> indexDataModelDtoList = new ArrayList<>();
         for (User user: userList) {
             IndexDataModelDto indexDataModelDto = new IndexDataModelDto();

@@ -12,6 +12,7 @@ package os.api.v2.api.user.dto.user;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * os.api.v2.api.user.dto.user.IndexDto

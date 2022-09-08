@@ -29,7 +29,7 @@ import javax.validation.Valid;
  * @date 2022-09-07 22:42
  */
 @RestController
-@RequestMapping("/rolemodule")
+@RequestMapping("/role-module")
 public class RoleModuleController {
     @Autowired
     protected IRoleModuleIndexService iRoleModuleIndexService;

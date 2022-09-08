@@ -68,7 +68,7 @@ public class ModuleServiceImpl implements IModuleService {
     }
 
     @Override
-    public Result<Map<Long, String>> getModuleIdName() {
+    public Result<Map<Long, String>> getModuleIdNameMap() {
         String[] fieldArray = {
                 "id",
                 "name_en",
@@ -80,5 +80,29 @@ public class ModuleServiceImpl implements IModuleService {
                 .stream()
                 .collect(Collectors.toMap(ModuleModelDto::getId, ModuleModelDto::getNameZh));
         return new Result<>(Result.SUCCESS, idName);
+    }
+
+    @Override
+    public Result<List<ModuleServiceDto>> getModuleIdNameList(ModuleServiceVo moduleServiceVo) {
+        String[] fieldArray = {
+                "id",
+                "name_en",
+        };
+        ModuleModelVo moduleModelVo = new ModuleModelVo();
+        moduleModelVo.setFieldArray(fieldArray);
+        Result<List<ModuleModelDto>> result = iModuleService.getModuleList(moduleModelVo);
+        List<ModuleServiceDto> moduleServiceDtoList = new ArrayList<>();
+
+        if (Objects.equals(result.getFlag(), Result.FAILURE)) {
+            return new Result<>(result.getFlag(), result.getMessage(), moduleServiceDtoList);
+        }
+
+        for (ModuleModelDto moduleModelDto : result.getData()) {
+            ModuleServiceDto moduleServiceDto = new ModuleServiceDto();
+            BeanUtils.copyProperties(moduleModelDto, moduleServiceDto);
+            moduleServiceDtoList.add(moduleServiceDto);
+        }
+
+        return new Result<>(Result.SUCCESS, moduleServiceDtoList);
     }
 }
