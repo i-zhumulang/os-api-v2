@@ -11,6 +11,8 @@ package os.api.v2.model.service.user.dto.role;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * os.api.v2.model.service.user.dto.role.RoleModelDto
  *
@@ -19,7 +21,7 @@ import lombok.Data;
  * @date 2022-09-05 22:15
  */
 @Data
-public class RoleModelDto {
+public class RoleModelDto implements Serializable {
     private Integer id;
 
     /**

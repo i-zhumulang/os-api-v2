@@ -35,6 +35,7 @@ public class IGetListByIdListServiceImpl implements IGetListByIdListService {
                 "location",
                 "name_en",
                 "name_zh",
+                "type",
         };
         Result<List<MenuOperateModelDto>> result = iGetListByIdListService.getListByIdList(idList, fieldArray);
         List<Map<String, Object>> mapList = new ArrayList<>();
@@ -46,6 +47,7 @@ public class IGetListByIdListServiceImpl implements IGetListByIdListService {
                 Map<String, Object> map = new HashMap<>();
                 map.put("nameEn", menuOperateModelDto.getNameEn());
                 map.put("nameZh", menuOperateModelDto.getNameZh());
+                map.put("type", menuOperateModelDto.getType());
                 mapList.add(map);
             }
         }

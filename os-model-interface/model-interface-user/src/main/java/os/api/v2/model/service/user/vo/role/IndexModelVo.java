@@ -11,6 +11,8 @@ package os.api.v2.model.service.user.vo.role;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * os.api.v2.model.service.user.vo.role.IndexModelVo
  *
@@ -19,6 +21,6 @@ import lombok.Data;
  * @date 2022-09-05 22:27
  */
 @Data
-public class IndexModelVo {
+public class IndexModelVo implements Serializable {
     private String[] fieldArray;
 }

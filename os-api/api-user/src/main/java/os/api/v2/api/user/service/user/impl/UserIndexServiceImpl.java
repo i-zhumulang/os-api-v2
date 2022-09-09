@@ -23,6 +23,7 @@ import os.api.v2.model.service.user.vo.user.IndexModelVo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * os.api.v2.api.user.service.user.impl.UserIndexServiceImpl
@@ -41,13 +42,16 @@ public class UserIndexServiceImpl implements IUserIndexService {
         IndexModelVo indexModelVo = new IndexModelVo();
         BeanUtils.copyProperties(indexVo, indexModelVo);
         Result<IndexModelDto> result = iUserIndexService.index(indexModelVo);
+        // 获取数据操作权限数据
+        List<Map<String, Object>> menuOperateList = new ArrayList<>();
+
         IndexDto indexDto = new IndexDto();
         indexDto.setTotal(result.getData().getTotal());
         List<IndexDataDto> indexDataDtoList = new ArrayList<>();
         for (IndexDataModelDto indexDataModelDto : result.getData().getData()) {
             IndexDataDto indexDataDto = new IndexDataDto();
             BeanUtils.copyProperties(indexDataModelDto, indexDataDto);
-            indexDataDto.setOpts(new ArrayList<>());
+            indexDataDto.setOpts(menuOperateList);
             indexDataDtoList.add(indexDataDto);
         }
         indexDto.setData(indexDataDtoList);

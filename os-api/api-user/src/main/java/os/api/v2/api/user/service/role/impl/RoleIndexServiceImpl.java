@@ -10,6 +10,7 @@
 package os.api.v2.api.user.service.role.impl;
 
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import os.api.v2.api.user.dto.role.IndexDto;
 import os.api.v2.api.user.service.role.IRoleIndexService;
@@ -82,8 +83,7 @@ public class RoleIndexServiceImpl implements IRoleIndexService {
         List<IndexDto> indexDtoList = new ArrayList<>();
         for (RoleModelDto roleModelDto: roleModelDtoList) {
             IndexDto indexDto = new IndexDto();
-            indexDto.setData(roleModelDto);
-            indexDto.setOpts(menuOperateList);
+            BeanUtils.copyProperties(roleModelDto, indexDto);
             indexDtoList.add(indexDto);
         }
         return new Result<>(Result.SUCCESS, indexDtoList);

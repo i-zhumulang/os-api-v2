@@ -12,6 +12,7 @@ package os.api.v2.api.system;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import os.api.v2.common.base.utils.IdWorkerUtils;
 
 /**
  * os.api.v2.api.system.ApiSystemApplication

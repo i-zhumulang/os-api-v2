@@ -10,10 +10,6 @@
 package os.api.v2.api.user.dto.role;
 
 import lombok.Data;
-import os.api.v2.model.service.user.dto.role.RoleModelDto;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * os.api.v2.api.user.dto.role.IndexDto
@@ -24,6 +20,15 @@ import java.util.Map;
  */
 @Data
 public class IndexDto {
-    private RoleModelDto data;
-    private List<Map<String, Object>> opts;
+    private Integer id;
+
+    /**
+     * 角色名称(英文)
+     */
+    private String nameEn;
+
+    /**
+     * 角色名称(中文)
+     */
+    private String nameZh;
 }
