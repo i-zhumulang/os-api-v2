@@ -16,12 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import os.api.v2.api.user.dto.rolemodule.IndexDto;
 import os.api.v2.api.user.service.rolemodule.IRoleModuleIndexService;
+import os.api.v2.api.user.service.rolemodule.IRoleModuleOptionsService;
 import os.api.v2.api.user.vo.rolemodule.IndexVo;
 import os.api.v2.common.base.common.Result;
 
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -37,6 +36,9 @@ public class RoleModuleController {
     @Autowired
     protected IRoleModuleIndexService iRoleModuleIndexService;
 
+    @Autowired
+    protected IRoleModuleOptionsService iRoleModuleOptionsService;
+
     @RequestMapping(value = "/index", method = RequestMethod.POST)
     public Result<IndexDto> index(@RequestBody @Valid IndexVo indexVo) {
         return iRoleModuleIndexService.index(indexVo);
@@ -44,6 +46,6 @@ public class RoleModuleController {
 
     @RequestMapping(value = "/options", method = RequestMethod.POST)
     public Result<Map<String, Object>> options() {
-        return new Result<>(Result.SUCCESS, new HashMap<>());
+        return iRoleModuleOptionsService.options();
     }
 }
