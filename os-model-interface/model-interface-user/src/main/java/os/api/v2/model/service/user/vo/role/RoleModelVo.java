@@ -5,28 +5,22 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-09-07 22:22
+// | Date  : 2022-09-10 12:48
 // +----------------------------------------------------------------------
-package os.api.v2.api.user.dto.rolemodule;
+package os.api.v2.model.service.user.vo.role;
 
 import lombok.Data;
 
-import java.util.List;
-import java.util.Map;
+import java.io.Serializable;
 
 /**
- * os.api.v2.api.user.dto.rolemodule.IndexDataDto
+ * os.api.v2.model.service.user.vo.role.RoleModelVo
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-09-07 22:22
+ * @date 2022-09-10 12:48
  */
 @Data
-public class IndexDataDto {
-    private Long id;
-    private Integer roleId;
-    private String roleName;
-    private Long systemModuleId;
-    private String systemModuleName;
-    private List<Map<String, Object>> opts;
+public class RoleModelVo implements Serializable {
+    private String[] fieldArray;
 }

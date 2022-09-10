@@ -39,15 +39,15 @@ public class RoleModuleIndexServiceImpl extends ServiceImpl<RoleModuleMapper, Ro
     public Result<IndexModelDto> index(IndexModelVo indexModelVo) {
         LambdaQueryWrapper<RoleModule> queryWrapper = queryWrapper(indexModelVo);
         Page<RoleModule> page = new Page<>();
-        getBaseMapper().selectPage(page, queryWrapper);
+        Page<RoleModule> modulePage = getBaseMapper().selectPage(page, queryWrapper);
         IndexModelDto indexModelDto = new IndexModelDto();
-        indexModelDto.setTotal(page.getTotal());
+        indexModelDto.setTotal(modulePage.getTotal());
 
         if (indexModelDto.getTotal() == 0) {
             return new Result<>(Result.SUCCESS, indexModelDto);
         }
         List<IndexDataModelDto> indexDataModelDtoList = new ArrayList<>();
-        List<RoleModule> roleModuleList = page.getRecords();
+        List<RoleModule> roleModuleList = modulePage.getRecords();
         for (RoleModule roleModule : roleModuleList) {
             IndexDataModelDto indexDataModelDto = new IndexDataModelDto();
             BeanUtils.copyProperties(roleModule, indexDataModelDto);

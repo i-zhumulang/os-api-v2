@@ -9,6 +9,12 @@
 // +----------------------------------------------------------------------
 package os.api.v2.model.service.user.service.role;
 
+import os.api.v2.common.base.common.Result;
+import os.api.v2.model.service.user.dto.role.RoleModelDto;
+import os.api.v2.model.service.user.vo.role.RoleModelVo;
+
+import java.util.List;
+
 /**
  * os.api.v2.model.service.user.service.role.IRole
  *
@@ -17,4 +23,5 @@ package os.api.v2.model.service.user.service.role;
  * @date 2022-07-31 08:38
  */
 public interface IRoleService {
+    Result<List<RoleModelDto>> getRoleList(RoleModelVo roleModelVo);
 }

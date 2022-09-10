@@ -20,6 +20,9 @@ import os.api.v2.api.user.vo.rolemodule.IndexVo;
 import os.api.v2.common.base.common.Result;
 
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * os.api.v2.api.user.controller.RoleModuleController
@@ -37,5 +40,10 @@ public class RoleModuleController {
     @RequestMapping(value = "/index", method = RequestMethod.POST)
     public Result<IndexDto> index(@RequestBody @Valid IndexVo indexVo) {
         return iRoleModuleIndexService.index(indexVo);
+    }
+
+    @RequestMapping(value = "/options", method = RequestMethod.POST)
+    public Result<Map<String, Object>> options() {
+        return new Result<>(Result.SUCCESS, new HashMap<>());
     }
 }

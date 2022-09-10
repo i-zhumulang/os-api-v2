@@ -20,11 +20,13 @@ import os.api.v2.common.base.common.Result;
 import os.api.v2.model.service.user.dto.rolemodule.IndexDataModelDto;
 import os.api.v2.model.service.user.dto.rolemodule.IndexModelDto;
 import os.api.v2.model.service.user.vo.rolemodule.IndexModelVo;
+import os.api.v2.service.service.system.service.menuoperate.IGetListByIdListService;
+import os.api.v2.service.service.user.service.menuoperate.IMenuOperateService;
+import os.api.v2.service.service.user.service.role.IRoleService;
 import os.api.v2.service.service.system.service.module.IModuleService;
+import os.api.v2.service.service.user.vo.menuoperate.MenuOperateServiceVo;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * os.api.v2.api.user.service.rolemodule.impl.RoleModuleIndexServiceImpl
@@ -41,25 +43,76 @@ public class RoleModuleIndexServiceImpl implements IRoleModuleIndexService {
     @DubboReference(version = "2.0.0")
     protected IModuleService iModuleService;
 
+    @DubboReference(version = "2.0.0")
+    protected IRoleService iRoleService;
+
+    @DubboReference(version = "2.0.0")
+    protected IMenuOperateService iMenuOperateService;
+
+    @DubboReference(version = "2.0.0")
+    protected IGetListByIdListService iGetListByIdListService;
+
     @Override
     public Result<IndexDto> index(IndexVo indexVo) {
+        IndexModelDto indexModelDto = getIndexModelDto(indexVo);
+        IndexDto indexDto = new IndexDto();
+        indexDto.setTotal(indexModelDto.getTotal());
+        if (indexDto.getTotal() == 0) {
+            indexDto.setData(Collections.emptyList());
+            return new Result<>(Result.SUCCESS, indexDto);
+        }
+        return complete(indexModelDto);
+    }
+
+    private IndexModelDto getIndexModelDto(IndexVo indexVo) {
         IndexModelVo indexModelVo = new IndexModelVo();
         BeanUtils.copyProperties(indexVo, indexModelVo);
         Result<IndexModelDto> result = iRoleModuleIndexService.index(indexModelVo);
+        return result.getData();
+    }
+
+    private Result<IndexDto> complete(IndexModelDto indexModelDto) {
         IndexDto indexDto = new IndexDto();
-        indexDto.setTotal(result.getData().getTotal());
-        if (indexDto.getTotal() == 0) {
-            return new Result<>(Result.SUCCESS, indexDto);
-        }
+        indexDto.setTotal(indexModelDto.getTotal());
+        // 模块名称
         Result<Map<Long, String>> module = iModuleService.getModuleIdNameMap();
+        // 角色名称
+        Result<Map<Integer, String>> role = iRoleService.getRoleIdNameZhMap();
+        // 获取数据操作权限ID
+        List<Long> menuOperateIdList = getMenuOperateIdList();
+        // 获取数据操作权限数据
+        List<Map<String, Object>> menuOperateList = getMenuOperateList(menuOperateIdList);
+
         List<IndexDataDto> indexDataDtoList = new ArrayList<>();
-        for (IndexDataModelDto indexDataModelDto : result.getData().getData()) {
+        for (IndexDataModelDto indexDataModelDto : indexModelDto.getData()) {
             IndexDataDto indexDataDto = new IndexDataDto();
             BeanUtils.copyProperties(indexDataModelDto, indexDataDto);
             indexDataDto.setSystemModuleName(module.getData().get(indexDataDto.getSystemModuleId()));
+            indexDataDto.setRoleName(role.getData().get(indexDataDto.getRoleId()));
+            indexDataDto.setOpts(menuOperateList);
             indexDataDtoList.add(indexDataDto);
         }
         indexDto.setData(indexDataDtoList);
         return new Result<>(Result.SUCCESS, indexDto);
+    }
+
+    private List<Long> getMenuOperateIdList() {
+        MenuOperateServiceVo menuOperateServiceVo = new MenuOperateServiceVo();
+        menuOperateServiceVo.setRoleId(1);
+        menuOperateServiceVo.setSystemModuleId(1100176417951318016L);
+        menuOperateServiceVo.setSystemMenuId(1102873120315822080L);
+        Result<List<Long>> result = iMenuOperateService.getSystemMenuOperateIdList(menuOperateServiceVo);
+        if (Objects.equals(result.getFlag(), Result.FAILURE)) {
+            return new ArrayList<>();
+        }
+        return result.getData();
+    }
+
+    private List<Map<String, Object>> getMenuOperateList(List<Long> menuOperateIdList) {
+        List<Map<String, Object>> mapList = new ArrayList<>();
+        if (menuOperateIdList.isEmpty()) {
+            return mapList;
+        }
+        return iGetListByIdListService.getTableBodyListByIdList(menuOperateIdList);
     }
 }

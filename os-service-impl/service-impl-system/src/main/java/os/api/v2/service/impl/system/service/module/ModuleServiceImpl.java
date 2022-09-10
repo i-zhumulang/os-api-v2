@@ -71,7 +71,7 @@ public class ModuleServiceImpl implements IModuleService {
     public Result<Map<Long, String>> getModuleIdNameMap() {
         String[] fieldArray = {
                 "id",
-                "name_en",
+                "name_zh",
         };
         ModuleModelVo moduleModelVo = new ModuleModelVo();
         moduleModelVo.setFieldArray(fieldArray);
