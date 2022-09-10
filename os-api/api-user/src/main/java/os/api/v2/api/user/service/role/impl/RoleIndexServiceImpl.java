@@ -12,6 +12,7 @@ package os.api.v2.api.user.service.role.impl;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import os.api.v2.api.user.dto.role.IndexDataDto;
 import os.api.v2.api.user.dto.role.IndexDto;
 import os.api.v2.api.user.service.role.IRoleIndexService;
 import os.api.v2.common.base.common.Result;
@@ -41,7 +42,7 @@ public class RoleIndexServiceImpl implements IRoleIndexService {
     protected IGetListByIdListService iGetListByIdListService;
 
     @Override
-    public Result<List<IndexDto>> index() {
+    public Result<IndexDto> index() {
         // 获取数据列表
         List<RoleModelDto> roleModelDtoList = getRoleModelDtoList();
         // 获取数据操作权限ID
@@ -79,13 +80,16 @@ public class RoleIndexServiceImpl implements IRoleIndexService {
         return iGetListByIdListService.getTableHeadListByIdList(menuOperateIdList);
     }
 
-    private Result<List<IndexDto>> complete(List<RoleModelDto> roleModelDtoList, List<Map<String, Object>> menuOperateList) {
-        List<IndexDto> indexDtoList = new ArrayList<>();
+    private Result<IndexDto> complete(List<RoleModelDto> roleModelDtoList, List<Map<String, Object>> menuOperateList) {
+        IndexDto indexDto = new IndexDto();
+        List<IndexDataDto> indexDataDtoList = new ArrayList<>();
         for (RoleModelDto roleModelDto: roleModelDtoList) {
-            IndexDto indexDto = new IndexDto();
-            BeanUtils.copyProperties(roleModelDto, indexDto);
-            indexDtoList.add(indexDto);
+            IndexDataDto indexDataDto = new IndexDataDto();
+            BeanUtils.copyProperties(roleModelDto, indexDataDto);
+            indexDataDtoList.add(indexDataDto);
         }
-        return new Result<>(Result.SUCCESS, indexDtoList);
+        indexDto.setTotal((long) roleModelDtoList.size());
+        indexDto.setData(indexDataDtoList);
+        return new Result<>(Result.SUCCESS, indexDto);
     }
 }

@@ -5,22 +5,30 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-09-05 22:21
+// | Date  : 2022-09-10 10:27
 // +----------------------------------------------------------------------
-package os.api.v2.api.user.service.role;
+package os.api.v2.api.user.dto.role;
 
-import os.api.v2.api.user.dto.role.IndexDto;
-import os.api.v2.common.base.common.Result;
-
-import java.util.List;
+import lombok.Data;
 
 /**
- * os.api.v2.api.user.service.role.IRoleIndexService
+ * os.api.v2.api.user.dto.role.IndexDataDto
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-09-05 22:21
+ * @date 2022-09-10 10:27
  */
-public interface IRoleIndexService {
-    Result<IndexDto> index();
+@Data
+public class IndexDataDto {
+    private Integer id;
+
+    /**
+     * 角色名称(英文)
+     */
+    private String nameEn;
+
+    /**
+     * 角色名称(中文)
+     */
+    private String nameZh;
 }

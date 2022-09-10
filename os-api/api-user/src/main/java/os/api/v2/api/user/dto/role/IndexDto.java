@@ -11,6 +11,8 @@ package os.api.v2.api.user.dto.role;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * os.api.v2.api.user.dto.role.IndexDto
  *
@@ -20,15 +22,6 @@ import lombok.Data;
  */
 @Data
 public class IndexDto {
-    private Integer id;
-
-    /**
-     * 角色名称(英文)
-     */
-    private String nameEn;
-
-    /**
-     * 角色名称(中文)
-     */
-    private String nameZh;
+    private Long total;
+    private List<IndexDataDto> data;
 }

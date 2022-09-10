@@ -35,7 +35,7 @@ public class RoleController {
     protected IRoleIndexService iRoleIndexService;
 
     @RequestMapping(value = "/index", method = RequestMethod.POST)
-    public Result<List<IndexDto>> index() {
+    public Result<IndexDto> index() {
         return iRoleIndexService.index();
     }
 }
