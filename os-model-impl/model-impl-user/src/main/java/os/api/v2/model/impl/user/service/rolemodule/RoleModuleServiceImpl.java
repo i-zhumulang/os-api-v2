@@ -32,10 +32,10 @@ import os.api.v2.model.service.user.vo.rolemodule.RoleModuleModelVo;
 public class RoleModuleServiceImpl extends ServiceImpl<RoleModuleMapper, RoleModule> implements IRoleModuleService {
     @Override
     public Result<RoleModuleModelDto> getSingle(RoleModuleModelVo roleModuleModelVo) {
-        String[] fieldArray = {"module_menu_id"};
-        LambdaQueryWrapper<RoleModule> queryWrapper = new FieldValuesUtils<>(RoleModule.class, fieldArray).queryWrapper();
-        queryWrapper.eq(RoleModule::getRoleId, roleModuleModelVo.getRoleId());
-        queryWrapper.eq(RoleModule::getSystemModuleId, roleModuleModelVo.getSystemModuleId());
+        LambdaQueryWrapper<RoleModule> queryWrapper = new FieldValuesUtils<>(RoleModule.class, roleModuleModelVo.getFieldArray()).queryWrapper();
+        queryWrapper.eq(roleModuleModelVo.getId() != null, RoleModule::getId, roleModuleModelVo.getId());
+        queryWrapper.eq(roleModuleModelVo.getRoleId() != null, RoleModule::getRoleId, roleModuleModelVo.getRoleId());
+        queryWrapper.eq(roleModuleModelVo.getSystemModuleId() != null, RoleModule::getSystemModuleId, roleModuleModelVo.getSystemModuleId());
         RoleModule roleModule = getBaseMapper().selectOne(queryWrapper);
         if (roleModule == null) {
             return new Result<>(Result.FAILURE, null);

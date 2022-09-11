@@ -18,6 +18,7 @@ import os.api.v2.api.user.dto.rolemodule.CreateDto;
 import os.api.v2.api.user.dto.rolemodule.IndexDto;
 import os.api.v2.api.user.service.rolemodule.*;
 import os.api.v2.api.user.vo.rolemodule.DestroyVo;
+import os.api.v2.api.user.vo.rolemodule.EditVo;
 import os.api.v2.api.user.vo.rolemodule.IndexVo;
 import os.api.v2.api.user.vo.rolemodule.StoreVo;
 import os.api.v2.common.base.common.Result;
@@ -48,6 +49,9 @@ public class RoleModuleController {
     protected IRoleModuleStoreService iRoleModuleStoreService;
 
     @Autowired
+    protected IRoleModuleEditService iRoleModuleEditService;
+
+    @Autowired
     protected IRoleModuleDestroyService iRoleModuleDestroyService;
 
     @RequestMapping(value = "/index", method = RequestMethod.POST)
@@ -68,6 +72,11 @@ public class RoleModuleController {
     @RequestMapping(value = "/store", method = RequestMethod.POST)
     public Result<String> store(@RequestBody @Valid StoreVo storeVo) {
         return iRoleModuleStoreService.store(storeVo);
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public Result<CreateDto> edit(@RequestBody @Valid EditVo editVo) {
+        return iRoleModuleEditService.edit(editVo);
     }
 
     @RequestMapping(value = "/destroy", method = RequestMethod.POST)

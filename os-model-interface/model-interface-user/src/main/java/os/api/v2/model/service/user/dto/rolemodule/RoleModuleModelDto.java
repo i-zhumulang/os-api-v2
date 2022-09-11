@@ -22,15 +22,15 @@ import java.io.Serializable;
  */
 @Data
 public class RoleModuleModelDto implements Serializable {
-    private Integer id;
+    private Long id;
 
     /**
-     * 角色-模块ID
+     * 角色ID
      */
-    private Long roleModuleId;
+    private Integer roleId;
 
     /**
      * 菜单ID(v2_system.menu表ID)
      */
-    private Integer systemMenuId;
+    private Long systemModuleId;
 }

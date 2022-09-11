@@ -5,24 +5,20 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-09-10 23:02
+// | Date  : 2022-09-11 18:01
 // +----------------------------------------------------------------------
-package os.api.v2.api.user.dto.rolemodule;
+package os.api.v2.api.user.vo.rolemodule;
 
 import lombok.Data;
 
-import java.util.List;
-
 /**
- * os.api.v2.api.user.dto.rolemodule.CreateDto
+ * os.api.v2.api.user.vo.rolemodule.EditVo
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-09-10 23:02
+ * @date 2022-09-11 18:01
  */
 @Data
-public class CreateDto {
-    private List<RoleDataDto> role;
-    private List<ModuleDataDto> module;
-    private RoleModuleDataDto data;
+public class EditVo {
+    private Long id;
 }

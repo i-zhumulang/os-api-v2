@@ -33,4 +33,9 @@ public class RoleModuleModelVo implements Serializable {
      * 模块ID(v2_system.module表ID)
      */
     private Long systemModuleId;
+
+    /**
+     * 查询字段
+     */
+    private String[] fieldArray;
 }
