@@ -5,22 +5,20 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-07-31 08:38
+// | Date  : 2022-09-11 10:11
 // +----------------------------------------------------------------------
-package os.api.v2.model.service.user.service.rolemodule;
+package os.api.v2.api.user.service.rolemodule;
 
+import os.api.v2.api.user.vo.rolemodule.DestroyVo;
 import os.api.v2.common.base.common.Result;
-import os.api.v2.model.service.user.dto.rolemodule.RoleModuleModelDto;
-import os.api.v2.model.service.user.vo.rolemodule.RoleModuleModelVo;
 
 /**
- * os.api.v2.model.service.user.service.rolemodule.IRoleModule
+ * os.api.v2.api.user.service.rolemodule.IRoleModuleDestroyService
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-07-31 08:38
+ * @date 2022-09-11 10:11
  */
-public interface IRoleModuleService {
-    Result<RoleModuleModelDto> getSingle(RoleModuleModelVo roleModuleModelVo);
-    Result<String> destroy(RoleModuleModelVo roleModuleModelVo);
+public interface IRoleModuleDestroyService {
+    Result<String> destroy(DestroyVo destroyVo);
 }

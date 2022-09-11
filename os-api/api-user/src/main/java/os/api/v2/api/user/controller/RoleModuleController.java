@@ -16,10 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import os.api.v2.api.user.dto.rolemodule.CreateDto;
 import os.api.v2.api.user.dto.rolemodule.IndexDto;
-import os.api.v2.api.user.service.rolemodule.IRoleModuleCreateService;
-import os.api.v2.api.user.service.rolemodule.IRoleModuleIndexService;
-import os.api.v2.api.user.service.rolemodule.IRoleModuleOptionsService;
-import os.api.v2.api.user.service.rolemodule.IRoleModuleStoreService;
+import os.api.v2.api.user.service.rolemodule.*;
+import os.api.v2.api.user.vo.rolemodule.DestroyVo;
 import os.api.v2.api.user.vo.rolemodule.IndexVo;
 import os.api.v2.api.user.vo.rolemodule.StoreVo;
 import os.api.v2.common.base.common.Result;
@@ -49,6 +47,9 @@ public class RoleModuleController {
     @Autowired
     protected IRoleModuleStoreService iRoleModuleStoreService;
 
+    @Autowired
+    protected IRoleModuleDestroyService iRoleModuleDestroyService;
+
     @RequestMapping(value = "/index", method = RequestMethod.POST)
     public Result<IndexDto> index(@RequestBody @Valid IndexVo indexVo) {
         return iRoleModuleIndexService.index(indexVo);
@@ -67,5 +68,10 @@ public class RoleModuleController {
     @RequestMapping(value = "/store", method = RequestMethod.POST)
     public Result<String> store(@RequestBody @Valid StoreVo storeVo) {
         return iRoleModuleStoreService.store(storeVo);
+    }
+
+    @RequestMapping(value = "/destroy", method = RequestMethod.POST)
+    public Result<String> destroy(@RequestBody @Valid DestroyVo destroyVo) {
+        return iRoleModuleDestroyService.destroy(destroyVo);
     }
 }

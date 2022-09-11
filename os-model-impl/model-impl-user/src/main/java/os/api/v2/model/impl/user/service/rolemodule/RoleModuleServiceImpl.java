@@ -44,4 +44,13 @@ public class RoleModuleServiceImpl extends ServiceImpl<RoleModuleMapper, RoleMod
         BeanUtils.copyProperties(roleModule, roleModuleModelDto);
         return new Result<>(Result.SUCCESS, roleModuleModelDto);
     }
+
+    @Override
+    public Result<String> destroy(RoleModuleModelVo roleModuleModelVo) {
+        int result = getBaseMapper().deleteById(roleModuleModelVo.getId());
+        if (result > 0) {
+            return new Result<>(Result.SUCCESS, "删除成功");
+        }
+        return new Result<>(Result.FAILURE, "删除失败");
+    }
 }
