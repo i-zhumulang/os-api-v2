@@ -17,11 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import os.api.v2.api.user.dto.rolemodule.CreateDto;
 import os.api.v2.api.user.dto.rolemodule.IndexDto;
 import os.api.v2.api.user.service.rolemodule.*;
-import os.api.v2.api.user.vo.rolemodule.DestroyVo;
-import os.api.v2.api.user.vo.rolemodule.EditVo;
-import os.api.v2.api.user.vo.rolemodule.IndexVo;
-import os.api.v2.api.user.vo.rolemodule.StoreVo;
+import os.api.v2.api.user.vo.rolemodule.*;
 import os.api.v2.common.base.common.Result;
+import os.api.v2.model.service.user.dto.rolemodule.RoleModuleModelDto;
 
 import javax.validation.Valid;
 import java.util.Map;
@@ -52,6 +50,9 @@ public class RoleModuleController {
     protected IRoleModuleEditService iRoleModuleEditService;
 
     @Autowired
+    protected IRoleModuleUpdateService iRoleModuleUpdateService;
+
+    @Autowired
     protected IRoleModuleDestroyService iRoleModuleDestroyService;
 
     @RequestMapping(value = "/index", method = RequestMethod.POST)
@@ -77,6 +78,11 @@ public class RoleModuleController {
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public Result<CreateDto> edit(@RequestBody @Valid EditVo editVo) {
         return iRoleModuleEditService.edit(editVo);
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public Result<RoleModuleModelDto> update(@RequestBody @Valid UpdateVo updateVo) {
+        return iRoleModuleUpdateService.update(updateVo);
     }
 
     @RequestMapping(value = "/destroy", method = RequestMethod.POST)

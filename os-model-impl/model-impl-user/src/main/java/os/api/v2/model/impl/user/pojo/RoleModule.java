@@ -33,5 +33,14 @@ public class RoleModule implements Serializable {
      */
     private Long systemModuleId;
 
+    /**
+     * 菜单数量
+     */
+    private Integer count;
+
+    /**
+     * 排序
+     */
+    private Integer sorting;
 
 }
