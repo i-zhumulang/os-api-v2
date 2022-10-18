@@ -20,8 +20,8 @@ import os.api.v2.common.base.exception.UserException;
 import os.api.v2.model.service.system.dto.menu.MenuModelDto;
 import os.api.v2.model.service.system.vo.menu.IndexModelVo;
 import os.api.v2.service.service.system.service.menuoperate.IGetListByIdListService;
-import os.api.v2.service.service.user.service.menuoperate.IMenuOperateService;
-import os.api.v2.service.service.user.vo.menuoperate.MenuOperateServiceVo;
+import os.api.v2.service.service.user.service.roleoperate.IMenuOperateService;
+import os.api.v2.service.service.user.vo.roleoperate.MenuOperateServiceVo;
 
 import java.util.*;
 

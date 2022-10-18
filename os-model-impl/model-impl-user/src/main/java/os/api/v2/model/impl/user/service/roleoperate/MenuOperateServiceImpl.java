@@ -7,7 +7,7 @@
 // +----------------------------------------------------------------------
 // | Date  : 2022-08-09 21:28
 // +----------------------------------------------------------------------
-package os.api.v2.model.impl.user.service.menuoperate;
+package os.api.v2.model.impl.user.service.roleoperate;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -17,17 +17,15 @@ import os.api.v2.common.base.common.Result;
 import os.api.v2.model.impl.common.utils.FieldValuesUtils;
 import os.api.v2.model.impl.user.mapper.MenuOperateMapper;
 import os.api.v2.model.impl.user.pojo.MenuOperate;
-import os.api.v2.model.impl.user.pojo.ModuleMenu;
 import os.api.v2.model.service.user.dto.menuoperate.MenuOperateModelDto;
-import os.api.v2.model.service.user.service.menuoperate.IMenuOperateService;
-import os.api.v2.model.service.user.vo.menuoperate.MenuOperateModelVo;
+import os.api.v2.model.service.user.service.roleoperate.IMenuOperateService;
+import os.api.v2.model.service.user.vo.roleoperate.MenuOperateModelVo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
- * os.api.v2.model.impl.user.service.menuoperate.MenuOperateServiceImpl
+ * os.api.v2.model.impl.user.service.roleoperate.MenuOperateServiceImpl
  *
  * @author 吴荣超
  * @version 2.0.0

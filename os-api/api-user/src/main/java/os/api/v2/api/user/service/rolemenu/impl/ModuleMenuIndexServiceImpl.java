@@ -7,19 +7,19 @@
 // +----------------------------------------------------------------------
 // | Date  : 2022-09-14 21:56
 // +----------------------------------------------------------------------
-package os.api.v2.api.user.service.modulemenu.impl;
+package os.api.v2.api.user.service.rolemenu.impl;
 
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
-import os.api.v2.api.user.dto.modulemenu.IndexDto;
-import os.api.v2.api.user.dto.modulemenu.IndexDataDto;
-import os.api.v2.api.user.service.modulemenu.IModuleMenuIndexService;
-import os.api.v2.api.user.vo.modulemenu.IndexVo;
+import os.api.v2.api.user.dto.rolemenu.IndexDto;
+import os.api.v2.api.user.dto.rolemenu.IndexDataDto;
+import os.api.v2.api.user.service.rolemenu.IModuleMenuIndexService;
+import os.api.v2.api.user.vo.rolemenu.IndexVo;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.model.service.user.dto.modulemenu.IndexModelDto;
 import os.api.v2.model.service.user.dto.modulemenu.IndexDataModelDto;
-import os.api.v2.model.service.user.vo.modulemenu.IndexModelVo;
+import os.api.v2.model.service.user.vo.rolemenu.IndexModelVo;
 import os.api.v2.service.service.system.service.menu.IMenuService;
 import os.api.v2.service.service.system.service.module.IModuleService;
 import os.api.v2.service.service.user.service.role.IRoleService;
@@ -36,7 +36,7 @@ import java.util.*;
 @Service
 public class ModuleMenuIndexServiceImpl implements IModuleMenuIndexService {
     @DubboReference(version = "2.0.0")
-    protected os.api.v2.model.service.user.service.modulemenu.IModuleMenuIndexService iModuleMenuIndexService;
+    protected os.api.v2.model.service.user.service.rolemenu.IModuleMenuIndexService iModuleMenuIndexService;
 
     @DubboReference(version = "2.0.0")
     protected IModuleService iModuleService;

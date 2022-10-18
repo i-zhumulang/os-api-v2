@@ -7,23 +7,23 @@
 // +----------------------------------------------------------------------
 // | Date  : 2022-08-09 21:59
 // +----------------------------------------------------------------------
-package os.api.v2.service.impl.user.service.menuoperate;
+package os.api.v2.service.impl.user.service.roleoperate;
 
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.BeanUtils;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.model.service.user.dto.menuoperate.MenuOperateModelDto;
-import os.api.v2.model.service.user.vo.menuoperate.MenuOperateModelVo;
-import os.api.v2.service.service.user.service.menuoperate.IMenuOperateService;
-import os.api.v2.service.service.user.vo.menuoperate.MenuOperateServiceVo;
+import os.api.v2.model.service.user.vo.roleoperate.MenuOperateModelVo;
+import os.api.v2.service.service.user.service.roleoperate.IMenuOperateService;
+import os.api.v2.service.service.user.vo.roleoperate.MenuOperateServiceVo;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * os.api.v2.service.impl.user.service.menuoperate.MenuOperateServiceImpl
+ * os.api.v2.service.impl.user.service.roleoperate.MenuOperateServiceImpl
  *
  * @author 吴荣超
  * @version 2.0.0
@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 @DubboService(version = "2.0.0")
 public class MenuOperateServiceImpl implements IMenuOperateService {
     @DubboReference(version = "2.0.0")
-    protected os.api.v2.model.service.user.service.menuoperate.IMenuOperateService iMenuOperateService;
+    protected os.api.v2.model.service.user.service.roleoperate.IMenuOperateService iMenuOperateService;
 
     @Override
     public Result<List<Long>> getSystemMenuOperateIdList(MenuOperateServiceVo menuOperateServiceVo) {

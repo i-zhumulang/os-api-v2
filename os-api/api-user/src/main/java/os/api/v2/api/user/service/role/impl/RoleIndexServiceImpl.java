@@ -19,8 +19,8 @@ import os.api.v2.common.base.common.Result;
 import os.api.v2.model.service.user.dto.role.RoleModelDto;
 import os.api.v2.model.service.user.vo.role.IndexModelVo;
 import os.api.v2.service.service.system.service.menuoperate.IGetListByIdListService;
-import os.api.v2.service.service.user.service.menuoperate.IMenuOperateService;
-import os.api.v2.service.service.user.vo.menuoperate.MenuOperateServiceVo;
+import os.api.v2.service.service.user.service.roleoperate.IMenuOperateService;
+import os.api.v2.service.service.user.vo.roleoperate.MenuOperateServiceVo;
 
 import java.util.*;
 

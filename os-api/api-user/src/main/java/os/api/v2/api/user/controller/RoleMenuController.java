@@ -14,21 +14,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import os.api.v2.api.user.dto.modulemenu.IndexDto;
-import os.api.v2.api.user.service.modulemenu.IModuleMenuIndexService;
-import os.api.v2.api.user.vo.modulemenu.IndexVo;
+import os.api.v2.api.user.dto.rolemenu.IndexDto;
+import os.api.v2.api.user.service.rolemenu.IModuleMenuIndexService;
+import os.api.v2.api.user.vo.rolemenu.IndexVo;
 import os.api.v2.common.base.common.Result;
 
 /**
- * os.api.v2.api.user.controller.ModuleMenuController
+ * os.api.v2.api.user.controller.RoleMenuController
  *
  * @author 吴荣超
  * @version 2.0.0
  * @date 2022-09-14 23:04
  */
 @RestController
-@RequestMapping("/module-menu")
-public class ModuleMenuController {
+@RequestMapping("/role-menu")
+public class RoleMenuController {
     @Autowired
     protected IModuleMenuIndexService iModuleMenuIndexService;
 

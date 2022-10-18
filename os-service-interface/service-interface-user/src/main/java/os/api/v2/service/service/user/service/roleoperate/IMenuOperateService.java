@@ -5,21 +5,22 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-09-14 21:56
+// | Date  : 2022-08-09 21:51
 // +----------------------------------------------------------------------
-package os.api.v2.api.user.service.modulemenu;
+package os.api.v2.service.service.user.service.roleoperate;
 
-import os.api.v2.api.user.dto.modulemenu.IndexDto;
-import os.api.v2.api.user.vo.modulemenu.IndexVo;
 import os.api.v2.common.base.common.Result;
+import os.api.v2.service.service.user.vo.roleoperate.MenuOperateServiceVo;
+
+import java.util.List;
 
 /**
- * os.api.v2.api.user.service.modulemenu.IModuleMenuIndexService
+ * os.api.v2.service.service.user.service.roleoperate.IMenuOperateService
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-09-14 21:56
+ * @date 2022-08-09 21:51
  */
-public interface IModuleMenuIndexService {
-    Result<IndexDto> index(IndexVo indexVo);
+public interface IMenuOperateService {
+    Result<List<Long>> getSystemMenuOperateIdList(MenuOperateServiceVo menuOperateServiceVo);
 }

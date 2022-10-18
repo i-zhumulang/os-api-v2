@@ -7,7 +7,7 @@
 // +----------------------------------------------------------------------
 // | Date  : 2022-09-14 21:37
 // +----------------------------------------------------------------------
-package os.api.v2.model.impl.user.service.modulemenu;
+package os.api.v2.model.impl.user.service.rolemenu;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -20,14 +20,14 @@ import os.api.v2.model.impl.user.mapper.ModuleMenuMapper;
 import os.api.v2.model.impl.user.pojo.ModuleMenu;
 import os.api.v2.model.service.user.dto.modulemenu.IndexModelDto;
 import os.api.v2.model.service.user.dto.modulemenu.IndexDataModelDto;
-import os.api.v2.model.service.user.service.modulemenu.IModuleMenuIndexService;
-import os.api.v2.model.service.user.vo.modulemenu.IndexModelVo;
+import os.api.v2.model.service.user.service.rolemenu.IModuleMenuIndexService;
+import os.api.v2.model.service.user.vo.rolemenu.IndexModelVo;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * os.api.v2.model.impl.user.service.modulemenu.ModuleMenuIndexServiceImpl
+ * os.api.v2.model.impl.user.service.rolemenu.ModuleMenuIndexServiceImpl
  *
  * @author 吴荣超
  * @version 2.0.0

@@ -16,9 +16,9 @@ import os.api.v2.common.base.common.Result;
 import os.api.v2.model.service.system.dto.module.ModuleModelDto;
 import os.api.v2.model.service.system.service.module.IModuleService;
 import os.api.v2.model.service.system.vo.module.ModuleModelVo;
-import os.api.v2.service.service.user.service.menuoperate.IMenuOperateService;
+import os.api.v2.service.service.user.service.roleoperate.IMenuOperateService;
 import os.api.v2.service.service.system.service.menuoperate.IGetListByIdListService;
-import os.api.v2.service.service.user.vo.menuoperate.MenuOperateServiceVo;
+import os.api.v2.service.service.user.vo.roleoperate.MenuOperateServiceVo;
 
 import java.util.*;
 

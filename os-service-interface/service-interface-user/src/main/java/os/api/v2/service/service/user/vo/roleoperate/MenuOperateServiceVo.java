@@ -5,30 +5,28 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-08-06 00:24
+// | Date  : 2022-08-09 21:55
 // +----------------------------------------------------------------------
-package os.api.v2.model.service.user.vo.modulemenu;
+package os.api.v2.service.service.user.vo.roleoperate;
 
 import lombok.Data;
 
 import java.io.Serializable;
 
 /**
- * os.api.v2.model.service.user.vo.modulemenu.ModuleMenuModelVo
+ * os.api.v2.service.service.user.vo.menuoperate.MenuOperateServiceVo
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-08-06 00:24
+ * @date 2022-08-09 21:55
  */
 @Data
-public class ModuleMenuModelVo implements Serializable {
-
-    private Long id;
+public class MenuOperateServiceVo implements Serializable {
 
     /**
-     * 角色-模块ID
+     * 模块-菜单ID
      */
-    private Long roleModuleId;
+    private Long moduleMenuId;
 
     /**
      * 角色ID
@@ -41,7 +39,9 @@ public class ModuleMenuModelVo implements Serializable {
     private Long systemModuleId;
 
     /**
-     * 菜单ID(v2_system.menu表ID)
+     * 菜单ID
      */
     private Long systemMenuId;
+
+
 }

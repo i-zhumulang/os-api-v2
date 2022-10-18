@@ -21,10 +21,10 @@ import os.api.v2.model.service.user.dto.rolemodule.IndexDataModelDto;
 import os.api.v2.model.service.user.dto.rolemodule.IndexModelDto;
 import os.api.v2.model.service.user.vo.rolemodule.IndexModelVo;
 import os.api.v2.service.service.system.service.menuoperate.IGetListByIdListService;
-import os.api.v2.service.service.user.service.menuoperate.IMenuOperateService;
+import os.api.v2.service.service.user.service.roleoperate.IMenuOperateService;
 import os.api.v2.service.service.user.service.role.IRoleService;
 import os.api.v2.service.service.system.service.module.IModuleService;
-import os.api.v2.service.service.user.vo.menuoperate.MenuOperateServiceVo;
+import os.api.v2.service.service.user.vo.roleoperate.MenuOperateServiceVo;
 
 import java.util.*;
 

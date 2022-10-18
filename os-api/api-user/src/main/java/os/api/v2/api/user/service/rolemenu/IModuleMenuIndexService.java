@@ -5,21 +5,21 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-09-14 21:52
+// | Date  : 2022-09-14 21:56
 // +----------------------------------------------------------------------
-package os.api.v2.api.user.vo.modulemenu;
+package os.api.v2.api.user.service.rolemenu;
 
-import lombok.Data;
+import os.api.v2.api.user.dto.rolemenu.IndexDto;
+import os.api.v2.api.user.vo.rolemenu.IndexVo;
+import os.api.v2.common.base.common.Result;
 
 /**
- * os.api.v2.api.user.vo.modulemenu.IndexVo
+ * os.api.v2.api.user.service.rolemenu.IModuleMenuIndexService
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-09-14 21:52
+ * @date 2022-09-14 21:56
  */
-@Data
-public class IndexVo {
-    private Integer offset;
-    private Integer limit;
+public interface IModuleMenuIndexService {
+    Result<IndexDto> index(IndexVo indexVo);
 }

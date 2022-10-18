@@ -7,16 +7,16 @@
 // +----------------------------------------------------------------------
 // | Date  : 2022-08-09 21:27
 // +----------------------------------------------------------------------
-package os.api.v2.model.service.user.service.menuoperate;
+package os.api.v2.model.service.user.service.roleoperate;
 
 import os.api.v2.common.base.common.Result;
 import os.api.v2.model.service.user.dto.menuoperate.MenuOperateModelDto;
-import os.api.v2.model.service.user.vo.menuoperate.MenuOperateModelVo;
+import os.api.v2.model.service.user.vo.roleoperate.MenuOperateModelVo;
 
 import java.util.List;
 
 /**
- * os.api.v2.model.service.user.service.menuoperate.IMenuOperateService
+ * os.api.v2.model.service.user.service.roleperate.IMenuOperateService
  *
  * @author 吴荣超
  * @version 2.0.0

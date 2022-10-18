@@ -5,46 +5,52 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-09-14 21:54
+// | Date  : 2022-08-09 21:22
 // +----------------------------------------------------------------------
-package os.api.v2.api.user.dto.modulemenu;
+package os.api.v2.model.service.user.vo.roleoperate;
 
 import lombok.Data;
 
-import java.util.List;
-import java.util.Map;
+import java.io.Serializable;
 
 /**
- * os.api.v2.api.user.dto.modulemenu.IndexDataDto
+ * os.api.v2.model.service.user.vo.roleoperate.MenuOperateModelVo
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-09-14 21:54
+ * @date 2022-08-09 21:22
  */
 @Data
-public class IndexDataDto {
+public class MenuOperateModelVo implements Serializable {
+    /**
+     * 主键
+     */
     private Long id;
+
+    /**
+     * 模块-菜单ID
+     */
+    private Long moduleMenuId;
 
     /**
      * 角色ID
      */
     private Integer roleId;
 
-    private String roleName;
-
     /**
-     * 模块ID(v2_system.module表ID)
+     * 模块ID
      */
     private Long systemModuleId;
 
-    private String systemModuleName;
-
     /**
-     * 菜单ID(v2_system.menu表ID)
+     * 菜单ID
      */
     private Long systemMenuId;
 
-    private String systemMenuName;
+    /**
+     * 操作ID
+     */
+    private Long systemMenuOperateId;
 
-    private List<Map<String, Object>> opts;
+
 }

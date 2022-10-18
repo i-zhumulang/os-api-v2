@@ -7,14 +7,14 @@
 // +----------------------------------------------------------------------
 // | Date  : 2022-09-14 21:33
 // +----------------------------------------------------------------------
-package os.api.v2.model.service.user.vo.modulemenu;
+package os.api.v2.model.service.user.vo.rolemenu;
 
 import lombok.Data;
 
 import java.io.Serializable;
 
 /**
- * os.api.v2.model.service.user.vo.modulemenu.IndexModelVo
+ * os.api.v2.model.service.user.vo.rolemenu.IndexModelVo
  *
  * @author 吴荣超
  * @version 2.0.0

@@ -5,23 +5,21 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-09-14 21:53
+// | Date  : 2022-09-14 21:36
 // +----------------------------------------------------------------------
-package os.api.v2.api.user.dto.modulemenu;
+package os.api.v2.model.service.user.service.rolemenu;
 
-import lombok.Data;
-
-import java.util.List;
+import os.api.v2.common.base.common.Result;
+import os.api.v2.model.service.user.dto.modulemenu.IndexModelDto;
+import os.api.v2.model.service.user.vo.rolemenu.IndexModelVo;
 
 /**
- * os.api.v2.api.user.dto.modulemenu.IndexDto
+ * os.api.v2.model.service.user.service.modulemenu.IModuleMenuIndexService
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-09-14 21:53
+ * @date 2022-09-14 21:36
  */
-@Data
-public class IndexDto {
-    private Long total;
-    private List<IndexDataDto> data;
+public interface IModuleMenuIndexService {
+    Result<IndexModelDto> index(IndexModelVo indexModelVo);
 }
