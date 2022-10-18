@@ -5,32 +5,24 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-08-09 21:25
+// | Date  : 2022-09-14 21:34
 // +----------------------------------------------------------------------
-package os.api.v2.model.service.user.dto.menuoperate;
+package os.api.v2.model.service.user.dto.rolemenu;
 
 import lombok.Data;
 
 import java.io.Serializable;
 
 /**
- * os.api.v2.model.service.user.dto.menuoperate.MenuOperateModelDto
+ * os.api.v2.model.service.user.dto.rolemenu.IndexDataModelDto
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-08-09 21:25
+ * @date 2022-09-14 21:34
  */
 @Data
-public class MenuOperateModelDto implements Serializable {
-    /**
-     * 主键
-     */
+public class IndexDataModelDto implements Serializable {
     private Long id;
-
-    /**
-     * 模块-菜单ID
-     */
-    private Long moduleMenuId;
 
     /**
      * 角色ID
@@ -38,22 +30,12 @@ public class MenuOperateModelDto implements Serializable {
     private Integer roleId;
 
     /**
-     * 模块ID
+     * 模块ID(v2_system.module表ID)
      */
     private Long systemModuleId;
 
     /**
-     * 菜单ID
+     * 菜单ID(v2_system.menu表ID)
      */
     private Long systemMenuId;
-
-    /**
-     * 操作ID
-     */
-    private Long systemMenuOperateId;
-
-    /**
-     * 排序
-     */
-    private Integer sorting;
 }

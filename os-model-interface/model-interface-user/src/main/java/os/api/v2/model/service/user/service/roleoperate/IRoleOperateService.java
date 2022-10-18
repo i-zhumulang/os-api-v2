@@ -5,24 +5,23 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-09-14 21:34
+// | Date  : 2022-08-09 21:27
 // +----------------------------------------------------------------------
-package os.api.v2.model.service.user.dto.modulemenu;
+package os.api.v2.model.service.user.service.roleoperate;
 
-import lombok.Data;
+import os.api.v2.common.base.common.Result;
+import os.api.v2.model.service.user.dto.roleoperate.RoleOperateModelDto;
+import os.api.v2.model.service.user.vo.roleoperate.RoleOperateModelVo;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
- * os.api.v2.model.service.user.dto.modulemenu.IndexModelDto
+ * os.api.v2.model.service.user.service.roleperate.IRoleOperateService
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-09-14 21:34
+ * @date 2022-08-09 21:27
  */
-@Data
-public class IndexModelDto implements Serializable {
-    private Long total;
-    private List<IndexDataModelDto> data;
+public interface IRoleOperateService {
+    Result<List<RoleOperateModelDto>> systemMenuOperateList(RoleOperateModelVo roleOperateModelVo, String[] fieldArray);
 }

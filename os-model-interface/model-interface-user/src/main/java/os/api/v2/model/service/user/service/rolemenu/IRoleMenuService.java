@@ -5,23 +5,22 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-08-09 21:27
+// | Date  : 2022-07-31 08:38
 // +----------------------------------------------------------------------
-package os.api.v2.model.service.user.service.roleoperate;
+package os.api.v2.model.service.user.service.rolemenu;
 
 import os.api.v2.common.base.common.Result;
-import os.api.v2.model.service.user.dto.menuoperate.MenuOperateModelDto;
-import os.api.v2.model.service.user.vo.roleoperate.MenuOperateModelVo;
+import os.api.v2.model.service.user.vo.rolemenu.RoleMenuModelVo;
 
 import java.util.List;
 
 /**
- * os.api.v2.model.service.user.service.roleperate.IMenuOperateService
+ * os.api.v2.model.service.user.service.rolemenu.IRoleMenuService
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-08-09 21:27
+ * @date 2022-07-31 08:38
  */
-public interface IMenuOperateService {
-    Result<List<MenuOperateModelDto>> systemMenuOperateList(MenuOperateModelVo menuOperateModelVo, String[] fieldArray);
+public interface IRoleMenuService {
+    Result<List<Long>> permission(RoleMenuModelVo roleMenuModelVo);
 }

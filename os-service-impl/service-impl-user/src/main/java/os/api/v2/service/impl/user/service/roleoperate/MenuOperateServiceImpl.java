@@ -13,8 +13,9 @@ import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.BeanUtils;
 import os.api.v2.common.base.common.Result;
-import os.api.v2.model.service.user.dto.menuoperate.MenuOperateModelDto;
-import os.api.v2.model.service.user.vo.roleoperate.MenuOperateModelVo;
+import os.api.v2.model.service.user.dto.roleoperate.RoleOperateModelDto;
+import os.api.v2.model.service.user.service.roleoperate.IRoleOperateService;
+import os.api.v2.model.service.user.vo.roleoperate.RoleOperateModelVo;
 import os.api.v2.service.service.user.service.roleoperate.IMenuOperateService;
 import os.api.v2.service.service.user.vo.roleoperate.MenuOperateServiceVo;
 
@@ -32,18 +33,18 @@ import java.util.stream.Collectors;
 @DubboService(version = "2.0.0")
 public class MenuOperateServiceImpl implements IMenuOperateService {
     @DubboReference(version = "2.0.0")
-    protected os.api.v2.model.service.user.service.roleoperate.IMenuOperateService iMenuOperateService;
+    protected IRoleOperateService iRoleOperateService;
 
     @Override
     public Result<List<Long>> getSystemMenuOperateIdList(MenuOperateServiceVo menuOperateServiceVo) {
-        MenuOperateModelVo menuOperateModelVo = new MenuOperateModelVo();
-        BeanUtils.copyProperties(menuOperateServiceVo, menuOperateModelVo);
+        RoleOperateModelVo roleOperateModelVo = new RoleOperateModelVo();
+        BeanUtils.copyProperties(menuOperateServiceVo, roleOperateModelVo);
         String[] fieldArray = {"system_menu_operate_id"};
-        Result<List<MenuOperateModelDto>> result = iMenuOperateService.systemMenuOperateList(menuOperateModelVo, fieldArray);
+        Result<List<RoleOperateModelDto>> result = iRoleOperateService.systemMenuOperateList(roleOperateModelVo, fieldArray);
         if (Objects.equals(result.getFlag(), Result.FAILURE)) {
             return new Result<>(result.getFlag(), null);
         }
-        List<Long> collect = result.getData().stream().map(MenuOperateModelDto::getSystemMenuOperateId).collect(Collectors.toList());
+        List<Long> collect = result.getData().stream().map(RoleOperateModelDto::getSystemMenuOperateId).collect(Collectors.toList());
         return new Result<>(Result.SUCCESS, collect);
     }
 }

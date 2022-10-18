@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 菜单-操作
+ * 模块-菜单
  * </p>
  *
  * @author 吴荣超
@@ -16,20 +16,17 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class MenuOperate implements Serializable {
+public class RoleMenu implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 主键
-     */
     @TableId(value = "id", type = IdType.INPUT)
     private Long id;
 
     /**
-     * 模块-菜单ID
+     * 角色-模块ID
      */
-    private Long moduleMenuId;
+    private Long roleModuleId;
 
     /**
      * 角色ID
@@ -42,19 +39,9 @@ public class MenuOperate implements Serializable {
     private Long systemModuleId;
 
     /**
-     * 菜单ID
+     * 菜单ID(v2_system.menu表ID)
      */
     private Long systemMenuId;
-
-    /**
-     * 操作ID
-     */
-    private Long systemMenuOperateId;
-
-    /**
-     * 排序
-     */
-    private Integer sorting;
 
 
 }

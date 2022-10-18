@@ -5,22 +5,21 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-07-31 08:38
+// | Date  : 2022-09-14 21:36
 // +----------------------------------------------------------------------
 package os.api.v2.model.service.user.service.rolemenu;
 
 import os.api.v2.common.base.common.Result;
-import os.api.v2.model.service.user.vo.rolemenu.ModuleMenuModelVo;
-
-import java.util.List;
+import os.api.v2.model.service.user.dto.rolemenu.IndexModelDto;
+import os.api.v2.model.service.user.vo.rolemenu.IndexModelVo;
 
 /**
- * os.api.v2.model.service.user.service.rolemenu.IModuleMenuService
+ * os.api.v2.model.service.user.service.rolemenu.IRoleMenuIndexService
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-07-31 08:38
+ * @date 2022-09-14 21:36
  */
-public interface IModuleMenuService {
-    Result<List<Long>> permission(ModuleMenuModelVo moduleMenuModelVo);
+public interface IRoleMenuIndexService {
+    Result<IndexModelDto> index(IndexModelVo indexModelVo);
 }

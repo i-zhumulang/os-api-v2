@@ -17,8 +17,9 @@ import os.api.v2.api.user.dto.rolemenu.IndexDataDto;
 import os.api.v2.api.user.service.rolemenu.IModuleMenuIndexService;
 import os.api.v2.api.user.vo.rolemenu.IndexVo;
 import os.api.v2.common.base.common.Result;
-import os.api.v2.model.service.user.dto.modulemenu.IndexModelDto;
-import os.api.v2.model.service.user.dto.modulemenu.IndexDataModelDto;
+import os.api.v2.model.service.user.dto.rolemenu.IndexModelDto;
+import os.api.v2.model.service.user.dto.rolemenu.IndexDataModelDto;
+import os.api.v2.model.service.user.service.rolemenu.IRoleMenuIndexService;
 import os.api.v2.model.service.user.vo.rolemenu.IndexModelVo;
 import os.api.v2.service.service.system.service.menu.IMenuService;
 import os.api.v2.service.service.system.service.module.IModuleService;
@@ -27,7 +28,7 @@ import os.api.v2.service.service.user.service.role.IRoleService;
 import java.util.*;
 
 /**
- * os.api.v2.api.user.service.modulemenu.impl.ModuleMenuIndexServiceImpl
+ * os.api.v2.api.user.service.rolemenu.impl.ModuleMenuIndexServiceImpl
  *
  * @author 吴荣超
  * @version 2.0.0
@@ -36,7 +37,7 @@ import java.util.*;
 @Service
 public class ModuleMenuIndexServiceImpl implements IModuleMenuIndexService {
     @DubboReference(version = "2.0.0")
-    protected os.api.v2.model.service.user.service.rolemenu.IModuleMenuIndexService iModuleMenuIndexService;
+    protected IRoleMenuIndexService iRoleMenuIndexService;
 
     @DubboReference(version = "2.0.0")
     protected IModuleService iModuleService;
@@ -62,7 +63,7 @@ public class ModuleMenuIndexServiceImpl implements IModuleMenuIndexService {
     private IndexModelDto getIndexModelDto(IndexVo indexVo) {
         IndexModelVo indexModelVo = new IndexModelVo();
         BeanUtils.copyProperties(indexVo, indexModelVo);
-        Result<IndexModelDto> result = iModuleMenuIndexService.index(indexModelVo);
+        Result<IndexModelDto> result = iRoleMenuIndexService.index(indexModelVo);
         return result.getData();
     }
 

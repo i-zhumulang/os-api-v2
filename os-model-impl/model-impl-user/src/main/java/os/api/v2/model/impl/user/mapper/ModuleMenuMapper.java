@@ -1,6 +1,6 @@
 package os.api.v2.model.impl.user.mapper;
 
-import os.api.v2.model.impl.user.pojo.ModuleMenu;
+import os.api.v2.model.impl.user.pojo.RoleMenu;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author 吴荣超
  * @since 2022-08-08
  */
-public interface ModuleMenuMapper extends BaseMapper<ModuleMenu> {
+public interface ModuleMenuMapper extends BaseMapper<RoleMenu> {
 
 }

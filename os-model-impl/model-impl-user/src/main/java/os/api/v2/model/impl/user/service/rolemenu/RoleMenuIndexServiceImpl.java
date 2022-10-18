@@ -17,10 +17,10 @@ import org.springframework.beans.BeanUtils;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.model.impl.common.utils.FieldValuesUtils;
 import os.api.v2.model.impl.user.mapper.ModuleMenuMapper;
-import os.api.v2.model.impl.user.pojo.ModuleMenu;
-import os.api.v2.model.service.user.dto.modulemenu.IndexModelDto;
-import os.api.v2.model.service.user.dto.modulemenu.IndexDataModelDto;
-import os.api.v2.model.service.user.service.rolemenu.IModuleMenuIndexService;
+import os.api.v2.model.impl.user.pojo.RoleMenu;
+import os.api.v2.model.service.user.dto.rolemenu.IndexModelDto;
+import os.api.v2.model.service.user.dto.rolemenu.IndexDataModelDto;
+import os.api.v2.model.service.user.service.rolemenu.IRoleMenuIndexService;
 import os.api.v2.model.service.user.vo.rolemenu.IndexModelVo;
 
 import java.util.ArrayList;
@@ -34,12 +34,12 @@ import java.util.List;
  * @date 2022-09-14 21:37
  */
 @DubboService(version = "2.0.0")
-public class ModuleMenuIndexServiceImpl extends ServiceImpl<ModuleMenuMapper, ModuleMenu> implements IModuleMenuIndexService {
+public class RoleMenuIndexServiceImpl extends ServiceImpl<ModuleMenuMapper, RoleMenu> implements IRoleMenuIndexService {
     @Override
     public Result<IndexModelDto> index(IndexModelVo indexModelVo) {
-        LambdaQueryWrapper<ModuleMenu> queryWrapper = queryWrapper(indexModelVo);
-        Page<ModuleMenu> page = new Page<>();
-        Page<ModuleMenu> modulePage = getBaseMapper().selectPage(page, queryWrapper);
+        LambdaQueryWrapper<RoleMenu> queryWrapper = queryWrapper(indexModelVo);
+        Page<RoleMenu> page = new Page<>();
+        Page<RoleMenu> modulePage = getBaseMapper().selectPage(page, queryWrapper);
         IndexModelDto indexModelDto = new IndexModelDto();
         indexModelDto.setTotal(modulePage.getTotal());
 
@@ -48,26 +48,26 @@ public class ModuleMenuIndexServiceImpl extends ServiceImpl<ModuleMenuMapper, Mo
         }
 
         List<IndexDataModelDto> indexDataModelDtoList = new ArrayList<>();
-        List<ModuleMenu> roleModuleList = modulePage.getRecords();
-        for (ModuleMenu moduleMenu : roleModuleList) {
+        List<RoleMenu> roleModuleList = modulePage.getRecords();
+        for (RoleMenu roleMenu : roleModuleList) {
             IndexDataModelDto indexDataModelDto = new IndexDataModelDto();
-            BeanUtils.copyProperties(moduleMenu, indexDataModelDto);
+            BeanUtils.copyProperties(roleMenu, indexDataModelDto);
             indexDataModelDtoList.add(indexDataModelDto);
         }
         indexModelDto.setData(indexDataModelDtoList);
         return new Result<>(Result.SUCCESS, indexModelDto);
     }
 
-    private LambdaQueryWrapper<ModuleMenu> queryWrapper(IndexModelVo indexModelVo) {
+    private LambdaQueryWrapper<RoleMenu> queryWrapper(IndexModelVo indexModelVo) {
         String[] fieldArray = new String[]{
                 "id",
                 "role_id",
                 "system_module_id",
                 "system_menu_id"
         };
-        LambdaQueryWrapper<ModuleMenu> queryWrapper = new FieldValuesUtils<>(ModuleMenu.class, fieldArray).queryWrapper();
-        queryWrapper.eq(indexModelVo.getRoleId() != null, ModuleMenu::getRoleId, indexModelVo.getRoleId());
-        queryWrapper.eq(indexModelVo.getSystemModuleId() != null, ModuleMenu::getSystemModuleId, indexModelVo.getSystemModuleId());
+        LambdaQueryWrapper<RoleMenu> queryWrapper = new FieldValuesUtils<>(RoleMenu.class, fieldArray).queryWrapper();
+        queryWrapper.eq(indexModelVo.getRoleId() != null, RoleMenu::getRoleId, indexModelVo.getRoleId());
+        queryWrapper.eq(indexModelVo.getSystemModuleId() != null, RoleMenu::getSystemModuleId, indexModelVo.getSystemModuleId());
         return queryWrapper;
     }
 }

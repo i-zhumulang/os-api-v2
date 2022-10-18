@@ -20,9 +20,9 @@ import os.api.v2.common.auth.realm.Profile;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.common.base.exception.UserException;
 import os.api.v2.model.service.user.dto.userrole.UserRoleModelDto;
-import os.api.v2.model.service.user.service.rolemenu.IModuleMenuService;
+import os.api.v2.model.service.user.service.rolemenu.IRoleMenuService;
 import os.api.v2.model.service.user.service.userrole.IUserRoleService;
-import os.api.v2.model.service.user.vo.rolemenu.ModuleMenuModelVo;
+import os.api.v2.model.service.user.vo.rolemenu.RoleMenuModelVo;
 import os.api.v2.model.service.user.vo.userrole.UserRoleModelVo;
 import os.api.v2.service.service.system.dto.menu.PermissionServiceDto;
 
@@ -42,7 +42,7 @@ public class PermissionServiceImpl implements IPermissionService {
     protected IUserRoleService iUserRoleService;
 
     @DubboReference(version = "2.0.0")
-    protected IModuleMenuService iModuleMenuService;
+    protected IRoleMenuService iRoleMenuService;
 
     @DubboReference(version = "2.0.0")
     protected os.api.v2.service.service.system.service.menu.IPermissionService iPermissionService;
@@ -81,10 +81,10 @@ public class PermissionServiceImpl implements IPermissionService {
      * @date 0:52 2022/8/6
      */
     private List<Long> getSystemModuleMenuIdList(Integer roleId, Long systemModuleId) throws UserException {
-        ModuleMenuModelVo moduleMenuModelVo = new ModuleMenuModelVo();
-        moduleMenuModelVo.setRoleId(roleId);
-        moduleMenuModelVo.setSystemModuleId(systemModuleId);
-        Result<List<Long>> result = iModuleMenuService.permission(moduleMenuModelVo);
+        RoleMenuModelVo roleMenuModelVo = new RoleMenuModelVo();
+        roleMenuModelVo.setRoleId(roleId);
+        roleMenuModelVo.setSystemModuleId(systemModuleId);
+        Result<List<Long>> result = iRoleMenuService.permission(roleMenuModelVo);
         if (Objects.equals(result.getFlag(), Result.FAILURE)) {
             throw new UserException("模块没有分配菜单");
         }
