@@ -50,21 +50,8 @@ public class ModuleServiceImpl implements IModuleService {
         ModuleModelVo moduleModelVo = new ModuleModelVo();
         moduleModelVo.setIdList(moduleServiceVo.getIdList());
         moduleModelVo.setFieldArray(fieldArray);
-        Result<List<ModuleModelDto>> result = iModuleService.getModuleList(moduleModelVo);
 
-        List<ModuleServiceDto> moduleServiceDtoList = new ArrayList<>();
-
-        if (Objects.equals(result.getFlag(), Result.FAILURE)) {
-            return new Result<>(result.getFlag(), result.getMessage(), moduleServiceDtoList);
-        }
-
-        for (ModuleModelDto moduleModelDto : result.getData()) {
-            ModuleServiceDto moduleServiceDto = new ModuleServiceDto();
-            BeanUtils.copyProperties(moduleModelDto, moduleServiceDto);
-            moduleServiceDtoList.add(moduleServiceDto);
-        }
-
-        return new Result<>(Result.SUCCESS, moduleServiceDtoList);
+        return moduleServiceDtoList(iModuleService.getModuleList(moduleModelVo));
     }
 
     @Override
@@ -90,7 +77,11 @@ public class ModuleServiceImpl implements IModuleService {
         };
         ModuleModelVo moduleModelVo = new ModuleModelVo();
         moduleModelVo.setFieldArray(fieldArray);
-        Result<List<ModuleModelDto>> result = iModuleService.getModuleList(moduleModelVo);
+
+        return moduleServiceDtoList(iModuleService.getModuleList(moduleModelVo));
+    }
+
+    private Result<List<ModuleServiceDto>> moduleServiceDtoList(Result<List<ModuleModelDto>> result) {
         List<ModuleServiceDto> moduleServiceDtoList = new ArrayList<>();
 
         if (Objects.equals(result.getFlag(), Result.FAILURE)) {

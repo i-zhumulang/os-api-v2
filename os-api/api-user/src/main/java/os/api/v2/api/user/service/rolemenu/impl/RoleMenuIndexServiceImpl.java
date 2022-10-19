@@ -14,12 +14,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import os.api.v2.api.user.dto.rolemenu.IndexDto;
 import os.api.v2.api.user.dto.rolemenu.IndexDataDto;
-import os.api.v2.api.user.service.rolemenu.IModuleMenuIndexService;
+import os.api.v2.api.user.service.rolemenu.IRoleMenuIndexService;
 import os.api.v2.api.user.vo.rolemenu.IndexVo;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.model.service.user.dto.rolemenu.IndexModelDto;
 import os.api.v2.model.service.user.dto.rolemenu.IndexDataModelDto;
-import os.api.v2.model.service.user.service.rolemenu.IRoleMenuIndexService;
 import os.api.v2.model.service.user.vo.rolemenu.IndexModelVo;
 import os.api.v2.service.service.system.service.menu.IMenuService;
 import os.api.v2.service.service.system.service.module.IModuleService;
@@ -35,9 +34,9 @@ import java.util.*;
  * @date 2022-09-14 21:56
  */
 @Service
-public class ModuleMenuIndexServiceImpl implements IModuleMenuIndexService {
+public class RoleMenuIndexServiceImpl implements IRoleMenuIndexService {
     @DubboReference(version = "2.0.0")
-    protected IRoleMenuIndexService iRoleMenuIndexService;
+    protected os.api.v2.model.service.user.service.rolemenu.IRoleMenuIndexService iRoleMenuIndexService;
 
     @DubboReference(version = "2.0.0")
     protected IModuleService iModuleService;

@@ -16,7 +16,7 @@ import os.api.v2.common.base.common.Result;
 import os.api.v2.model.service.system.dto.module.ModuleModelDto;
 import os.api.v2.model.service.system.service.module.IModuleService;
 import os.api.v2.model.service.system.vo.module.ModuleModelVo;
-import os.api.v2.service.service.user.service.roleoperate.IMenuOperateService;
+import os.api.v2.service.service.user.service.roleoperate.IRoleOperateService;
 import os.api.v2.service.service.system.service.menuoperate.IGetListByIdListService;
 import os.api.v2.service.service.user.vo.roleoperate.MenuOperateServiceVo;
 
@@ -35,7 +35,7 @@ public class MenuOptionsServiceImpl implements IMenuOptionsService {
     protected IModuleService iModuleService;
 
     @DubboReference(version = "2.0.0")
-    protected IMenuOperateService iMenuOperateService;
+    protected IRoleOperateService iRoleOperateService;
 
     @DubboReference(version = "2.0.0")
     protected IGetListByIdListService iGetListByIdListService;
@@ -64,7 +64,7 @@ public class MenuOptionsServiceImpl implements IMenuOptionsService {
         menuOperateServiceVo.setRoleId(1);
         menuOperateServiceVo.setSystemModuleId(1100176417150205952L);
         menuOperateServiceVo.setSystemMenuId(1100177342397005824L);
-        Result<List<Long>> result = iMenuOperateService.getSystemMenuOperateIdList(menuOperateServiceVo);
+        Result<List<Long>> result = iRoleOperateService.getSystemMenuOperateIdList(menuOperateServiceVo);
         if (Objects.equals(result.getFlag(), Result.FAILURE)) {
             return new ArrayList<>();
         }

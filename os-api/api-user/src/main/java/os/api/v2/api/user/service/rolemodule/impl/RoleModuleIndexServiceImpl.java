@@ -21,7 +21,7 @@ import os.api.v2.model.service.user.dto.rolemodule.IndexDataModelDto;
 import os.api.v2.model.service.user.dto.rolemodule.IndexModelDto;
 import os.api.v2.model.service.user.vo.rolemodule.IndexModelVo;
 import os.api.v2.service.service.system.service.menuoperate.IGetListByIdListService;
-import os.api.v2.service.service.user.service.roleoperate.IMenuOperateService;
+import os.api.v2.service.service.user.service.roleoperate.IRoleOperateService;
 import os.api.v2.service.service.user.service.role.IRoleService;
 import os.api.v2.service.service.system.service.module.IModuleService;
 import os.api.v2.service.service.user.vo.roleoperate.MenuOperateServiceVo;
@@ -47,7 +47,7 @@ public class RoleModuleIndexServiceImpl implements IRoleModuleIndexService {
     protected IRoleService iRoleService;
 
     @DubboReference(version = "2.0.0")
-    protected IMenuOperateService iMenuOperateService;
+    protected IRoleOperateService iRoleOperateService;
 
     @DubboReference(version = "2.0.0")
     protected IGetListByIdListService iGetListByIdListService;
@@ -101,7 +101,7 @@ public class RoleModuleIndexServiceImpl implements IRoleModuleIndexService {
         menuOperateServiceVo.setRoleId(1);
         menuOperateServiceVo.setSystemModuleId(1100176417951318016L);
         menuOperateServiceVo.setSystemMenuId(1102873120315822080L);
-        Result<List<Long>> result = iMenuOperateService.getSystemMenuOperateIdList(menuOperateServiceVo);
+        Result<List<Long>> result = iRoleOperateService.getSystemMenuOperateIdList(menuOperateServiceVo);
         if (Objects.equals(result.getFlag(), Result.FAILURE)) {
             return new ArrayList<>();
         }

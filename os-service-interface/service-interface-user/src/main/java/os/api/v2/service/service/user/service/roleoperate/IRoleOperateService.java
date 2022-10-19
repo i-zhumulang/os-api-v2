@@ -21,6 +21,6 @@ import java.util.List;
  * @version 2.0.0
  * @date 2022-08-09 21:51
  */
-public interface IMenuOperateService {
+public interface IRoleOperateService {
     Result<List<Long>> getSystemMenuOperateIdList(MenuOperateServiceVo menuOperateServiceVo);
 }

@@ -16,7 +16,7 @@ import os.api.v2.model.service.user.vo.roleoperate.RoleOperateModelVo;
 import java.util.List;
 
 /**
- * os.api.v2.model.service.user.service.roleperate.IRoleOperateService
+ * os.api.v2.model.service.user.service.roleoperate.IRoleOperateService
  *
  * @author 吴荣超
  * @version 2.0.0

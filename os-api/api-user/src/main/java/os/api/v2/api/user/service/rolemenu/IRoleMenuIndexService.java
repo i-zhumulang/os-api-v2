@@ -20,6 +20,6 @@ import os.api.v2.common.base.common.Result;
  * @version 2.0.0
  * @date 2022-09-14 21:56
  */
-public interface IModuleMenuIndexService {
+public interface IRoleMenuIndexService {
     Result<IndexDto> index(IndexVo indexVo);
 }

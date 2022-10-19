@@ -14,9 +14,8 @@ import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.BeanUtils;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.model.service.user.dto.roleoperate.RoleOperateModelDto;
-import os.api.v2.model.service.user.service.roleoperate.IRoleOperateService;
 import os.api.v2.model.service.user.vo.roleoperate.RoleOperateModelVo;
-import os.api.v2.service.service.user.service.roleoperate.IMenuOperateService;
+import os.api.v2.service.service.user.service.roleoperate.IRoleOperateService;
 import os.api.v2.service.service.user.vo.roleoperate.MenuOperateServiceVo;
 
 import java.util.List;
@@ -31,9 +30,9 @@ import java.util.stream.Collectors;
  * @date 2022-08-09 21:59
  */
 @DubboService(version = "2.0.0")
-public class MenuOperateServiceImpl implements IMenuOperateService {
+public class RoleOperateServiceImpl implements IRoleOperateService {
     @DubboReference(version = "2.0.0")
-    protected IRoleOperateService iRoleOperateService;
+    protected os.api.v2.model.service.user.service.roleoperate.IRoleOperateService iRoleOperateService;
 
     @Override
     public Result<List<Long>> getSystemMenuOperateIdList(MenuOperateServiceVo menuOperateServiceVo) {

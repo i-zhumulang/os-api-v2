@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import os.api.v2.api.user.dto.rolemenu.IndexDto;
-import os.api.v2.api.user.service.rolemenu.IModuleMenuIndexService;
+import os.api.v2.api.user.service.rolemenu.IRoleMenuIndexService;
 import os.api.v2.api.user.vo.rolemenu.IndexVo;
 import os.api.v2.common.base.common.Result;
 
@@ -30,10 +30,10 @@ import os.api.v2.common.base.common.Result;
 @RequestMapping("/role-menu")
 public class RoleMenuController {
     @Autowired
-    protected IModuleMenuIndexService iModuleMenuIndexService;
+    protected IRoleMenuIndexService iRoleMenuIndexService;
 
     @RequestMapping(value = "/index", method = RequestMethod.POST)
     public Result<IndexDto> index(@RequestBody IndexVo indexVo) {
-        return iModuleMenuIndexService.index(indexVo);
+        return iRoleMenuIndexService.index(indexVo);
     }
 }

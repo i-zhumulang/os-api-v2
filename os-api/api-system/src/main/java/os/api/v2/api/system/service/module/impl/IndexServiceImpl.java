@@ -23,7 +23,7 @@ import os.api.v2.common.base.exception.UserException;
 import os.api.v2.model.service.system.dto.module.ModuleModelDto;
 import os.api.v2.model.service.system.vo.module.IndexModelVo;
 import os.api.v2.service.service.system.service.menuoperate.IGetListByIdListService;
-import os.api.v2.service.service.user.service.roleoperate.IMenuOperateService;
+import os.api.v2.service.service.user.service.roleoperate.IRoleOperateService;
 import os.api.v2.service.service.user.vo.roleoperate.MenuOperateServiceVo;
 
 import java.util.*;
@@ -41,7 +41,7 @@ public class IndexServiceImpl implements IIndexService {
     protected os.api.v2.model.service.system.service.module.IIndexService iIndexService;
 
     @DubboReference(version = "2.0.0")
-    protected IMenuOperateService iMenuOperateService;
+    protected IRoleOperateService iRoleOperateService;
 
     @DubboReference(version = "2.0.0")
     protected IGetListByIdListService iGetListByIdListService;
@@ -106,7 +106,7 @@ public class IndexServiceImpl implements IIndexService {
         menuOperateServiceVo.setRoleId(1);
         menuOperateServiceVo.setSystemModuleId(1100176417150205952L);
         menuOperateServiceVo.setSystemMenuId(1100177341767860224L);
-        Result<List<Long>> result = iMenuOperateService.getSystemMenuOperateIdList(menuOperateServiceVo);
+        Result<List<Long>> result = iRoleOperateService.getSystemMenuOperateIdList(menuOperateServiceVo);
         if (Objects.equals(result.getFlag(), Result.FAILURE)) {
             return new ArrayList<>();
         }
