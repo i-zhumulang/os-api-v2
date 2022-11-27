@@ -22,6 +22,7 @@ import os.api.v2.common.base.common.Result;
 import os.api.v2.model.service.user.dto.rolemodule.RoleModuleModelDto;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -54,6 +55,9 @@ public class RoleModuleController {
 
     @Autowired
     protected IRoleModuleDestroyService iRoleModuleDestroyService;
+
+    @Autowired
+    protected IRoleModulePermissionCreateService iRoleModulePermissionCreateService;
 
     @RequestMapping(value = "/index", method = RequestMethod.POST)
     public Result<IndexDto> index(@RequestBody @Valid IndexVo indexVo) {
@@ -88,5 +92,10 @@ public class RoleModuleController {
     @RequestMapping(value = "/destroy", method = RequestMethod.POST)
     public Result<String> destroy(@RequestBody @Valid DestroyVo destroyVo) {
         return iRoleModuleDestroyService.destroy(destroyVo);
+    }
+
+    @RequestMapping(value = "permission", method = RequestMethod.POST)
+    public Result<List<Object>> permission() {
+        return iRoleModulePermissionCreateService.permissionCreate();
     }
 }

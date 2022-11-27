@@ -16,29 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `user_role`
+-- Table structure for table `role_module`
 --
 
-DROP TABLE IF EXISTS `user_role`;
+DROP TABLE IF EXISTS `role_module`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user_role` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `role_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '角色ID',
-  `user_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '用户ID',
-  `created_at` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+CREATE TABLE `role_module` (
+  `id` bigint(20) unsigned NOT NULL,
+  `role_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '角色ID',
+  `system_module_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '模块ID(v2_system.module表ID)',
+  `count` int(10) NOT NULL DEFAULT '0' COMMENT '菜单数量',
+  `sorting` int(10) NOT NULL DEFAULT '0' COMMENT '排序',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='用户-角色';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='角色-模块';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user_role`
+-- Dumping data for table `role_module`
 --
 
-LOCK TABLES `user_role` WRITE;
-/*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
-INSERT INTO `user_role` VALUES (1,1,1035433978183557120,1658239800000);
-/*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
+LOCK TABLES `role_module` WRITE;
+/*!40000 ALTER TABLE `role_module` DISABLE KEYS */;
+INSERT INTO `role_module` VALUES (1100230276350537728,1,1100176417150205952,0,0),(1100230276883214336,1,1100176417951318016,0,0);
+/*!40000 ALTER TABLE `role_module` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-09  0:54:37
+-- Dump completed on 2022-11-27 10:57:40

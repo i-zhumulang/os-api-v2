@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.29, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: v2_user
+-- Host: 127.0.0.1    Database: v2_company
 -- ------------------------------------------------------
 -- Server version	5.7.38
 
@@ -16,28 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `role_module`
+-- Table structure for table `employee`
 --
 
-DROP TABLE IF EXISTS `role_module`;
+DROP TABLE IF EXISTS `employee`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `role_module` (
+CREATE TABLE `employee` (
   `id` bigint(20) unsigned NOT NULL,
-  `role_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '角色ID',
-  `system_module_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '模块ID(v2_system.module表ID)',
+  `clique_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '集团ID',
+  `user_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '用户ID',
+  `user_name` varchar(20) NOT NULL DEFAULT '' COMMENT '用户名称',
+  `user_mobile` varchar(11) NOT NULL DEFAULT '' COMMENT '用户手机',
+  `employee_position_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '默认公司职位',
+  `created_at` bigint(20) unsigned NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='角色-模块';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='员工-主表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `role_module`
+-- Dumping data for table `employee`
 --
 
-LOCK TABLES `role_module` WRITE;
-/*!40000 ALTER TABLE `role_module` DISABLE KEYS */;
-INSERT INTO `role_module` VALUES (1100230276350537728,1,1100176417150205952),(1100230276883214336,1,1100176417951318016);
-/*!40000 ALTER TABLE `role_module` ENABLE KEYS */;
+LOCK TABLES `employee` WRITE;
+/*!40000 ALTER TABLE `employee` DISABLE KEYS */;
+/*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-09  0:54:37
+-- Dump completed on 2022-11-27 10:58:39

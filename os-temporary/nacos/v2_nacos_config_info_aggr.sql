@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.29, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: v2_user
+-- Host: 127.0.0.1    Database: v2_nacos
 -- ------------------------------------------------------
 -- Server version	5.7.38
 
@@ -16,32 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `user_account`
+-- Table structure for table `config_info_aggr`
 --
 
-DROP TABLE IF EXISTS `user_account`;
+DROP TABLE IF EXISTS `config_info_aggr`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user_account` (
-  `user_id` bigint(20) unsigned NOT NULL COMMENT '用户ID',
-  `mobile` varchar(11) NOT NULL DEFAULT '' COMMENT '手机号码',
-  `authentication` varchar(255) NOT NULL DEFAULT '' COMMENT '密码',
-  `salt` char(32) NOT NULL DEFAULT '' COMMENT '加密用的盐',
-  `iv` char(16) NOT NULL DEFAULT '' COMMENT '一个非空初始化向量',
-  `state` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '状态',
-  `deleted_state` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '是否删除(0:否,1:是)',
-  PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='用户-账号';
+CREATE TABLE `config_info_aggr` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `data_id` varchar(255) COLLATE utf8_bin NOT NULL COMMENT 'data_id',
+  `group_id` varchar(255) COLLATE utf8_bin NOT NULL COMMENT 'group_id',
+  `datum_id` varchar(255) COLLATE utf8_bin NOT NULL COMMENT 'datum_id',
+  `content` longtext COLLATE utf8_bin NOT NULL COMMENT '内容',
+  `gmt_modified` datetime NOT NULL COMMENT '修改时间',
+  `app_name` varchar(128) COLLATE utf8_bin DEFAULT NULL,
+  `tenant_id` varchar(128) COLLATE utf8_bin DEFAULT '' COMMENT '租户字段',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_configinfoaggr_datagrouptenantdatum` (`data_id`,`group_id`,`tenant_id`,`datum_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='增加租户字段';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user_account`
+-- Dumping data for table `config_info_aggr`
 --
 
-LOCK TABLES `user_account` WRITE;
-/*!40000 ALTER TABLE `user_account` DISABLE KEYS */;
-INSERT INTO `user_account` VALUES (1035433978183557120,'18120827456','IpIj+iIo3C7GeURjG30EnA==','CeKASEI8J8IZJa67F2PkEn4X9mDihzpe','uoI20c88igFvi6eE',0,0);
-/*!40000 ALTER TABLE `user_account` ENABLE KEYS */;
+LOCK TABLES `config_info_aggr` WRITE;
+/*!40000 ALTER TABLE `config_info_aggr` DISABLE KEYS */;
+/*!40000 ALTER TABLE `config_info_aggr` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -53,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-09  0:54:37
+-- Dump completed on 2022-11-27 10:59:14

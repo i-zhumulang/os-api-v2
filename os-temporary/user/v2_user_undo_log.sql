@@ -16,30 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `module_menu`
+-- Table structure for table `undo_log`
 --
 
-DROP TABLE IF EXISTS `module_menu`;
+DROP TABLE IF EXISTS `undo_log`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `module_menu` (
-  `id` bigint(20) unsigned NOT NULL,
-  `role_module_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '角色-模块ID',
-  `role_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '角色ID',
-  `system_module_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '模块ID',
-  `system_menu_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '菜单ID(v2_system.menu表ID)',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='模块-菜单';
+CREATE TABLE `undo_log` (
+  `branch_id` bigint(20) NOT NULL COMMENT 'branch transaction id',
+  `xid` varchar(128) NOT NULL COMMENT 'global transaction id',
+  `context` varchar(128) NOT NULL COMMENT 'undo_log context,such as serialization',
+  `rollback_info` longblob NOT NULL COMMENT 'rollback info',
+  `log_status` int(11) NOT NULL COMMENT '0:normal status,1:defense status',
+  `log_created` datetime(6) NOT NULL COMMENT 'create datetime',
+  `log_modified` datetime(6) NOT NULL COMMENT 'modify datetime',
+  UNIQUE KEY `ux_undo_log` (`xid`,`branch_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='AT transaction mode undo table';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `module_menu`
+-- Dumping data for table `undo_log`
 --
 
-LOCK TABLES `module_menu` WRITE;
-/*!40000 ALTER TABLE `module_menu` DISABLE KEYS */;
-INSERT INTO `module_menu` VALUES (1100230277583663104,1100230276350537728,1,1100176417150205952,1100177340668952576),(1100230278099562496,1100230276350537728,1,1100176417150205952,1100177341767860224),(1100230279420768256,1100230276350537728,1,1100176417150205952,1100177342397005824),(1104209218967199744,1100230276350537728,1,1100176417150205952,1102868720906162176),(1106526075837497344,1100230276883214336,1,1100176417951318016,1102871794815094784),(1106526076093349888,1100230276883214336,1,1100176417951318016,1102872191327817728);
-/*!40000 ALTER TABLE `module_menu` ENABLE KEYS */;
+LOCK TABLES `undo_log` WRITE;
+/*!40000 ALTER TABLE `undo_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `undo_log` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-09  0:54:37
+-- Dump completed on 2022-11-27 10:57:40

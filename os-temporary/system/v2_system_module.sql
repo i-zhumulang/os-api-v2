@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.29, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: v2_user
+-- Host: 127.0.0.1    Database: v2_system
 -- ------------------------------------------------------
 -- Server version	5.7.38
 
@@ -16,31 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `undo_log`
+-- Table structure for table `module`
 --
 
-DROP TABLE IF EXISTS `undo_log`;
+DROP TABLE IF EXISTS `module`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `undo_log` (
-  `branch_id` bigint(20) NOT NULL COMMENT 'branch transaction id',
-  `xid` varchar(128) NOT NULL COMMENT 'global transaction id',
-  `context` varchar(128) NOT NULL COMMENT 'undo_log context,such as serialization',
-  `rollback_info` longblob NOT NULL COMMENT 'rollback info',
-  `log_status` int(11) NOT NULL COMMENT '0:normal status,1:defense status',
-  `log_created` datetime(6) NOT NULL COMMENT 'create datetime',
-  `log_modified` datetime(6) NOT NULL COMMENT 'modify datetime',
-  UNIQUE KEY `ux_undo_log` (`xid`,`branch_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='AT transaction mode undo table';
+CREATE TABLE `module` (
+  `id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `name_en` varchar(20) NOT NULL DEFAULT '' COMMENT '模块名称(英文)',
+  `name_zh` varchar(20) NOT NULL DEFAULT '' COMMENT '模块名称(中文)',
+  `domain` varchar(50) NOT NULL DEFAULT '' COMMENT '模块域名',
+  `home_page` varchar(50) NOT NULL DEFAULT '' COMMENT '模块首页',
+  `sorting` tinyint(4) NOT NULL DEFAULT '0' COMMENT '排序',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='模块';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `undo_log`
+-- Dumping data for table `module`
 --
 
-LOCK TABLES `undo_log` WRITE;
-/*!40000 ALTER TABLE `undo_log` DISABLE KEYS */;
-/*!40000 ALTER TABLE `undo_log` ENABLE KEYS */;
+LOCK TABLES `module` WRITE;
+/*!40000 ALTER TABLE `module` DISABLE KEYS */;
+INSERT INTO `module` VALUES (1100176417150205952,'SYSTEM','系统管理','http://127.0.0.1:8080','/system/module/index',0),(1100176417951318016,'USER','个人中心','http://127.0.0.1:8080','/user/user/index',0),(1100176418634989568,'DOCUMENT','操作手册','http://127.0.0.1:8080','/document/system/index',1);
+/*!40000 ALTER TABLE `module` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-09  0:54:37
+-- Dump completed on 2022-11-27 10:56:30

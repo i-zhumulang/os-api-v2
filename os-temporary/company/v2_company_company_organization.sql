@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.29, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: v2_user
+-- Host: 127.0.0.1    Database: v2_company
 -- ------------------------------------------------------
 -- Server version	5.7.38
 
@@ -16,28 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `role`
+-- Table structure for table `company_organization`
 --
 
-DROP TABLE IF EXISTS `role`;
+DROP TABLE IF EXISTS `company_organization`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `role` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name_en` varchar(45) NOT NULL DEFAULT '' COMMENT '角色名称(英文)',
-  `name_zh` varchar(45) NOT NULL DEFAULT '' COMMENT '角色名称(中文)',
+CREATE TABLE `company_organization` (
+  `id` bigint(20) unsigned NOT NULL COMMENT '部门ID',
+  `pid` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '上级部门ID',
+  `name` varchar(20) NOT NULL DEFAULT '' COMMENT '部门名称',
+  `state` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '状态(0:正常)',
+  `company_id` bigint(20) NOT NULL COMMENT '所属公司ID',
+  `clique_id` bigint(20) NOT NULL COMMENT '所属集团ID',
+  `created_at` bigint(20) unsigned NOT NULL COMMENT '创建时间',
+  `deleted_state` int(11) NOT NULL DEFAULT '0' COMMENT '是否删除(0:否,1:是)',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='角色表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='公司-组织架构表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `role`
+-- Dumping data for table `company_organization`
 --
 
-LOCK TABLES `role` WRITE;
-/*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` VALUES (1,'超级管理员','超级管理员'),(2,'普通用户','普通用户'),(3,'公司管理员','公司管理员'),(4,'集团管理员','集团管理员');
-/*!40000 ALTER TABLE `role` ENABLE KEYS */;
+LOCK TABLES `company_organization` WRITE;
+/*!40000 ALTER TABLE `company_organization` DISABLE KEYS */;
+/*!40000 ALTER TABLE `company_organization` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-09  0:54:37
+-- Dump completed on 2022-11-27 10:58:39
