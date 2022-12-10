@@ -25,7 +25,7 @@ import java.util.List;
 @Service
 public class RoleModulePermissionCreateServiceImpl implements IRoleModulePermissionCreateService {
     @Override
-    public Result<List<Object>> permissionCreate() {
+    public Result<List<Object>> permissionCreate(Long id) {
         return null;
     }
 }

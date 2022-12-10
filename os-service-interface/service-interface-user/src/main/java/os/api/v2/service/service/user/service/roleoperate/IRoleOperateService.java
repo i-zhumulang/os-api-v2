@@ -15,7 +15,7 @@ import os.api.v2.service.service.user.vo.roleoperate.MenuOperateServiceVo;
 import java.util.List;
 
 /**
- * os.api.v2.service.service.user.service.roleoperate.IMenuOperateService
+ * os.api.v2.service.service.user.service.roleoperate.IRoleOperateService
  *
  * @author 吴荣超
  * @version 2.0.0

@@ -13,6 +13,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * os.api.v2.model.impl.system.ModelImplSystemApplication
@@ -24,6 +25,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @SpringBootApplication(scanBasePackages = "os.api.v2.model.impl.system")
 @MapperScan(value = "os.api.v2.model.impl.system.mapper")
 @EnableDiscoveryClient
+@ComponentScan({
+        "os.api.v2.model.impl.common.config",
+})
 public class ModelImplSystemApplication {
     public static void main(String[] args) {
         SpringApplication.run(ModelImplSystemApplication.class, args);

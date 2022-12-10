@@ -11,6 +11,7 @@ package os.api.v2.api.user.service.rolemodule.impl;
 
 import org.springframework.stereotype.Service;
 import os.api.v2.api.user.service.rolemodule.IRoleModulePermissionStoreService;
+import os.api.v2.common.base.common.Result;
 
 /**
  * os.api.v2.api.user.service.rolemodule.impl.RoleModulePermissionStoreServiceImpl
@@ -21,4 +22,8 @@ import os.api.v2.api.user.service.rolemodule.IRoleModulePermissionStoreService;
  */
 @Service
 public class RoleModulePermissionStoreServiceImpl implements IRoleModulePermissionStoreService {
+    @Override
+    public Result<String> permissionStore() {
+        return null;
+    }
 }

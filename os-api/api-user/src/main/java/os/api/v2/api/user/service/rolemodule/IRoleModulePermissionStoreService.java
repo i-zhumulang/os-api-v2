@@ -9,6 +9,8 @@
 // +----------------------------------------------------------------------
 package os.api.v2.api.user.service.rolemodule;
 
+import os.api.v2.common.base.common.Result;
+
 /**
  * os.api.v2.api.user.service.rolemodule.IRoleModulePermissionStoreService
  *
@@ -17,4 +19,5 @@ package os.api.v2.api.user.service.rolemodule;
  * @date 2022-11-08 23:32
  */
 public interface IRoleModulePermissionStoreService {
+    Result<String> permissionStore();
 }

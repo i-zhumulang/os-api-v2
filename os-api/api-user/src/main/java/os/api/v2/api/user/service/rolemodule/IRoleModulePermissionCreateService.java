@@ -21,5 +21,5 @@ import java.util.List;
  * @date 2022-11-06 10:34
  */
 public interface IRoleModulePermissionCreateService {
-    Result<List<Object>> permissionCreate();
+    Result<List<Object>> permissionCreate(Long id);
 }

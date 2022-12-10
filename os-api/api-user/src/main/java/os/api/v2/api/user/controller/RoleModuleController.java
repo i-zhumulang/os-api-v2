@@ -10,10 +10,7 @@
 package os.api.v2.api.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import os.api.v2.api.user.dto.rolemodule.CreateDto;
 import os.api.v2.api.user.dto.rolemodule.IndexDto;
 import os.api.v2.api.user.service.rolemodule.*;
@@ -59,6 +56,9 @@ public class RoleModuleController {
     @Autowired
     protected IRoleModulePermissionCreateService iRoleModulePermissionCreateService;
 
+    @Autowired
+    protected IRoleModulePermissionStoreService iRoleModulePermissionStoreService;
+
     @RequestMapping(value = "/index", method = RequestMethod.POST)
     public Result<IndexDto> index(@RequestBody @Valid IndexVo indexVo) {
         return iRoleModuleIndexService.index(indexVo);
@@ -94,8 +94,13 @@ public class RoleModuleController {
         return iRoleModuleDestroyService.destroy(destroyVo);
     }
 
+    @RequestMapping(value = "permission", method = RequestMethod.GET)
+    public Result<List<Object>> permissionCreate(@RequestParam("id") Long id) {
+        return iRoleModulePermissionCreateService.permissionCreate(id);
+    }
+
     @RequestMapping(value = "permission", method = RequestMethod.POST)
-    public Result<List<Object>> permission() {
-        return iRoleModulePermissionCreateService.permissionCreate();
+    public Result<String> permissionStore() {
+        return iRoleModulePermissionStoreService.permissionStore();
     }
 }
