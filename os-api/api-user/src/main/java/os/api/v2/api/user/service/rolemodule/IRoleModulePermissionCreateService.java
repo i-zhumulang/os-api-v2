@@ -10,6 +10,7 @@
 package os.api.v2.api.user.service.rolemodule;
 
 import os.api.v2.common.base.common.Result;
+import os.api.v2.common.base.exception.UserException;
 
 import java.util.List;
 
@@ -21,5 +22,5 @@ import java.util.List;
  * @date 2022-11-06 10:34
  */
 public interface IRoleModulePermissionCreateService {
-    Result<List<Object>> permissionCreate(Long id);
+    Result<List<Object>> permissionCreate(Long id) throws UserException;
 }

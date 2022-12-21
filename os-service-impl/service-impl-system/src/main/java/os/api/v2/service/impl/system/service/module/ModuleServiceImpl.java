@@ -65,7 +65,12 @@ public class ModuleServiceImpl implements IModuleService {
         Result<List<ModuleModelDto>> result = iModuleService.getModuleList(moduleModelVo);
         Map<Long, String> idName = result.getData()
                 .stream()
-                .collect(Collectors.toMap(ModuleModelDto::getId, ModuleModelDto::getNameZh));
+                .collect(
+                        Collectors.toMap(
+                                ModuleModelDto::getId,
+                                ModuleModelDto::getNameZh
+                        )
+                );
         return new Result<>(Result.SUCCESS, idName);
     }
 

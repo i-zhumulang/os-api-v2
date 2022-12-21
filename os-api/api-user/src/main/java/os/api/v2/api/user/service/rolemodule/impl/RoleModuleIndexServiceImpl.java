@@ -24,7 +24,7 @@ import os.api.v2.service.service.system.service.menuoperate.IGetListByIdListServ
 import os.api.v2.service.service.user.service.roleoperate.IRoleOperateService;
 import os.api.v2.service.service.user.service.role.IRoleService;
 import os.api.v2.service.service.system.service.module.IModuleService;
-import os.api.v2.service.service.user.vo.roleoperate.MenuOperateServiceVo;
+import os.api.v2.service.service.user.vo.roleoperate.RoleOperateServiceVo;
 
 import java.util.*;
 
@@ -97,11 +97,11 @@ public class RoleModuleIndexServiceImpl implements IRoleModuleIndexService {
     }
 
     private List<Long> getMenuOperateIdList() {
-        MenuOperateServiceVo menuOperateServiceVo = new MenuOperateServiceVo();
-        menuOperateServiceVo.setRoleId(1);
-        menuOperateServiceVo.setSystemModuleId(1100176417951318016L);
-        menuOperateServiceVo.setSystemMenuId(1102873120315822080L);
-        Result<List<Long>> result = iRoleOperateService.getSystemMenuOperateIdList(menuOperateServiceVo);
+        RoleOperateServiceVo roleOperateServiceVo = new RoleOperateServiceVo();
+        roleOperateServiceVo.setRoleId(1);
+        roleOperateServiceVo.setSystemModuleId(1100176417951318016L);
+        roleOperateServiceVo.setSystemMenuId(1102873120315822080L);
+        Result<List<Long>> result = iRoleOperateService.getSystemMenuOperateIdList(roleOperateServiceVo);
         if (Objects.equals(result.getFlag(), Result.FAILURE)) {
             return new ArrayList<>();
         }

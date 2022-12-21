@@ -15,7 +15,7 @@ import os.api.v2.api.system.service.module.IModuleOptionsService;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.service.service.system.service.menuoperate.IGetListByIdListService;
 import os.api.v2.service.service.user.service.roleoperate.IRoleOperateService;
-import os.api.v2.service.service.user.vo.roleoperate.MenuOperateServiceVo;
+import os.api.v2.service.service.user.vo.roleoperate.RoleOperateServiceVo;
 
 import java.util.*;
 
@@ -46,11 +46,11 @@ public class ModuleOptionsServiceImpl implements IModuleOptionsService {
     }
 
     private List<Long> getMenuOperateIdList() {
-        MenuOperateServiceVo menuOperateServiceVo = new MenuOperateServiceVo();
-        menuOperateServiceVo.setRoleId(1);
-        menuOperateServiceVo.setSystemModuleId(1100176417150205952L);
-        menuOperateServiceVo.setSystemMenuId(1100177341767860224L);
-        Result<List<Long>> result = iRoleOperateService.getSystemMenuOperateIdList(menuOperateServiceVo);
+        RoleOperateServiceVo roleOperateServiceVo = new RoleOperateServiceVo();
+        roleOperateServiceVo.setRoleId(1);
+        roleOperateServiceVo.setSystemModuleId(1100176417150205952L);
+        roleOperateServiceVo.setSystemMenuId(1100177341767860224L);
+        Result<List<Long>> result = iRoleOperateService.getSystemMenuOperateIdList(roleOperateServiceVo);
         if (Objects.equals(result.getFlag(), Result.FAILURE)) {
             return new ArrayList<>();
         }

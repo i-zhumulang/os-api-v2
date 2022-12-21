@@ -21,13 +21,14 @@ import os.api.v2.model.service.system.dto.menu.MenuModelDto;
 import os.api.v2.model.service.system.dto.menuoperate.MenuOperateModelDto;
 import os.api.v2.model.service.system.dto.module.ModuleModelDto;
 import os.api.v2.model.service.system.service.menu.IMenuService;
+import os.api.v2.model.service.system.service.menuoperate.IMenuOperateIndexService;
 import os.api.v2.model.service.system.service.module.IModuleService;
 import os.api.v2.model.service.system.vo.menu.MenuModelVo;
 import os.api.v2.model.service.system.vo.menuoperate.IndexModelVo;
 import os.api.v2.model.service.system.vo.module.ModuleModelVo;
 import os.api.v2.service.service.system.service.menuoperate.IGetListByIdListService;
 import os.api.v2.service.service.user.service.roleoperate.IRoleOperateService;
-import os.api.v2.service.service.user.vo.roleoperate.MenuOperateServiceVo;
+import os.api.v2.service.service.user.vo.roleoperate.RoleOperateServiceVo;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -42,7 +43,7 @@ import java.util.stream.Collectors;
 @Service
 public class OperateIndexServiceImpl implements IOperateIndexService {
     @DubboReference(version = "2.0.0")
-    protected os.api.v2.model.service.system.service.menuoperate.IOperateIndexService iOperateIndexService;
+    protected IMenuOperateIndexService iMenuOperateIndexService;
 
     @DubboReference(version = "2.0.0")
     protected IModuleService iModuleService;
@@ -85,7 +86,7 @@ public class OperateIndexServiceImpl implements IOperateIndexService {
                 "uri",
                 "sorting"
         });
-        Result<List<MenuOperateModelDto>> result = iOperateIndexService.index(indexModelVo);
+        Result<List<MenuOperateModelDto>> result = iMenuOperateIndexService.index(indexModelVo);
         if (Objects.equals(result.getFlag(), Result.FAILURE)) {
             throw new UserException(result.getMessage());
         }
@@ -153,11 +154,11 @@ public class OperateIndexServiceImpl implements IOperateIndexService {
      * @date 22:29 2022/9/1
      */
     private List<Long> getMenuOperateIdList() {
-        MenuOperateServiceVo menuOperateServiceVo = new MenuOperateServiceVo();
-        menuOperateServiceVo.setRoleId(1);
-        menuOperateServiceVo.setSystemModuleId(1100176417150205952L);
-        menuOperateServiceVo.setSystemMenuId(1102868720906162176L);
-        Result<List<Long>> result = iRoleOperateService.getSystemMenuOperateIdList(menuOperateServiceVo);
+        RoleOperateServiceVo roleOperateServiceVo = new RoleOperateServiceVo();
+        roleOperateServiceVo.setRoleId(1);
+        roleOperateServiceVo.setSystemModuleId(1100176417150205952L);
+        roleOperateServiceVo.setSystemMenuId(1102868720906162176L);
+        Result<List<Long>> result = iRoleOperateService.getSystemMenuOperateIdList(roleOperateServiceVo);
         if (Objects.equals(result.getFlag(), Result.FAILURE)) {
             return new ArrayList<>();
         }

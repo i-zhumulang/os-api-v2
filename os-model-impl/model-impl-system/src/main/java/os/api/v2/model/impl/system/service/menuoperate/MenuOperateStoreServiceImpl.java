@@ -15,7 +15,7 @@ import org.springframework.beans.BeanUtils;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.model.impl.system.mapper.MenuOperateMapper;
 import os.api.v2.model.impl.system.pojo.MenuOperate;
-import os.api.v2.model.service.system.service.menuoperate.IOperateStoreService;
+import os.api.v2.model.service.system.service.menuoperate.IMenuOperateStoreService;
 import os.api.v2.model.service.system.vo.menuoperate.StoreModelVo;
 
 /**
@@ -26,7 +26,7 @@ import os.api.v2.model.service.system.vo.menuoperate.StoreModelVo;
  * @date 2022-09-04 22:47
  */
 @DubboService(version = "2.0.0")
-public class OperateStoreServiceImpl extends ServiceImpl<MenuOperateMapper, MenuOperate> implements IOperateStoreService {
+public class MenuOperateStoreServiceImpl extends ServiceImpl<MenuOperateMapper, MenuOperate> implements IMenuOperateStoreService {
     @Override
     public Result<String> store(StoreModelVo storeModelVo) {
         MenuOperate entity = new MenuOperate();

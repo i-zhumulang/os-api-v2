@@ -25,4 +25,6 @@ import java.util.List;
 public class MenuServiceVo implements Serializable {
     private Long id;
     private List<Long> idList;
+    private Long moduleId;
+    private List<Long> moduleIdList;
 }

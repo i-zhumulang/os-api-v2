@@ -16,6 +16,7 @@ import os.api.v2.api.system.service.operate.IOperateStoreService;
 import os.api.v2.api.system.vo.operate.StoreVo;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.common.base.utils.IdWorkerUtils;
+import os.api.v2.model.service.system.service.menuoperate.IMenuOperateStoreService;
 import os.api.v2.model.service.system.vo.menuoperate.StoreModelVo;
 
 /**
@@ -28,13 +29,13 @@ import os.api.v2.model.service.system.vo.menuoperate.StoreModelVo;
 @Service
 public class OperateStoreServiceImpl implements IOperateStoreService {
     @DubboReference(version = "2.0.0")
-    protected os.api.v2.model.service.system.service.menuoperate.IOperateStoreService iOperateStoreService;
+    protected IMenuOperateStoreService iMenuOperateStoreService;
 
     @Override
     public Result<String> store(StoreVo storeVo) {
         StoreModelVo storeModelVo = new StoreModelVo();
         BeanUtils.copyProperties(storeVo, storeModelVo);
         storeModelVo.setId(new IdWorkerUtils().nextId());
-        return iOperateStoreService.store(storeModelVo);
+        return iMenuOperateStoreService.store(storeModelVo);
     }
 }

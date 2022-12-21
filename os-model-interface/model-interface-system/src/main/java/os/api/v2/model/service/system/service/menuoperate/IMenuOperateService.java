@@ -5,25 +5,24 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-09-14 23:47
+// | Date  : 2022-09-04 22:45
 // +----------------------------------------------------------------------
-package os.api.v2.service.service.system.service.menu;
+package os.api.v2.model.service.system.service.menuoperate;
 
 import os.api.v2.common.base.common.Result;
-import os.api.v2.service.service.system.dto.menu.MenuServiceDto;
-import os.api.v2.service.service.system.vo.menu.MenuServiceVo;
+import os.api.v2.model.service.system.dto.menuoperate.MenuOperateModelDto;
+import os.api.v2.model.service.system.vo.menuoperate.MenuOperateModelVo;
 
 import java.util.List;
-import java.util.Map;
 
 /**
- * os.api.v2.service.service.system.service.menu.IMenuService
+ * os.api.v2.model.service.system.service.menuoperate.IMenuOperateService
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-09-14 23:47
+ * @date 2022-09-04 22:45
  */
-public interface IMenuService {
-    Result<Map<Long, String>> getMenuIdNameZhMap();
-    Result<List<MenuServiceDto>> getMenuList(MenuServiceVo menuServiceVo);
+public interface IMenuOperateService {
+    Result<String> destroy(MenuOperateModelDto menuOperateModelDto);
+    Result<List<MenuOperateModelDto>> getMenuOperateList(MenuOperateModelVo menuOperateModelVo);
 }

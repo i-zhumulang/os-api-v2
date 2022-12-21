@@ -14,11 +14,9 @@ import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.BeanUtils;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.model.impl.system.mapper.MenuOperateMapper;
-import os.api.v2.model.impl.system.pojo.Menu;
 import os.api.v2.model.impl.system.pojo.MenuOperate;
-import os.api.v2.model.service.system.dto.menu.MenuModelDto;
 import os.api.v2.model.service.system.dto.menuoperate.MenuOperateModelDto;
-import os.api.v2.model.service.system.service.menuoperate.IOperateUpdateService;
+import os.api.v2.model.service.system.service.menuoperate.IMenuOperateUpdateService;
 import os.api.v2.model.service.system.vo.menuoperate.UpdateModelVo;
 
 /**
@@ -29,7 +27,7 @@ import os.api.v2.model.service.system.vo.menuoperate.UpdateModelVo;
  * @date 2022-09-05 00:21
  */
 @DubboService(version = "2.0.0")
-public class OperateUpdateServiceImpl extends ServiceImpl<MenuOperateMapper, MenuOperate> implements IOperateUpdateService {
+public class MenuOperateUpdateServiceImpl extends ServiceImpl<MenuOperateMapper, MenuOperate> implements IMenuOperateUpdateService {
     @Override
     public Result<MenuOperateModelDto> update(UpdateModelVo updateModelVo) {
         MenuOperate entity = new MenuOperate();

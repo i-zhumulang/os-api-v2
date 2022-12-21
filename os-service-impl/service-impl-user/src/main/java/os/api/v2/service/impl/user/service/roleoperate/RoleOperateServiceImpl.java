@@ -16,7 +16,7 @@ import os.api.v2.common.base.common.Result;
 import os.api.v2.model.service.user.dto.roleoperate.RoleOperateModelDto;
 import os.api.v2.model.service.user.vo.roleoperate.RoleOperateModelVo;
 import os.api.v2.service.service.user.service.roleoperate.IRoleOperateService;
-import os.api.v2.service.service.user.vo.roleoperate.MenuOperateServiceVo;
+import os.api.v2.service.service.user.vo.roleoperate.RoleOperateServiceVo;
 
 import java.util.List;
 import java.util.Objects;
@@ -35,9 +35,9 @@ public class RoleOperateServiceImpl implements IRoleOperateService {
     protected os.api.v2.model.service.user.service.roleoperate.IRoleOperateService iRoleOperateService;
 
     @Override
-    public Result<List<Long>> getSystemMenuOperateIdList(MenuOperateServiceVo menuOperateServiceVo) {
+    public Result<List<Long>> getSystemMenuOperateIdList(RoleOperateServiceVo roleOperateServiceVo) {
         RoleOperateModelVo roleOperateModelVo = new RoleOperateModelVo();
-        BeanUtils.copyProperties(menuOperateServiceVo, roleOperateModelVo);
+        BeanUtils.copyProperties(roleOperateServiceVo, roleOperateModelVo);
         String[] fieldArray = {"system_menu_operate_id"};
         Result<List<RoleOperateModelDto>> result = iRoleOperateService.systemMenuOperateList(roleOperateModelVo, fieldArray);
         if (Objects.equals(result.getFlag(), Result.FAILURE)) {

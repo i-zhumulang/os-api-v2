@@ -17,9 +17,8 @@ import os.api.v2.common.base.common.Result;
 import os.api.v2.model.impl.common.utils.FieldValuesUtils;
 import os.api.v2.model.impl.system.mapper.MenuOperateMapper;
 import os.api.v2.model.impl.system.pojo.MenuOperate;
-import os.api.v2.model.impl.system.pojo.Module;
 import os.api.v2.model.service.system.dto.menuoperate.MenuOperateModelDto;
-import os.api.v2.model.service.system.service.menuoperate.IOperateIndexService;
+import os.api.v2.model.service.system.service.menuoperate.IMenuOperateIndexService;
 import os.api.v2.model.service.system.vo.menuoperate.IndexModelVo;
 
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ import java.util.List;
  * @date 2022-08-31 22:11
  */
 @DubboService(version = "2.0.0")
-public class OperateIndexServiceImpl extends ServiceImpl<MenuOperateMapper, MenuOperate> implements IOperateIndexService {
+public class MenuOperateIndexServiceImpl extends ServiceImpl<MenuOperateMapper, MenuOperate> implements IMenuOperateIndexService {
     @Override
     public Result<List<MenuOperateModelDto>> index(IndexModelVo indexModelVo) {
         LambdaQueryWrapper<MenuOperate> queryWrapper = new FieldValuesUtils<>(MenuOperate.class, indexModelVo.getFieldArray()).queryWrapper();

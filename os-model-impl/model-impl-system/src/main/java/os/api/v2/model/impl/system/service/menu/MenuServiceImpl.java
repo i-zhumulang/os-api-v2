@@ -46,9 +46,14 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     public Result<List<MenuModelDto>> getMenuList(MenuModelVo menuModelVo) {
         LambdaQueryWrapper<Menu> queryWrapper = new FieldValuesUtils<>(Menu.class, menuModelVo.getFieldArray()).queryWrapper();
 
+        // id查询
         queryWrapper.eq(menuModelVo.getId() != null, Menu::getId, menuModelVo.getId());
-        queryWrapper.eq(menuModelVo.getParentId() != null, Menu::getParentId, menuModelVo.getParentId());
         queryWrapper.in(menuModelVo.getIdList() != null, Menu::getId, menuModelVo.getIdList());
+        // module id查询
+        queryWrapper.eq(menuModelVo.getModuleId() != null, Menu::getModuleId,menuModelVo.getModuleId());
+        queryWrapper.in(menuModelVo.getModuleIdList() != null, Menu::getModuleId,menuModelVo.getModuleId());
+        // parent id 查询
+        queryWrapper.eq(menuModelVo.getParentId() != null, Menu::getParentId, menuModelVo.getParentId());
 
         queryWrapper.orderByAsc(Menu::getSorting);
 

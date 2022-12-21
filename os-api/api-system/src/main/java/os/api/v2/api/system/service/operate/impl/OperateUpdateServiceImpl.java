@@ -16,6 +16,7 @@ import os.api.v2.api.system.service.operate.IOperateUpdateService;
 import os.api.v2.api.system.vo.operate.UpdateVo;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.model.service.system.dto.menuoperate.MenuOperateModelDto;
+import os.api.v2.model.service.system.service.menuoperate.IMenuOperateUpdateService;
 import os.api.v2.model.service.system.vo.menuoperate.UpdateModelVo;
 
 /**
@@ -28,12 +29,12 @@ import os.api.v2.model.service.system.vo.menuoperate.UpdateModelVo;
 @Service
 public class OperateUpdateServiceImpl implements IOperateUpdateService {
     @DubboReference(version = "2.0.0")
-    protected os.api.v2.model.service.system.service.menuoperate.IOperateUpdateService iOperateUpdateService;
+    protected IMenuOperateUpdateService iMenuOperateUpdateService;
 
     @Override
     public Result<MenuOperateModelDto> update(UpdateVo updateVo) {
         UpdateModelVo updateModelVo = new UpdateModelVo();
         BeanUtils.copyProperties(updateVo, updateModelVo);
-        return iOperateUpdateService.update(updateModelVo);
+        return iMenuOperateUpdateService.update(updateModelVo);
     }
 }

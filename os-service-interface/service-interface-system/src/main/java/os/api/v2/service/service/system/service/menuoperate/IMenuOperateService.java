@@ -5,21 +5,23 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-09-05 00:17
+// | Date  : 2022-12-21 22:59
 // +----------------------------------------------------------------------
-package os.api.v2.model.service.system.service.menuoperate;
+package os.api.v2.service.service.system.service.menuoperate;
 
 import os.api.v2.common.base.common.Result;
-import os.api.v2.model.service.system.dto.menuoperate.MenuOperateModelDto;
-import os.api.v2.model.service.system.vo.menuoperate.UpdateModelVo;
+import os.api.v2.service.service.system.dto.menuoperate.MenuOperateServiceDto;
+import os.api.v2.service.service.system.vo.menuoperate.MenuOperateServiceVo;
+
+import java.util.List;
 
 /**
- * os.api.v2.model.service.system.service.menuoperate.IOperateUpdateService
+ * os.api.v2.service.service.system.service.menuoperate.IMenuOperateService
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-09-05 00:17
+ * @date 2022-12-21 22:59
  */
-public interface IOperateUpdateService {
-    Result<MenuOperateModelDto> update(UpdateModelVo updateModelVo);
+public interface IMenuOperateService {
+    Result<List<MenuOperateServiceDto>> getMenuOperateList(MenuOperateServiceVo menuOperateServiceVo);
 }

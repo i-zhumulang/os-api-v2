@@ -10,7 +10,7 @@
 package os.api.v2.service.service.user.service.roleoperate;
 
 import os.api.v2.common.base.common.Result;
-import os.api.v2.service.service.user.vo.roleoperate.MenuOperateServiceVo;
+import os.api.v2.service.service.user.vo.roleoperate.RoleOperateServiceVo;
 
 import java.util.List;
 
@@ -22,5 +22,5 @@ import java.util.List;
  * @date 2022-08-09 21:51
  */
 public interface IRoleOperateService {
-    Result<List<Long>> getSystemMenuOperateIdList(MenuOperateServiceVo menuOperateServiceVo);
+    Result<List<Long>> getSystemMenuOperateIdList(RoleOperateServiceVo roleOperateServiceVo);
 }

@@ -15,7 +15,7 @@ import os.api.v2.api.system.service.operate.IOperateDestroyService;
 import os.api.v2.api.system.vo.operate.OperateVo;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.model.service.system.dto.menuoperate.MenuOperateModelDto;
-import os.api.v2.model.service.system.service.menuoperate.IOperateService;
+import os.api.v2.model.service.system.service.menuoperate.IMenuOperateService;
 
 /**
  * os.api.v2.api.system.service.operate.impl.OperateDestroyServiceImpl
@@ -27,12 +27,12 @@ import os.api.v2.model.service.system.service.menuoperate.IOperateService;
 @Service
 public class OperateDestroyServiceImpl implements IOperateDestroyService {
     @DubboReference(version = "2.0.0")
-    protected IOperateService iOperateService;
+    protected IMenuOperateService iMenuOperateService;
 
     @Override
     public Result<String> destroy(OperateVo operateVo) {
         MenuOperateModelDto menuOperateModelDto = new MenuOperateModelDto();
         menuOperateModelDto.setId(operateVo.getId());
-        return iOperateService.destroy(menuOperateModelDto);
+        return iMenuOperateService.destroy(menuOperateModelDto);
     }
 }

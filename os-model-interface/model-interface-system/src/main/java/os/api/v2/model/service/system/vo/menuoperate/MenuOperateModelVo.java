@@ -5,25 +5,29 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-09-14 23:47
+// | Date  : 2022-12-21 23:09
 // +----------------------------------------------------------------------
-package os.api.v2.service.service.system.service.menu;
+package os.api.v2.model.service.system.vo.menuoperate;
 
-import os.api.v2.common.base.common.Result;
-import os.api.v2.service.service.system.dto.menu.MenuServiceDto;
-import os.api.v2.service.service.system.vo.menu.MenuServiceVo;
+import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
 /**
- * os.api.v2.service.service.system.service.menu.IMenuService
+ * os.api.v2.model.service.system.vo.menuoperate.MenuOperateModelVo
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-09-14 23:47
+ * @date 2022-12-21 23:09
  */
-public interface IMenuService {
-    Result<Map<Long, String>> getMenuIdNameZhMap();
-    Result<List<MenuServiceDto>> getMenuList(MenuServiceVo menuServiceVo);
+@Data
+public class MenuOperateModelVo implements Serializable {
+    private Long id;
+    private List<Long> idList;
+    private Long menuId;
+    private List<Long> menuIdList;
+    private Long moduleId;
+    private List<Long> moduleIdList;
+    private String[] fieldArray;
 }

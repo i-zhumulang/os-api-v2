@@ -5,23 +5,28 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-08-31 22:09
+// | Date  : 2022-12-21 23:00
 // +----------------------------------------------------------------------
-package os.api.v2.model.service.system.service.menuoperate;
+package os.api.v2.service.service.system.vo.menuoperate;
 
-import os.api.v2.common.base.common.Result;
-import os.api.v2.model.service.system.dto.menuoperate.MenuOperateModelDto;
-import os.api.v2.model.service.system.vo.menuoperate.IndexModelVo;
+import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
- * os.api.v2.model.service.system.service.menuoperate.IOperateIndexService
+ * os.api.v2.service.service.system.vo.menuoperate.MenuOperateServiceVo
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-08-31 22:09
+ * @date 2022-12-21 23:00
  */
-public interface IOperateIndexService {
-    Result<List<MenuOperateModelDto>> index(IndexModelVo indexModelVo);
+@Data
+public class MenuOperateServiceVo implements Serializable {
+    private Long id;
+    private List<Long> idList;
+    private Long menuId;
+    private List<Long> menuIdList;
+    private Long moduleId;
+    private List<Long> moduleIdList;
 }
