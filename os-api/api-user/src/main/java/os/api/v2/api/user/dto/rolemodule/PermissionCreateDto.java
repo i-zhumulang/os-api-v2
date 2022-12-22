@@ -5,23 +5,27 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-11-06 10:34
+// | Date  : 2022-12-22 21:34
 // +----------------------------------------------------------------------
-package os.api.v2.api.user.service.rolemodule;
+package os.api.v2.api.user.dto.rolemodule;
 
-import os.api.v2.api.user.dto.rolemodule.PermissionCreateDto;
-import os.api.v2.common.base.common.Result;
-import os.api.v2.common.base.exception.UserException;
+import lombok.Data;
 
 import java.util.List;
 
 /**
- * os.api.v2.api.user.service.rolemodule.IRoleModulePermissionCreateService
+ * os.api.v2.api.user.dto.rolemodule.PermissionCreateDto
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-11-06 10:34
+ * @date 2022-12-22 21:34
  */
-public interface IRoleModulePermissionCreateService {
-    Result<List<PermissionCreateDto>> permissionCreate(Long id) throws UserException;
+@Data
+public class PermissionCreateDto {
+    private Long id;
+    private String label;
+    private String type;
+    private Long moduleId;
+    private Long leaderId;
+    private List<PermissionCreateDto> children;
 }

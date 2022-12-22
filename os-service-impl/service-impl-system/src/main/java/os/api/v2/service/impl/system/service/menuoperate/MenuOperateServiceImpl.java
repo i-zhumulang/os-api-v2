@@ -30,7 +30,7 @@ import java.util.List;
  * @date 2022-12-21 23:03
  */
 @DubboService(version = "2.0.0")
-public class IMenuOperateServiceImpl implements IMenuOperateService {
+public class MenuOperateServiceImpl implements IMenuOperateService {
     @DubboReference(version = "2.0.0")
     protected os.api.v2.model.service.system.service.menuoperate.IMenuOperateService iMenuOperateService;
 
@@ -43,7 +43,7 @@ public class IMenuOperateServiceImpl implements IMenuOperateService {
         modelVo.setMenuIdList(serviceVo.getMenuIdList());
         modelVo.setModuleId(serviceVo.getModuleId());
         modelVo.setModuleIdList(serviceVo.getModuleIdList());
-        modelVo.setFieldArray(new String[]{"id", "menu_id", "location", "name_zh"});
+        modelVo.setFieldArray(new String[]{"id", "menu_id", "module_id", "name_zh"});
 
         Result<List<MenuOperateModelDto>> result = iMenuOperateService.getMenuOperateList(modelVo);
 

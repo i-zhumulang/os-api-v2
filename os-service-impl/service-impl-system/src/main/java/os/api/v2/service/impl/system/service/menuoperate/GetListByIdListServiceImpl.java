@@ -25,7 +25,7 @@ import java.util.*;
  * @date 2022-09-05 22:43
  */
 @DubboService(version = "2.0.0")
-public class IGetListByIdListServiceImpl implements IGetListByIdListService {
+public class GetListByIdListServiceImpl implements IGetListByIdListService {
     @DubboReference(version = "2.0.0")
     protected os.api.v2.model.service.system.service.menuoperate.IGetListByIdListService iGetListByIdListService;
 

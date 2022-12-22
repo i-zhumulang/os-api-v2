@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
  * @date 2022-09-14 23:48
  */
 @DubboService(version = "2.0.0")
-public class IMenuServiceImpl implements IMenuService {
+public class MenuServiceImpl implements IMenuService {
     @DubboReference(version = "2.0.0")
     protected os.api.v2.model.service.system.service.menu.IMenuService iMenuService;
     @Override
@@ -57,10 +57,11 @@ public class IMenuServiceImpl implements IMenuService {
     @Override
     public Result<List<MenuServiceDto>> getMenuList(MenuServiceVo menuServiceVo) {
         MenuModelVo menuModelVo = new MenuModelVo();
-        menuModelVo.setModuleId(menuModelVo.getModuleId());
+        menuModelVo.setModuleId(menuServiceVo.getModuleId());
         menuModelVo.setFieldArray(new String[]{
                 "id",
                 "parent_id",
+                "module_id",
                 "name_zh",
         });
         Result<List<MenuModelDto>> result = iMenuService.getMenuList(menuModelVo);

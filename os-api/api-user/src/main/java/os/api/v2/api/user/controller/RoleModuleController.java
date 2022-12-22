@@ -13,9 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import os.api.v2.api.user.dto.rolemodule.CreateDto;
 import os.api.v2.api.user.dto.rolemodule.IndexDto;
+import os.api.v2.api.user.dto.rolemodule.PermissionCreateDto;
 import os.api.v2.api.user.service.rolemodule.*;
 import os.api.v2.api.user.vo.rolemodule.*;
 import os.api.v2.common.base.common.Result;
+import os.api.v2.common.base.exception.UserException;
 import os.api.v2.model.service.user.dto.rolemodule.RoleModuleModelDto;
 
 import javax.validation.Valid;
@@ -95,7 +97,7 @@ public class RoleModuleController {
     }
 
     @RequestMapping(value = "permission", method = RequestMethod.GET)
-    public Result<List<Object>> permissionCreate(@RequestParam("id") Long id) {
+    public Result<List<PermissionCreateDto>> permissionCreate(@RequestParam("id") Long id) throws UserException {
         return iRoleModulePermissionCreateService.permissionCreate(id);
     }
 
