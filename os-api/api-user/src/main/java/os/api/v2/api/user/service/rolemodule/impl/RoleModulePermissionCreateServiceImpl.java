@@ -25,10 +25,7 @@ import os.api.v2.service.service.system.service.menuoperate.IMenuOperateService;
 import os.api.v2.service.service.system.vo.menu.MenuServiceVo;
 import os.api.v2.service.service.system.vo.menuoperate.MenuOperateServiceVo;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -44,13 +41,20 @@ public class RoleModulePermissionCreateServiceImpl implements IRoleModulePermiss
     protected IRoleModuleService iRoleModuleService;
     @DubboReference(version = "2.0.0")
     protected IMenuService iMenuService;
-
     @DubboReference(version = "2.0.0")
     protected IMenuOperateService iMenuOperateService;
 
     @Override
-    public Result<List<PermissionCreateDto>> permissionCreate(Long id) throws UserException {
+    public Result<Map<String, Object>> permissionCreate(Long id) throws UserException {
         RoleModuleModelDto roleModuleModelDto = getRoleModuleModelDto(id);
+        Map<String, Object> map = new HashMap<>();
+        map.put("menus", getPermissionCreateDtoList(roleModuleModelDto));
+        map.put("default", getDefaultPermission(roleModuleModelDto));
+        return new Result<>(Result.SUCCESS, map);
+    }
+
+    private List<PermissionCreateDto> getPermissionCreateDtoList(RoleModuleModelDto roleModuleModelDto) throws UserException {
+
         List<PermissionCreateDto> permissionCreateDtoList = getMenuServiceDto(roleModuleModelDto.getSystemModuleId());
         Map<Long, List<PermissionCreateDto>> permissionCreateDtoMap = getMenuOperateServiceDto(roleModuleModelDto.getSystemModuleId());
 
@@ -60,7 +64,7 @@ public class RoleModulePermissionCreateServiceImpl implements IRoleModulePermiss
             permissionCreateDto.setChildren(children);
             list.add(permissionCreateDto);
         }
-        return new Result<>(Result.SUCCESS, list);
+        return list;
     }
 
     private RoleModuleModelDto getRoleModuleModelDto(Long id) throws UserException {
@@ -115,5 +119,9 @@ public class RoleModulePermissionCreateServiceImpl implements IRoleModulePermiss
                                 PermissionCreateDto::getLeaderId
                         )
                 );
+    }
+
+    private List<Long> getDefaultPermission(RoleModuleModelDto roleModuleModelDto) {
+        return null;
     }
 }

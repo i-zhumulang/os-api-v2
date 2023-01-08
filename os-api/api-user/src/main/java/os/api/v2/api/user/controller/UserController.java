@@ -53,13 +53,13 @@ public class UserController {
     @Autowired
     protected IUserOptionsService iUserOptionsService;
 
-    @RequestMapping(value = "/module", method = RequestMethod.POST)
+    @RequestMapping(value = "/module", method = RequestMethod.GET)
     public Result<List<Map<String, Object>>> module() throws UserException {
         return iModuleService.module();
     }
 
-    @RequestMapping(value = "/permission", method = RequestMethod.POST)
-    public Result<List<PermissionServiceDto>> permission(@RequestBody @Valid PermissionVo permissionVo) throws UserException {
+    @RequestMapping(value = "/permission", method = RequestMethod.GET)
+    public Result<List<PermissionServiceDto>> permission(PermissionVo permissionVo) throws UserException {
         return iPermissionService.permission(permissionVo);
     }
 
@@ -68,12 +68,12 @@ public class UserController {
         return iRegisterService.register(registerVo);
     }
 
-    @RequestMapping(value = "/index", method = RequestMethod.POST)
-    public Result<IndexDto> index(@RequestBody IndexVo indexVo) {
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public Result<IndexDto> index(IndexVo indexVo) {
         return iUserIndexService.index(indexVo);
     }
 
-    @RequestMapping(value = "/options", method = RequestMethod.POST)
+    @RequestMapping(value = "/options", method = RequestMethod.GET)
     public Result<Map<String, Object>> options() {
         return iUserOptionsService.options();
     }

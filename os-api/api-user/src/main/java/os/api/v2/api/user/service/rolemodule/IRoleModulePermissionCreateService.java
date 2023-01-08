@@ -14,6 +14,7 @@ import os.api.v2.common.base.common.Result;
 import os.api.v2.common.base.exception.UserException;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * os.api.v2.api.user.service.rolemodule.IRoleModulePermissionCreateService
@@ -23,5 +24,5 @@ import java.util.List;
  * @date 2022-11-06 10:34
  */
 public interface IRoleModulePermissionCreateService {
-    Result<List<PermissionCreateDto>> permissionCreate(Long id) throws UserException;
+    Result<Map<String, Object>> permissionCreate(Long id) throws UserException;
 }

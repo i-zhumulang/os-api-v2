@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import os.api.v2.api.user.dto.rolemodule.CreateDto;
 import os.api.v2.api.user.dto.rolemodule.IndexDto;
-import os.api.v2.api.user.dto.rolemodule.PermissionCreateDto;
 import os.api.v2.api.user.service.rolemodule.*;
 import os.api.v2.api.user.vo.rolemodule.*;
 import os.api.v2.common.base.common.Result;
@@ -21,7 +20,6 @@ import os.api.v2.common.base.exception.UserException;
 import os.api.v2.model.service.user.dto.rolemodule.RoleModuleModelDto;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -61,17 +59,17 @@ public class RoleModuleController {
     @Autowired
     protected IRoleModulePermissionStoreService iRoleModulePermissionStoreService;
 
-    @RequestMapping(value = "/index", method = RequestMethod.POST)
-    public Result<IndexDto> index(@RequestBody @Valid IndexVo indexVo) {
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public Result<IndexDto> index(IndexVo indexVo) {
         return iRoleModuleIndexService.index(indexVo);
     }
 
-    @RequestMapping(value = "/options", method = RequestMethod.POST)
+    @RequestMapping(value = "/options", method = RequestMethod.GET)
     public Result<Map<String, Object>> options() {
         return iRoleModuleOptionsService.options();
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
     public Result<CreateDto> create() {
         return iRoleModuleCreateService.create();
     }
@@ -81,8 +79,8 @@ public class RoleModuleController {
         return iRoleModuleStoreService.store(storeVo);
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public Result<CreateDto> edit(@RequestBody @Valid EditVo editVo) {
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    public Result<CreateDto> edit(EditVo editVo) {
         return iRoleModuleEditService.edit(editVo);
     }
 
@@ -97,7 +95,7 @@ public class RoleModuleController {
     }
 
     @RequestMapping(value = "permission", method = RequestMethod.GET)
-    public Result<List<PermissionCreateDto>> permissionCreate(@RequestParam("id") Long id) throws UserException {
+    public Result<Map<String, Object>> permissionCreate(@RequestParam("id") Long id) throws UserException {
         return iRoleModulePermissionCreateService.permissionCreate(id);
     }
 

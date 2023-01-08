@@ -28,14 +28,19 @@ public class RoleOperateModelDto implements Serializable {
     private Long id;
 
     /**
-     * 模块-菜单ID
-     */
-    private Long moduleMenuId;
-
-    /**
      * 角色ID
      */
     private Integer roleId;
+
+    /**
+     * 角色-模块ID
+     */
+    private Long roleModuleId;
+
+    /**
+     * 角色-菜单ID
+     */
+    private Long roleMenuId;
 
     /**
      * 模块ID

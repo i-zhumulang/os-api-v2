@@ -38,9 +38,9 @@ public class RoleOperateServiceImpl extends ServiceImpl<MenuOperateMapper, RoleO
         LambdaQueryWrapper<RoleOperate> queryWrapper = new FieldValuesUtils<>(RoleOperate.class, fieldArray).queryWrapper();
 
         queryWrapper.eq(
-                roleOperateModelVo.getModuleMenuId() != null,
+                roleOperateModelVo.getRoleMenuId() != null,
                 RoleOperate::getModuleMenuId,
-                roleOperateModelVo.getModuleMenuId()
+                roleOperateModelVo.getRoleMenuId()
         );
         queryWrapper.eq(
                 roleOperateModelVo.getRoleId() != null,
