@@ -32,6 +32,11 @@ public class RoleOperate implements Serializable {
     private Long moduleMenuId;
 
     /**
+     * 角色-模块ID
+     */
+    private Long roleModuleId;
+
+    /**
      * 角色ID
      */
     private Integer roleId;

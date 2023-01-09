@@ -10,6 +10,7 @@
 package os.api.v2.api.user.service.rolemodule.impl;
 
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
 import os.api.v2.api.user.dto.rolemodule.PermissionCreateDto;
 import os.api.v2.api.user.service.rolemodule.IRoleModulePermissionCreateService;
@@ -24,6 +25,8 @@ import os.api.v2.service.service.system.service.menu.IMenuService;
 import os.api.v2.service.service.system.service.menuoperate.IMenuOperateService;
 import os.api.v2.service.service.system.vo.menu.MenuServiceVo;
 import os.api.v2.service.service.system.vo.menuoperate.MenuOperateServiceVo;
+import os.api.v2.service.service.user.service.rolemenu.IPermissionCreateSystemMenuIdService;
+import os.api.v2.service.service.user.service.roleoperate.IPermissionCreateSystemOperateIdService;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -43,6 +46,12 @@ public class RoleModulePermissionCreateServiceImpl implements IRoleModulePermiss
     protected IMenuService iMenuService;
     @DubboReference(version = "2.0.0")
     protected IMenuOperateService iMenuOperateService;
+
+    @DubboReference(version = "2.0.0")
+    protected IPermissionCreateSystemMenuIdService iPermissionCreateSystemMenuIdService;
+
+    @DubboReference(version = "2.0.0")
+    protected IPermissionCreateSystemOperateIdService iPermissionCreateSystemOperateIdService;
 
     @Override
     public Result<Map<String, Object>> permissionCreate(Long id) throws UserException {
@@ -72,7 +81,6 @@ public class RoleModulePermissionCreateServiceImpl implements IRoleModulePermiss
         modelVo.setId(id);
         modelVo.setFieldArray(new String[]{"id", "system_module_id"});
         Result<RoleModuleModelDto> result = iRoleModuleService.getSingle(modelVo);
-        System.out.println(result);
         if (Objects.equals(Result.FAILURE, result.getFlag())) {
             throw new UserException("数据不存在");
         }
@@ -122,6 +130,12 @@ public class RoleModulePermissionCreateServiceImpl implements IRoleModulePermiss
     }
 
     private List<Long> getDefaultPermission(RoleModuleModelDto roleModuleModelDto) {
-        return null;
+        // 获取已有权限菜单ID
+        Result<List<Long>> menuId = iPermissionCreateSystemMenuIdService.permissionCreateMenuId(roleModuleModelDto.getId());
+        // 获取已有权限操作ID
+        Result<List<Long>> operateId = iPermissionCreateSystemOperateIdService.permissionCreateSystemOperateId(roleModuleModelDto.getId());
+        List<Long> list = menuId.getData();
+        list.addAll(operateId.getData());
+        return list;
     }
 }
