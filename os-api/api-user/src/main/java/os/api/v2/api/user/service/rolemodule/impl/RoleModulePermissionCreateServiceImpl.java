@@ -65,15 +65,10 @@ public class RoleModulePermissionCreateServiceImpl implements IRoleModulePermiss
     private List<PermissionCreateDto> getPermissionCreateDtoList(RoleModuleModelDto roleModuleModelDto) throws UserException {
 
         List<PermissionCreateDto> permissionCreateDtoList = getMenuServiceDto(roleModuleModelDto.getSystemModuleId());
-        Map<Long, List<PermissionCreateDto>> permissionCreateDtoMap = getMenuOperateServiceDto(roleModuleModelDto.getSystemModuleId());
+        List<PermissionCreateDto> permissionCreateDtoList1 = getMenuOperateServiceDto(roleModuleModelDto.getSystemModuleId());
 
-        List<PermissionCreateDto> list = new ArrayList<>();
-        for (PermissionCreateDto permissionCreateDto : permissionCreateDtoList) {
-            List<PermissionCreateDto> children = permissionCreateDtoMap.get(permissionCreateDto.getId());
-            permissionCreateDto.setChildren(children);
-            list.add(permissionCreateDto);
-        }
-        return list;
+        permissionCreateDtoList.addAll(permissionCreateDtoList1);
+        return buildTreeUseStream(permissionCreateDtoList, 0);
     }
 
     private RoleModuleModelDto getRoleModuleModelDto(Long id) throws UserException {
@@ -105,7 +100,18 @@ public class RoleModulePermissionCreateServiceImpl implements IRoleModulePermiss
         return list;
     }
 
-    private Map<Long, List<PermissionCreateDto>> getMenuOperateServiceDto(Long systemModuleId) {
+    //方式二:  使用stream流转换
+    public List<PermissionCreateDto> buildTreeUseStream(List<PermissionCreateDto> list, long parentId) {
+        return list.stream()
+                .filter(treeNode -> treeNode.getLeaderId() == parentId)
+                .peek(treeNode -> {
+                    // 递归设置孩子节点
+                    treeNode.setChildren(buildTreeUseStream(list, treeNode.getId()));
+                })
+                .collect(Collectors.toList());
+    }
+
+    private List<PermissionCreateDto> getMenuOperateServiceDto(Long systemModuleId) {
         MenuOperateServiceVo serviceVo = new MenuOperateServiceVo();
         serviceVo.setModuleId(systemModuleId);
         Result<List<MenuOperateServiceDto>> result = iMenuOperateService.getMenuOperateList(serviceVo);
@@ -121,12 +127,7 @@ public class RoleModulePermissionCreateServiceImpl implements IRoleModulePermiss
             permissionCreateDto.setChildren(new ArrayList<>());
             list.add(permissionCreateDto);
         }
-        return list.stream()
-                .collect(
-                        Collectors.groupingBy(
-                                PermissionCreateDto::getLeaderId
-                        )
-                );
+        return list;
     }
 
     private List<Long> getDefaultPermission(RoleModuleModelDto roleModuleModelDto) {
