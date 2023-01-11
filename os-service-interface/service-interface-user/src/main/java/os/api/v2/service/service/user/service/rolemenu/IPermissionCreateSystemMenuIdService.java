@@ -21,5 +21,5 @@ import java.util.List;
  * @date 2023-01-09 22:17
  */
 public interface IPermissionCreateSystemMenuIdService {
-    Result<List<Long>> permissionCreateMenuId(Long roleModuleId);
+    Result<List<Long>> permissionCreateSystemMenuId(Long roleModuleId);
 }

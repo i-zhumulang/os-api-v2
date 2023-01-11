@@ -43,5 +43,9 @@ public class RoleMenu implements Serializable {
      */
     private Long systemMenuId;
 
+    /**
+     * 菜单等级(0:一级菜单,1:二级菜单)
+     */
+    private Integer grade;
 
 }

@@ -50,6 +50,11 @@ public class RoleMenuServiceImpl extends ServiceImpl<ModuleMenuMapper, RoleMenu>
                 RoleMenu::getSystemModuleId,
                 roleMenuModelVo.getSystemModuleId()
         );
+        queryWrapper.eq(
+                roleMenuModelVo.getGrade() != null,
+                RoleMenu::getGrade,
+                roleMenuModelVo.getGrade()
+        );
         List<RoleMenu> roleMenus = getBaseMapper().selectList(queryWrapper);
         if (roleMenus.isEmpty()) {
             return new Result<>(Result.FAILURE, null);

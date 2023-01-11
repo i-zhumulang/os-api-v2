@@ -44,4 +44,9 @@ public class RoleMenuModelVo implements Serializable {
      * 菜单ID(v2_system.menu表ID)
      */
     private Long systemMenuId;
+
+    /**
+     * 菜单等级(0:一级菜单,1:二级菜单)
+     */
+    private Integer grade;
 }

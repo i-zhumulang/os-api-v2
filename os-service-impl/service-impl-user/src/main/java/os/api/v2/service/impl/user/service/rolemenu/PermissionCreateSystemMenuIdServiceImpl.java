@@ -31,9 +31,10 @@ public class PermissionCreateSystemMenuIdServiceImpl implements IPermissionCreat
     protected IRoleMenuService iRoleMenuService;
 
     @Override
-    public Result<List<Long>> permissionCreateMenuId(Long roleModuleId) {
+    public Result<List<Long>> permissionCreateSystemMenuId(Long roleModuleId) {
         RoleMenuModelVo modelVo = new RoleMenuModelVo();
         modelVo.setRoleModuleId(roleModuleId);
+        modelVo.setGrade(1);
 
         return iRoleMenuService.permission(modelVo);
     }

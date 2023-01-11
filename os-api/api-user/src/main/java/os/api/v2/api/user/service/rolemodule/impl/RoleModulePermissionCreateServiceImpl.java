@@ -62,10 +62,13 @@ public class RoleModulePermissionCreateServiceImpl implements IRoleModulePermiss
         return new Result<>(Result.SUCCESS, map);
     }
 
-    private List<PermissionCreateDto> getPermissionCreateDtoList(RoleModuleModelDto roleModuleModelDto) throws UserException {
+    private List<PermissionCreateDto> getPermissionCreateDtoList(RoleModuleModelDto roleModuleModelDto) {
 
-        List<PermissionCreateDto> permissionCreateDtoList = getMenuServiceDto(roleModuleModelDto.getSystemModuleId());
-        List<PermissionCreateDto> permissionCreateDtoList1 = getMenuOperateServiceDto(roleModuleModelDto.getSystemModuleId());
+        List<PermissionCreateDto> permissionCreateDtoList =
+                getMenuServiceDto(roleModuleModelDto.getSystemModuleId());
+
+        List<PermissionCreateDto> permissionCreateDtoList1 =
+                getMenuOperateServiceDto(roleModuleModelDto.getSystemModuleId());
 
         permissionCreateDtoList.addAll(permissionCreateDtoList1);
         return buildTreeUseStream(permissionCreateDtoList, 0);
@@ -132,9 +135,15 @@ public class RoleModulePermissionCreateServiceImpl implements IRoleModulePermiss
 
     private List<Long> getDefaultPermission(RoleModuleModelDto roleModuleModelDto) {
         // 获取已有权限菜单ID
-        Result<List<Long>> menuId = iPermissionCreateSystemMenuIdService.permissionCreateMenuId(roleModuleModelDto.getId());
+        Result<List<Long>> menuId =
+                iPermissionCreateSystemMenuIdService.permissionCreateSystemMenuId(
+                        roleModuleModelDto.getId()
+                );
         // 获取已有权限操作ID
-        Result<List<Long>> operateId = iPermissionCreateSystemOperateIdService.permissionCreateSystemOperateId(roleModuleModelDto.getId());
+        Result<List<Long>> operateId =
+                iPermissionCreateSystemOperateIdService.permissionCreateSystemOperateId(
+                        roleModuleModelDto.getId()
+                );
         List<Long> list = menuId.getData();
         list.addAll(operateId.getData());
         return list;
