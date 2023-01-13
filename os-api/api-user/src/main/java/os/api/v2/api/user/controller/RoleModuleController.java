@@ -100,7 +100,7 @@ public class RoleModuleController {
     }
 
     @RequestMapping(value = "permission", method = RequestMethod.POST)
-    public Result<String> permissionStore() {
-        return iRoleModulePermissionStoreService.permissionStore();
+    public Result<String> permissionStore(@RequestBody @Valid PermissionStoreVo permissionStoreVo) {
+        return iRoleModulePermissionStoreService.permissionStore(permissionStoreVo);
     }
 }

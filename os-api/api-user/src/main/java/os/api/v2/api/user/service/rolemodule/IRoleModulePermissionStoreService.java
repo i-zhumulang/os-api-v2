@@ -9,7 +9,9 @@
 // +----------------------------------------------------------------------
 package os.api.v2.api.user.service.rolemodule;
 
+import os.api.v2.api.user.vo.rolemodule.PermissionStoreVo;
 import os.api.v2.common.base.common.Result;
+import os.api.v2.common.base.exception.UserException;
 
 /**
  * os.api.v2.api.user.service.rolemodule.IRoleModulePermissionStoreService
@@ -19,5 +21,5 @@ import os.api.v2.common.base.common.Result;
  * @date 2022-11-08 23:32
  */
 public interface IRoleModulePermissionStoreService {
-    Result<String> permissionStore();
+    Result<String> permissionStore(PermissionStoreVo permissionStoreVo) throws UserException;
 }

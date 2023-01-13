@@ -10,14 +10,15 @@
 package os.api.v2.api.user.service.rolemodule.impl;
 
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
 import os.api.v2.api.user.dto.rolemodule.PermissionCreateDto;
 import os.api.v2.api.user.service.rolemodule.IRoleModulePermissionCreateService;
 import os.api.v2.common.base.common.Result;
 import os.api.v2.common.base.exception.UserException;
 import os.api.v2.model.service.user.dto.rolemodule.RoleModuleModelDto;
+import os.api.v2.model.service.user.service.rolemenu.IRoleMenuService;
 import os.api.v2.model.service.user.service.rolemodule.IRoleModuleService;
+import os.api.v2.model.service.user.vo.rolemenu.RoleMenuModelVo;
 import os.api.v2.model.service.user.vo.rolemodule.RoleModuleModelVo;
 import os.api.v2.service.service.system.dto.menu.MenuServiceDto;
 import os.api.v2.service.service.system.dto.menuoperate.MenuOperateServiceDto;
@@ -25,7 +26,6 @@ import os.api.v2.service.service.system.service.menu.IMenuService;
 import os.api.v2.service.service.system.service.menuoperate.IMenuOperateService;
 import os.api.v2.service.service.system.vo.menu.MenuServiceVo;
 import os.api.v2.service.service.system.vo.menuoperate.MenuOperateServiceVo;
-import os.api.v2.service.service.user.service.rolemenu.IPermissionCreateSystemMenuIdService;
 import os.api.v2.service.service.user.service.roleoperate.IPermissionCreateSystemOperateIdService;
 
 import java.util.*;
@@ -48,7 +48,7 @@ public class RoleModulePermissionCreateServiceImpl implements IRoleModulePermiss
     protected IMenuOperateService iMenuOperateService;
 
     @DubboReference(version = "2.0.0")
-    protected IPermissionCreateSystemMenuIdService iPermissionCreateSystemMenuIdService;
+    protected IRoleMenuService iRoleMenuService;
 
     @DubboReference(version = "2.0.0")
     protected IPermissionCreateSystemOperateIdService iPermissionCreateSystemOperateIdService;
@@ -57,27 +57,27 @@ public class RoleModulePermissionCreateServiceImpl implements IRoleModulePermiss
     public Result<Map<String, Object>> permissionCreate(Long id) throws UserException {
         RoleModuleModelDto roleModuleModelDto = getRoleModuleModelDto(id);
         Map<String, Object> map = new HashMap<>();
-        map.put("menus", getPermissionCreateDtoList(roleModuleModelDto));
-        map.put("default", getDefaultPermission(roleModuleModelDto));
+        map.put("roleModule", roleModuleModelDto);
+        map.put("systemMenus", getPermissionCreateDtoList(roleModuleModelDto));
+        map.put("roleMenuOperate", getDefaultPermission(roleModuleModelDto));
         return new Result<>(Result.SUCCESS, map);
     }
 
     private List<PermissionCreateDto> getPermissionCreateDtoList(RoleModuleModelDto roleModuleModelDto) {
-
-        List<PermissionCreateDto> permissionCreateDtoList =
+        List<PermissionCreateDto> menuServiceDto =
                 getMenuServiceDto(roleModuleModelDto.getSystemModuleId());
 
-        List<PermissionCreateDto> permissionCreateDtoList1 =
+        List<PermissionCreateDto> operateServiceDto =
                 getMenuOperateServiceDto(roleModuleModelDto.getSystemModuleId());
 
-        permissionCreateDtoList.addAll(permissionCreateDtoList1);
-        return buildTreeUseStream(permissionCreateDtoList, 0);
+        menuServiceDto.addAll(operateServiceDto);
+        return buildTreeUseStream(menuServiceDto, 0);
     }
 
     private RoleModuleModelDto getRoleModuleModelDto(Long id) throws UserException {
         RoleModuleModelVo modelVo = new RoleModuleModelVo();
         modelVo.setId(id);
-        modelVo.setFieldArray(new String[]{"id", "system_module_id"});
+        modelVo.setFieldArray(new String[]{"id", "role_id", "system_module_id"});
         Result<RoleModuleModelDto> result = iRoleModuleService.getSingle(modelVo);
         if (Objects.equals(Result.FAILURE, result.getFlag())) {
             throw new UserException("数据不存在");
@@ -135,10 +135,11 @@ public class RoleModulePermissionCreateServiceImpl implements IRoleModulePermiss
 
     private List<Long> getDefaultPermission(RoleModuleModelDto roleModuleModelDto) {
         // 获取已有权限菜单ID
-        Result<List<Long>> menuId =
-                iPermissionCreateSystemMenuIdService.permissionCreateSystemMenuId(
-                        roleModuleModelDto.getId()
-                );
+        RoleMenuModelVo modelVo = new RoleMenuModelVo();
+        modelVo.setRoleModuleId(roleModuleModelDto.getId());
+        modelVo.setGrade(1);
+        Result<List<Long>> menuId = iRoleMenuService.permission(modelVo);
+
         // 获取已有权限操作ID
         Result<List<Long>> operateId =
                 iPermissionCreateSystemOperateIdService.permissionCreateSystemOperateId(

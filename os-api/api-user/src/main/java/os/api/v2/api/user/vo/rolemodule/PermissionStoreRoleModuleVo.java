@@ -5,24 +5,22 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2022-11-06 10:55
+// | Date  : 2023-01-13 23:06
 // +----------------------------------------------------------------------
 package os.api.v2.api.user.vo.rolemodule;
 
 import lombok.Data;
 
-import java.util.List;
-
 /**
- * os.api.v2.api.user.vo.rolemodule.PermissionStoreVo
+ * os.api.v2.api.user.vo.rolemodule.PermissionStoreRoleModuleVo
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2022-11-06 10:55
+ * @date 2023-01-13 23:06
  */
 @Data
-public class PermissionStoreVo {
-    private PermissionStoreRoleModuleVo roleModule;
-    private List<PermissionStoreMenuVo> menu;
-    private List<PermissionStoreOperateVo> operate;
+public class PermissionStoreRoleModuleVo {
+    private Long id;
+    private Integer roleId;
+    private Long systemModuleId;
 }

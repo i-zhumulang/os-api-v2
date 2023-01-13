@@ -5,21 +5,22 @@
 // +----------------------------------------------------------------------
 // | Author: 吴荣超
 // +----------------------------------------------------------------------
-// | Date  : 2023-01-09 22:17
+// | Date  : 2023-01-13 20:50
 // +----------------------------------------------------------------------
-package os.api.v2.service.service.user.service.rolemenu;
+package os.api.v2.api.user.vo.rolemodule;
 
-import os.api.v2.common.base.common.Result;
-
-import java.util.List;
+import lombok.Data;
 
 /**
- * os.api.v2.service.service.user.service.rolemenu.IPermissionCreateMenuIdService
+ * os.api.v2.api.user.vo.rolemodule.PermissionStoreMenuVo
  *
  * @author 吴荣超
  * @version 2.0.0
- * @date 2023-01-09 22:17
+ * @date 2023-01-13 20:50
  */
-public interface IPermissionCreateSystemMenuIdService {
-    Result<List<Long>> permissionCreateSystemMenuId(Long roleModuleId);
+@Data
+public class PermissionStoreMenuVo {
+    private Long systemMenuId;
+    private Long systemModuleId;
+    private Long parentId;
 }
