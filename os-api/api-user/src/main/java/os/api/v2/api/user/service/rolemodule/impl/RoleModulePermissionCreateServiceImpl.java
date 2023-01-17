@@ -46,10 +46,8 @@ public class RoleModulePermissionCreateServiceImpl implements IRoleModulePermiss
     protected IMenuService iMenuService;
     @DubboReference(version = "2.0.0")
     protected IMenuOperateService iMenuOperateService;
-
     @DubboReference(version = "2.0.0")
     protected IRoleMenuService iRoleMenuService;
-
     @DubboReference(version = "2.0.0")
     protected IPermissionCreateSystemOperateIdService iPermissionCreateSystemOperateIdService;
 
